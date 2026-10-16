@@ -1,4 +1,4 @@
-# YLAC Signage Audit · Oct. 15, 2026
+# YLAC Signage Audit · Oct. 15, 2026 (imagery and contrast added Oct. 16)
 
 Checked against the **UVU Brand Guidelines (2025)**, the **Alumni Web System v1.2** (shared with Giving v1.6), and **Apple HIG** basics. Each finding is marked **Fixed** or **Open** (needs someone outside this repo).
 
@@ -42,10 +42,36 @@ Checked against the **UVU Brand Guidelines (2025)**, the **Alumni Web System v1.
 | H7 | **Contrast.** Pale Meadow on Warm and Lake Calm shapes on white failed AA. | **Fixed.** Text is White on UVU Green (7.4:1) or UVU Green on White (7.4:1). Muted text is #4B5D50 on White (6.9:1). |
 | H8 | **QR density.** Long Blackbaud form links make dense codes. | **Fixed.** The QR card is 320px on the stage (about 8 in.), and long links use the low-error-correction setting so the modules stay large. |
 
+## Imagery (Alumni Web System, Image Style)
+
+The rule: the uvu.edu image style. Plain photos with rounded corners and APFY shapes, or a raw full-bleed photo with a CSS UVU Green fade. Alumni pages need alumni-aged imagery (people at events, at work, and with families), not only students.
+
+| # | Finding | Status |
+|---|---|---|
+| I1 | **Skewed young.** Almost every Alumni-screen photo was a student, as the web system's own audit warned. | **Fixed.** The Alumni screen now uses the July 2026 License Plate shoot (alumni tailgating in the canyon), the 2026 Alumni Awards ceremony, a podcast studio, and the November 2025 employee shoot for Career and Networking. |
+| I2 | **Soft photos.** Full-screen scenes stretched 1080 × 1350 web crops to the 1920 px stage (1.4–1.9× upscale). | **Fixed.** Full-screen crops are cut fresh from the originals at 1440 × 2560 (CARE Hub from 8192 × 5464; campus from the April 2026 drone shoot). The Awards photo has no high-res original, so it moved to a framed scene, where 1600 × 1200 is sharp. |
+| I3 | **Off-center subjects.** Crops relied on `object-position: center top`. | **Fixed.** Every photo is pre-cropped around a marked focal point (`tools/crop.py`): faces sit on the vertical center line, and full-screen subjects sit in the top 45%, clear of the text. |
+| I4 | **Subjects under the text.** Vertical crops of group shots, like the tailgate and the license plate, pushed people under the fade or cut them off. | **Fixed.** Those are framed 4:3 photos with APFY shapes instead. Only photos whose subject sits high stay full screen. |
+| I5 | **Brand marks in photos.** The Willy the Wolverine flight photos and the stadium field logo carry the Athletics-only mascot mark. The EverGREEN celebration set is from the finished campaign. | **Fixed.** Left out. The campus aerial's field logo falls in the solid green zone and isn't visible. |
+| I6 | **Kyrsi's headshot** was a 960 px web crop. | **Fixed.** Square 800 × 800 crop from the 3888 × 5832 original, face centered. |
+| I7 | **Leftovers.** 32 photos from earlier versions were still in the repo. | **Fixed.** Unused photos removed. `assets/img` is 4.4 MB. |
+
+## Contrast (WCAG 2.2, Measured)
+
+Text over photos was measured against the actual photo pixels under the text block (y 840–1260 on the 1920 px stage), using the brightest pixel, not the average.
+
+| # | Finding | Before | After |
+|---|---|---|---|
+| C1 | **White headline over full-screen photos.** The fade only reached 41% opacity at the headline's top line, so bright fridge glass and sky showed through. | 2.0:1 | **6.7:1.** The fade is now solid behind the text and clears just above it, so faces keep a light 21% tint. |
+| C2 | **Timeline years** dimmed to 40% opacity. | 2.6:1 (green) / 2.0:1 (white) | **5.8:1 / 4.85:1** at 80%. The active year gets a rule and a tint instead. |
+| C3 | **Dock over a photo on a White screen.** The QR label, URL, and button kept White-screen colors (dark green) on the green fade, and the button vanished. | about 1.2:1 | **8.0:1.** The dock switches to white text and a white button whenever a photo is behind it, and button arrows now follow the text color. |
+| C4 | Other text pairs. | | All pass: White on UVU Green 8.0:1, UVU Green on White 8.0:1, body Dark Green on White 13.8:1, muted text 6.4:1 (green) and 7.1:1 (white), button borders 4.9:1, stat rules 4.5:1 and 5.3:1. |
+
 ## Open Items
 
 - Confirm the history dates on the Alumni screen with UVU Archives.
 - Confirm that Jacob Egan's quote can still be used, and refresh the 2024 Food Pantry numbers.
 - Add a donor recognition list (the `names` scene type is ready) once IA approves names and anonymity rules.
 - Ask whether a Stratum web font kit is available (B9).
-- Request vertical 2160 × 3840 photos from UVU Photo. Current heroes are 1080 × 1350 and soften on 4K.
+- The 2026 Alumni Awards photos exist only as web crops (1200 × 900). Ask UVU Photo for the originals.
+- When adding a photo, crop it with `tools/crop.py` and run `tools/contrast.py`. Anything under 4.5:1 needs a different crop or a framed scene.

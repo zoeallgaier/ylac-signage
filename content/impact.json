@@ -21,7 +21,7 @@
     },
     {
       "type": "photo",
-      "photo": "assets/img/care-hub-mobile.jpg",
+      "photo": "assets/img/bleed-care-hub.jpg",
       "alt": "A student choosing food at the UVU Food Pantry",
       "headline": "Fresh Food for Every Student",
       "lead": "Fresh Food Fridays shared almost 10,000 lbs of produce in 2024."
@@ -47,20 +47,28 @@
       {
         "label": "UVU Food Pantry",
         "icon": "student-life",
-        "photo": "assets/img/care-hub-mobile.jpg",
-        "alt": "A student choosing food at the UVU Food Pantry",
+        "photo": "assets/img/detail-pantry.jpg",
+        "alt": "Two students choosing food at the UVU Food Pantry",
         "title": "UVU Food Pantry",
         "body": "The pantry at the CARE Hub serves an average of 250 people every week. In 2024, it shared 52,000 lbs of food with students.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to UVU", "short": "uvu.edu/give" }
+        "qr": {
+          "url": "https://www.uvu.edu/give/",
+          "label": "Give to UVU",
+          "short": "uvu.edu/give"
+        }
       },
       {
         "label": "Scholarships",
         "icon": "diploma-3",
-        "photo": "assets/img/feat-scholarships.jpg",
-        "alt": "UVU graduates at commencement",
+        "photo": "assets/img/detail-scholarships.jpg",
+        "alt": "Graduates holding their diplomas at convocation",
         "title": "General Scholarships",
         "body": "Scholarships help students across every college stay in school and finish their degrees.",
-        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa", "label": "Give to General Scholarships", "short": "Opens the UVU giving form" }
+        "qr": {
+          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa",
+          "label": "Give to General Scholarships",
+          "short": "Opens the UVU giving form"
+        }
       },
       {
         "label": "First-Generation Students",
@@ -69,7 +77,11 @@
         "alt": "First-generation students at UVU",
         "title": "Be Part of That Village",
         "body": "“As a first-generation student, I endured many financial challenges, but I got the support from UVU to get through college. I am grateful that I am able to donate to do the same for our students now.” Kyrsi Zamora",
-        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799", "label": "Give to the First Generation Center", "short": "Opens the UVU giving form" }
+        "qr": {
+          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799",
+          "label": "Give to the First Generation Center",
+          "short": "Opens the UVU giving form"
+        }
       }
     ]
   }

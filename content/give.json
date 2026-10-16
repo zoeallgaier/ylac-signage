@@ -10,7 +10,7 @@
   "demo": [
     {
       "type": "photo",
-      "photo": "assets/img/give-campus-mobile.jpg",
+      "photo": "assets/img/bleed-campus.jpg",
       "alt": "UVU's Orem campus below Mount Timpanogos",
       "headline": "Giving to Utah Valley University",
       "lead": "Transforming classrooms, communities, and futures."
@@ -20,10 +20,26 @@
       "seconds": 9,
       "headline": "Featured Funds",
       "items": [
-        { "icon": "diploma-3", "title": "General Scholarships", "text": "University-wide" },
-        { "icon": "graduation", "title": "First Generation Center", "text": "Programs and Centers" },
-        { "icon": "team", "title": "Wolverine Club", "text": "Athletics" },
-        { "icon": "university", "title": "Fulton Library", "text": "Programs and Centers" }
+        {
+          "icon": "diploma-3",
+          "title": "General Scholarships",
+          "text": "University-wide"
+        },
+        {
+          "icon": "graduation",
+          "title": "First Generation Center",
+          "text": "Programs and Centers"
+        },
+        {
+          "icon": "team",
+          "title": "Wolverine Club",
+          "text": "Athletics"
+        },
+        {
+          "icon": "university",
+          "title": "Fulton Library",
+          "text": "Programs and Centers"
+        }
       ]
     },
     {
@@ -45,11 +61,15 @@
       {
         "label": "General Scholarships",
         "icon": "diploma-3",
-        "photo": "assets/img/feat-scholarships.jpg",
-        "alt": "UVU graduates at commencement",
+        "photo": "assets/img/detail-scholarships.jpg",
+        "alt": "Graduates holding their diplomas at convocation",
         "title": "General Scholarships",
         "body": "Gifts directly support scholarships that help students across every college stay in school and graduate.",
-        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa", "label": "Give to General Scholarships", "short": "Opens the UVU giving form" }
+        "qr": {
+          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa",
+          "label": "Give to General Scholarships",
+          "short": "Opens the UVU giving form"
+        }
       },
       {
         "label": "First Generation Center",
@@ -58,25 +78,37 @@
         "alt": "First-generation students at UVU",
         "title": "First Generation Center",
         "body": "“Remember, it takes a village to help a student graduate. Be part of that village.” Kyrsi Zamora",
-        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799", "label": "Give to the First Generation Center", "short": "Opens the UVU giving form" }
+        "qr": {
+          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799",
+          "label": "Give to the First Generation Center",
+          "short": "Opens the UVU giving form"
+        }
       },
       {
         "label": "Wolverine Club",
         "icon": "team",
-        "photo": "assets/img/feat-wolverine-club.jpg",
-        "alt": "UVU student-athletes",
+        "photo": "assets/img/detail-wolverine-club.jpg",
+        "alt": "UVU fans cheering in the stands",
         "title": "Wolverine Club",
         "body": "Your gift impacts UVU student-athletes for a lifetime.",
-        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form?svcid=tcs&formId=1f03fb1a-3bd4-4a08-870d-71ef2c2d9450&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=UVU%20Wolverine%20Club&desid=144", "label": "Give to the Wolverine Club", "short": "Opens the UVU giving form" }
+        "qr": {
+          "url": "https://host.nxt.blackbaud.com/donor-form?svcid=tcs&formId=1f03fb1a-3bd4-4a08-870d-71ef2c2d9450&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=UVU%20Wolverine%20Club&desid=144",
+          "label": "Give to the Wolverine Club",
+          "short": "Opens the UVU giving form"
+        }
       },
       {
         "label": "Fulton Library",
         "icon": "university",
-        "photo": "assets/img/feat-library.jpg",
-        "alt": "The Fulton Library at UVU",
+        "photo": "assets/img/detail-library.jpg",
+        "alt": "A student reading in the Fulton Library",
         "title": "Fulton Library",
         "body": "Support the library every UVU student and alum can use.",
-        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form?svcid=renxt&formId=1a853c90-cadd-4c17-9eb1-2c1a3530d3e0&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desid=257&desname=Library", "label": "Give to the Fulton Library", "short": "Opens the UVU giving form" }
+        "qr": {
+          "url": "https://host.nxt.blackbaud.com/donor-form?svcid=renxt&formId=1a853c90-cadd-4c17-9eb1-2c1a3530d3e0&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desid=257&desname=Library",
+          "label": "Give to the Fulton Library",
+          "short": "Opens the UVU giving form"
+        }
       }
     ]
   }

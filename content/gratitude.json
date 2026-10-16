@@ -19,7 +19,7 @@
       "quote": "Remember, it takes a village to help a student graduate. Be part of that village.",
       "name": "Kyrsi Zamora",
       "detail": "First-generation graduate and UVU donor",
-      "photo": "assets/img/kyrsi-zamora.jpg"
+      "photo": "assets/img/headshot-kyrsi.jpg"
     },
     {
       "type": "stat",
@@ -28,9 +28,9 @@
       "lead": "Thanks to sponsors of the President's Scholarship Ball."
     },
     {
-      "type": "photo",
-      "photo": "assets/img/licenseplate-mobile.jpg",
-      "alt": "A UVU license plate on a car",
+      "type": "framed",
+      "photo": "assets/img/frame-plate.jpg",
+      "alt": "A UVU license plate on a white car",
       "headline": "Your Plate Funds Scholarships",
       "lead": "A UVU license plate is $35 a year, and all proceeds go to scholarships."
     }
@@ -42,11 +42,15 @@
       {
         "label": "Gift Planning",
         "icon": "relationship",
-        "photo": "assets/img/gift-planning.jpg",
-        "alt": "A family planning together",
+        "photo": "assets/img/detail-gift-planning.jpg",
+        "alt": "A father and his young daughter at a laptop",
         "title": "Gift Planning",
         "body": "Many people choose a long-term approach to giving using a bequest, will, annuity, or trust.",
-        "qr": { "url": "https://uvgift.org/", "label": "Explore Gift Planning", "short": "uvgift.org" }
+        "qr": {
+          "url": "https://uvgift.org/",
+          "label": "Explore Gift Planning",
+          "short": "uvgift.org"
+        }
       },
       {
         "label": "Memorial and Tribute Gifts",
@@ -55,25 +59,37 @@
         "alt": "Flowers on a table",
         "title": "Memorial and Tribute Gifts",
         "body": "In lieu of flowers, many people choose to donate in their loved one's name.",
-        "qr": { "url": "https://www.uvu.edu/give/ways-to-give/memorial-gifts.html", "label": "Give a Memorial Gift", "short": "uvu.edu/give" }
+        "qr": {
+          "url": "https://www.uvu.edu/give/ways-to-give/memorial-gifts.html",
+          "label": "Give a Memorial Gift",
+          "short": "uvu.edu/give"
+        }
       },
       {
         "label": "Matching Gifts",
         "icon": "financial-growth",
-        "photo": "assets/img/matching-gifts.jpg",
-        "alt": "Colleagues at work",
+        "photo": "assets/img/detail-matching.jpg",
+        "alt": "Two colleagues working at a laptop",
         "title": "Matching Gifts",
         "body": "Many employers will match a charitable contribution or volunteer hours.",
-        "qr": { "url": "https://www.uvu.edu/give/ways-to-give/matching-gifts.html", "label": "See If Your Employer Matches", "short": "uvu.edu/give" }
+        "qr": {
+          "url": "https://www.uvu.edu/give/ways-to-give/matching-gifts.html",
+          "label": "See If Your Employer Matches",
+          "short": "uvu.edu/give"
+        }
       },
       {
         "label": "UVU License Plate",
         "icon": "cash-1",
-        "photo": "assets/img/licenseplate-look.jpg",
-        "alt": "A UVU license plate",
+        "photo": "assets/img/frame-plate.jpg",
+        "alt": "A UVU license plate on a white car",
         "title": "UVU License Plate",
         "body": "A $35 scholarship donation each year, with your registration. Available for any vehicle registered in Utah.",
-        "qr": { "url": "https://www.uvu.edu/alumni/make-an-impact/uvu-license-plate.html", "label": "Get a UVU Plate", "short": "uvu.edu/alumni" }
+        "qr": {
+          "url": "https://www.uvu.edu/alumni/make-an-impact/uvu-license-plate.html",
+          "label": "Get a UVU Plate",
+          "short": "uvu.edu/alumni"
+        }
       }
     ]
   }

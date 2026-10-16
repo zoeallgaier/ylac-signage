@@ -174,8 +174,13 @@
 		const el = document.createElement('section');
 		el.className = `scene scene--${s.type}`;
 		el.innerHTML = (SCENES[s.type] || SCENES.title)(s);
-		setTimeout(() => { scenesEl.appendChild(el); afterRender(el, s, ms); }, old ? 350 : 0);
-		stage.classList.toggle('is-cta', s.type === 'cta');
+		setTimeout(() => {
+			scenesEl.appendChild(el);
+			// Dock colors change with the scene behind it, not before (no flash of dark text on green)
+			stage.classList.toggle('is-cta', s.type === 'cta');
+			stage.classList.toggle('is-photo', s.type === 'photo');
+			afterRender(el, s, ms);
+		}, old ? 350 : 0);
 
 		const next = list[(sceneIdx + 1) % list.length];
 		if (next.photo) new Image().src = src(next.photo);
@@ -189,7 +194,7 @@
 
 	function renderDock() {
 		dockEl.innerHTML = `${qrBlock(data.qr)}
-			<button class="btn ${onWhite() ? 'btn--primary' : 'btn--light'} explore-btn" type="button" data-act="open">${esc(data.explore.button)}<img src="${icon('ui-arrow-right', onWhite() ? 'white' : 'green')}" alt=""></button>`;
+			<button class="btn ${onWhite() ? 'btn--primary' : 'btn--light'} explore-btn" type="button" data-act="open">${esc(data.explore.button)}<span class="arrow" aria-hidden="true"></span></button>`;
 	}
 
 	/* ---------- Explore ---------- */
@@ -242,7 +247,7 @@
 				${body}${people}
 				${qrBlock(t.qr || data.qr)}
 				<div class="foot">
-					<button type="button" class="btn btn--secondary back" data-act="back"><img src="${icon('ui-arrow-right')}" alt="">Back</button>
+					<button type="button" class="btn btn--secondary back" data-act="back"><span class="arrow" aria-hidden="true"></span>Back</button>
 					<button type="button" class="btn btn--secondary" data-act="close">Close</button>
 				</div>
 			</div>`);
