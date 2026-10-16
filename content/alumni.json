@@ -1,0 +1,135 @@
+{
+  "_verify": "Check before launch: era dates and descriptions with UVU Archives; events and profile URLs with Alumni Relations.",
+  "screen": "Alumni",
+  "theme": "green",
+  "place": "Young Living Alumni Center",
+  "qr": {
+    "url": "https://www.uvu.edu/alumni/",
+    "label": "Visit UVU Alumni",
+    "short": "uvu.edu/alumni"
+  },
+  "demo": [
+    {
+      "type": "title",
+      "eyebrow": "Welcome Home",
+      "headline": "Once a Wolverine, Always a Wolverine",
+      "lead": "This building belongs to every UVU graduate. Make yourself at home."
+    },
+    {
+      "type": "photo",
+      "photo": "assets/img/home-header-mobile.jpg",
+      "alt": "UVU alumni together on campus",
+      "eyebrow": "UVU Alumni",
+      "headline": "You Built This Place",
+      "lead": "Every graduate who came before helped make UVU what it is today."
+    },
+    {
+      "type": "timeline",
+      "seconds": 10,
+      "eyebrow": "Our Story Since 1941",
+      "headline": "Which Name Is on Your Diploma?",
+      "items": [
+        { "year": "1941", "name": "Central Utah Vocational School" },
+        { "year": "1945", "name": "Utah Trade Technical Institute" },
+        { "year": "1967", "name": "Utah Technical College at Provo" },
+        { "year": "1987", "name": "Utah Valley Community College" },
+        { "year": "1993", "name": "Utah Valley State College" },
+        { "year": "2008", "name": "Utah Valley University" }
+      ]
+    },
+    {
+      "type": "stat",
+      "eyebrow": "Every Name, One Family",
+      "value": "6",
+      "label": "Names on Our Diplomas. One Alumni Community.",
+      "note": "No matter which name is on yours, you're a UVU alum."
+    },
+    {
+      "type": "framed",
+      "photo": "assets/img/awards-honoring.jpg",
+      "alt": "Alumni Awards recipients on stage",
+      "eyebrow": "Alumni Awards",
+      "headline": "Honoring Alumni Who Lead",
+      "lead": "Each year we celebrate graduates making a difference in their fields and communities."
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Stay Connected",
+      "headline": "Update Your Alumni Profile",
+      "lead": "Membership is free for all graduated alumni.",
+      "qr": {
+        "url": "https://www.uvu.edu/alumni/",
+        "label": "Update Your Alumni Profile",
+        "short": "uvu.edu/alumni"
+      }
+    }
+  ],
+  "explore": {
+    "button": "Touch to Explore",
+    "eyebrow": "UVU Alumni",
+    "title": "Explore Your Alumni Community",
+    "lead": "Tap a topic. Scan any code to take it with you.",
+    "items": [
+      {
+        "label": "Find Your Era",
+        "teaser": "See UVU the year you were here.",
+        "icon": "history",
+        "title": "Find Your Era",
+        "body": "Tap the years you were on campus.",
+        "eras": [
+          { "label": "1940s", "years": "1941–1966", "name": "Central Utah Vocational School", "text": "UVU began in 1941 as a vocational school training workers for the war effort, then became Utah Trade Technical Institute in 1945." },
+          { "label": "1960s", "years": "1967–1986", "name": "Utah Technical College at Provo", "text": "As Utah Technical College, the school grew its technical and trade programs for a growing Utah County." },
+          { "label": "1980s", "years": "1987–1992", "name": "Utah Valley Community College", "text": "Becoming a community college opened general education and transfer programs to many more students." },
+          { "label": "1990s", "years": "1993–2007", "name": "Utah Valley State College", "text": "UVSC added its first four-year bachelor's degrees and grew into one of the largest colleges in the state." },
+          { "label": "2008", "years": "2008–Today", "name": "Utah Valley University", "text": "UVU became a university in 2008 and is now the largest university in Utah." },
+          { "label": "Today", "years": "Your Story", "name": "Share Your UVU Photos", "text": "Have photos from your time on campus? We'd love to add them to this wall." }
+        ],
+        "qr": { "url": "https://www.uvu.edu/alumni/", "label": "Share Your UVU Story", "short": "uvu.edu/alumni" }
+      },
+      {
+        "label": "Alumni Benefits",
+        "teaser": "Free for every graduate.",
+        "icon": "award",
+        "photo": "assets/img/benefits-opportunities.jpg",
+        "alt": "Alumni enjoying a member benefit",
+        "eyebrow": "Membership",
+        "title": "See Your Alumni Benefits",
+        "body": "Membership is free for all graduated alumni. Log into your alumni profile to access discounts, career resources, and events.",
+        "qr": { "url": "https://www.uvu.edu/alumni/", "label": "See Your Alumni Benefits", "short": "uvu.edu/alumni" }
+      },
+      {
+        "label": "Alumni Events",
+        "teaser": "Reunions, mixers, and more.",
+        "icon": "calendar",
+        "photo": "assets/img/grads-events.jpg",
+        "alt": "Alumni at a UVU event",
+        "eyebrow": "Get Together",
+        "title": "Upcoming Alumni Events",
+        "body": "From game days to networking nights, there's always a reason to come back to campus.",
+        "qr": { "url": "https://www.uvu.edu/alumni/", "label": "See Upcoming Alumni Events", "short": "uvu.edu/alumni" }
+      },
+      {
+        "label": "Alumni Awards",
+        "teaser": "Graduates who lead.",
+        "icon": "graduation",
+        "photo": "assets/img/awards-tradition.jpg",
+        "alt": "An Alumni Awards honoree",
+        "eyebrow": "Alumni Awards",
+        "title": "Honoring Alumni Who Lead",
+        "body": "The Alumni Awards celebrate graduates making a difference in their fields and communities. Know someone who should be honored?",
+        "qr": { "url": "https://www.uvu.edu/alumni/", "label": "Nominate an Alum", "short": "uvu.edu/alumni" }
+      },
+      {
+        "label": "Mentor a Student",
+        "teaser": "Share what you've learned.",
+        "icon": "communicate",
+        "photo": "assets/img/relations-team.jpg",
+        "alt": "Alumni and students talking",
+        "eyebrow": "Give Back",
+        "title": "Mentor a Student",
+        "body": "Job shadows and career networking connect current students with alumni who've been where they're headed.",
+        "qr": { "url": "https://www.uvu.edu/alumni/", "label": "Volunteer as an Alum", "short": "uvu.edu/alumni" }
+      }
+    ]
+  }
+}

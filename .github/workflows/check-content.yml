@@ -1,0 +1,36 @@
+name: Check Content
+on:
+  push:
+    paths: ["content/**"]
+  pull_request:
+    paths: ["content/**"]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check every content file
+        run: |
+          python3 - <<'PY'
+          import json, glob, os, sys
+          ok = True
+          for f in sorted(glob.glob("content/*.json")):
+              try:
+                  d = json.load(open(f))
+              except json.JSONDecodeError as e:
+                  print(f"::error file={f},line={e.lineno}::{e.msg} (look for a missing comma or quote on or just before this line)")
+                  ok = False; continue
+              for s in d.get("demo", []):
+                  p = s.get("photo")
+                  if p and not os.path.exists(p):
+                      print(f"::error file={f}::Photo not found: {p}"); ok = False
+              for t in d.get("explore", {}).get("items", []):
+                  p = t.get("photo")
+                  if p and not os.path.exists(p):
+                      print(f"::error file={f}::Photo not found: {p}"); ok = False
+                  i = t.get("icon")
+                  if i and not os.path.exists(f"assets/icons/{i}-green.svg"):
+                      print(f"::error file={f}::Icon not in assets/icons: {i}"); ok = False
+              print(f"{'✓' if ok else '✗'} {f}")
+          sys.exit(0 if ok else 1)
+          PY

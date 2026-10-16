@@ -1,0 +1,107 @@
+{
+  "_verify": "The donor names below are placeholders. Replace them with the approved recognition list (respect anonymity requests). Confirm campaign and Foundation Board copy with IA.",
+  "screen": "Gratitude",
+  "theme": "warm",
+  "place": "With Gratitude",
+  "qr": {
+    "url": "https://www.uvu.edu/give/",
+    "label": "Join Our Donors",
+    "short": "uvu.edu/give"
+  },
+  "demo": [
+    {
+      "type": "title",
+      "eyebrow": "With Gratitude",
+      "headline": "Thank You for Lifting Wolverines",
+      "lead": "Every name on this wall changed a student's story."
+    },
+    {
+      "type": "names",
+      "seconds": 16,
+      "eyebrow": "Legacy Society",
+      "headline": "Generosity That Lasts",
+      "names": [
+        "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name",
+        "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name",
+        "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name",
+        "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name",
+        "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name", "Donor Name"
+      ]
+    },
+    {
+      "type": "framed",
+      "photo": "assets/img/awards-tradition.jpg",
+      "alt": "A UVU donor event",
+      "eyebrow": "EverGREEN Campaign",
+      "headline": "Growing Opportunity for Every Student",
+      "lead": "The EverGREEN campaign is investing in the people and places that make UVU unique."
+    },
+    {
+      "type": "names",
+      "seconds": 14,
+      "eyebrow": "UVU Foundation Board",
+      "headline": "Leaders Who Give Their Time",
+      "names": [
+        "Board Member Name", "Board Member Name", "Board Member Name", "Board Member Name",
+        "Board Member Name", "Board Member Name", "Board Member Name", "Board Member Name",
+        "Board Member Name", "Board Member Name", "Board Member Name", "Board Member Name"
+      ]
+    },
+    {
+      "type": "photo",
+      "photo": "assets/img/awards-header-mobile.jpg",
+      "alt": "UVU alumni and donors at an event",
+      "eyebrow": "Join Them",
+      "headline": "Your Name Belongs Here",
+      "lead": "Gifts of every size make a difference."
+    }
+  ],
+  "explore": {
+    "button": "Touch to Meet Our Donors",
+    "eyebrow": "With Gratitude",
+    "title": "The People Behind Every Gift",
+    "lead": "Tap a topic. Scan any code to take it with you.",
+    "items": [
+      {
+        "label": "EverGREEN Campaign",
+        "teaser": "Growing opportunity",
+        "icon": "financial-growth",
+        "photo": "assets/img/awards-honoring.jpg",
+        "alt": "A UVU campaign celebration",
+        "eyebrow": "Campaign",
+        "title": "The EverGREEN Campaign",
+        "body": "EverGREEN invests in scholarships, student support, and the spaces where Wolverines learn.",
+        "qr": { "url": "https://www.uvu.edu/give/", "label": "Learn About EverGREEN", "short": "uvu.edu/give" }
+      },
+      {
+        "label": "Legacy Society",
+        "teaser": "Gifts for generations",
+        "icon": "relationship",
+        "eyebrow": "Legacy Society",
+        "title": "The Legacy Society",
+        "body": "Legacy Society members have included UVU in their estate plans, a promise to students they'll never meet.",
+        "qr": { "url": "https://www.uvu.edu/give/", "label": "Learn About Legacy Giving", "short": "uvu.edu/give" }
+      },
+      {
+        "label": "Foundation Board",
+        "teaser": "Leaders who serve",
+        "icon": "team",
+        "eyebrow": "UVU Foundation",
+        "title": "The UVU Foundation Board",
+        "body": "Board members lend their time, talent, and networks to advance UVU's mission.",
+        "qr": { "url": "https://www.uvu.edu/give/", "label": "Meet the Foundation Board", "short": "uvu.edu/give" }
+      },
+      {
+        "label": "Join Our Donors",
+        "teaser": "Every gift counts",
+        "icon": "donation",
+        "photo": "assets/img/grads-celebrate.jpg",
+        "alt": "UVU graduates celebrating",
+        "eyebrow": "Give",
+        "title": "Your Name Belongs Here",
+        "body": "Gifts of every size reach students in the classroom, at the pantry, and at graduation.",
+        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to UVU", "short": "uvu.edu/give" }
+      }
+    ]
+  }
+}
