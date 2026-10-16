@@ -1,8 +1,7 @@
 {
-  "_verify": "Every gift link points to uvu.edu/give. Swap in fund-specific links (Food Pantry, scholarships, Wee Care) from the Foundation. Add dollar amounts to the 'amount' fields only with approved impact numbers.",
+  "_verify": "Copy, the 439-fund count, and the Blackbaud form links are from the Give home mockup (v1.6). Update the count when Find a Fund changes.",
   "screen": "Give",
   "theme": "green",
-  "place": "Give to UVU",
   "qr": {
     "url": "https://www.uvu.edu/give/",
     "label": "Give to UVU",
@@ -10,109 +9,74 @@
   },
   "demo": [
     {
-      "type": "title",
-      "eyebrow": "Your Contribution Makes a Difference",
-      "headline": "What a Gift Can Do",
-      "lead": "Every gift, at every size, reaches a UVU student."
+      "type": "photo",
+      "photo": "assets/img/give-campus-mobile.jpg",
+      "alt": "UVU's Orem campus below Mount Timpanogos",
+      "headline": "Giving to Utah Valley University",
+      "lead": "Transforming classrooms, communities, and futures."
     },
     {
       "type": "list",
       "seconds": 9,
-      "eyebrow": "Choose Where It Goes",
-      "headline": "Give to What Moves You",
+      "headline": "Featured Funds",
       "items": [
-        { "icon": "student-life", "title": "Feed a Student", "text": "Stock the UVU Food Pantry at the CARE Hub." },
-        { "icon": "diploma-3", "title": "Fund a Scholarship", "text": "Help a student stay enrolled and finish." },
-        { "icon": "team", "title": "Support Student Parents", "text": "Childcare through Wee Care keeps parents in class." },
-        { "icon": "university", "title": "Where It's Needed Most", "text": "Let UVU put your gift to work right away." }
+        { "icon": "diploma-3", "title": "General Scholarships", "text": "University-wide" },
+        { "icon": "graduation", "title": "First Generation Center", "text": "Programs and Centers" },
+        { "icon": "team", "title": "Wolverine Club", "text": "Athletics" },
+        { "icon": "university", "title": "Fulton Library", "text": "Programs and Centers" }
       ]
     },
     {
-      "type": "photo",
-      "photo": "assets/img/grads-header-mobile.jpg",
-      "alt": "UVU graduates",
-      "eyebrow": "Every Gift Counts",
-      "headline": "Small Gifts, Big Futures",
-      "lead": "Gifts from alumni add up to scholarships, meals, and diplomas."
-    },
-    {
       "type": "stat",
-      "eyebrow": "Food Pantry",
-      "value": "52,000",
-      "unit": "lbs",
-      "label": "Of Food Shared With Students in 2024",
-      "note": "Made possible by donors like you."
+      "value": "439",
+      "label": "Funds to Choose From",
+      "lead": "Find yours at uvu.edu/give."
     },
     {
       "type": "cta",
-      "eyebrow": "Give Today",
-      "headline": "Scan to Give",
-      "lead": "Choose your fund on your phone in under a minute.",
-      "qr": {
-        "url": "https://www.uvu.edu/give/",
-        "label": "Give to UVU",
-        "short": "uvu.edu/give"
-      }
+      "headline": "Your Gift Opens Doors",
+      "lead": "Choose a fund and give from your phone."
     }
   ],
   "explore": {
-    "button": "Touch to Choose a Fund",
-    "eyebrow": "Give to UVU",
-    "title": "Choose Where Your Gift Goes",
-    "lead": "Tap a fund, then scan its code to give on your phone.",
+    "button": "Choose a Fund",
+    "title": "Featured Funds",
     "items": [
       {
-        "label": "Feed a Student",
-        "teaser": "UVU Food Pantry",
-        "icon": "student-life",
-        "photo": "assets/img/home-stayconnected.jpg",
-        "alt": "Students at UVU",
-        "eyebrow": "CARE Hub",
-        "title": "Feed a Student",
-        "body": "The UVU Food Pantry serves an average of 250 people every week. Your gift keeps the shelves full.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to the Food Pantry", "short": "uvu.edu/give" }
-      },
-      {
-        "label": "Fund a Scholarship",
-        "teaser": "Keep students enrolled.",
+        "label": "General Scholarships",
         "icon": "diploma-3",
-        "photo": "assets/img/scholarships-intro.jpg",
-        "alt": "A UVU scholarship student",
-        "eyebrow": "Scholarships",
-        "title": "Fund a Scholarship",
-        "body": "Scholarships help students work fewer hours, stay in school, and graduate sooner.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to Scholarships", "short": "uvu.edu/give" }
+        "photo": "assets/img/feat-scholarships.jpg",
+        "alt": "UVU graduates at commencement",
+        "title": "General Scholarships",
+        "body": "Gifts directly support scholarships that help students across every college stay in school and graduate.",
+        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa", "label": "Give to General Scholarships", "short": "Opens the UVU giving form" }
       },
       {
-        "label": "Support Student Parents",
-        "teaser": "Wee Care childcare",
+        "label": "First Generation Center",
+        "icon": "graduation",
+        "photo": "assets/img/feat-first-gen.jpg",
+        "alt": "First-generation students at UVU",
+        "title": "First Generation Center",
+        "body": "“Remember, it takes a village to help a student graduate. Be part of that village.” Kyrsi Zamora",
+        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799", "label": "Give to the First Generation Center", "short": "Opens the UVU giving form" }
+      },
+      {
+        "label": "Wolverine Club",
         "icon": "team",
-        "photo": "assets/img/diplomas-header-mobile.jpg",
-        "alt": "A UVU graduate",
-        "eyebrow": "Wee Care",
-        "title": "Support Student Parents",
-        "body": "Affordable on-campus childcare lets student parents focus on class and finish their degrees.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to Wee Care", "short": "uvu.edu/give" }
+        "photo": "assets/img/feat-wolverine-club.jpg",
+        "alt": "UVU student-athletes",
+        "title": "Wolverine Club",
+        "body": "Your gift impacts UVU student-athletes for a lifetime.",
+        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form?svcid=tcs&formId=1f03fb1a-3bd4-4a08-870d-71ef2c2d9450&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=UVU%20Wolverine%20Club&desid=144", "label": "Give to the Wolverine Club", "short": "Opens the UVU giving form" }
       },
       {
-        "label": "Where It's Needed Most",
-        "teaser": "Flexible support",
+        "label": "Fulton Library",
         "icon": "university",
-        "photo": "assets/img/grads-celebrate.jpg",
-        "alt": "UVU graduates celebrating",
-        "eyebrow": "Greatest Need",
-        "title": "Where It's Needed Most",
-        "body": "Unrestricted gifts let UVU respond to what students need right now.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to UVU", "short": "uvu.edu/give" }
-      },
-      {
-        "label": "Plan a Legacy Gift",
-        "teaser": "Wills, trusts, and estate gifts",
-        "icon": "relationship",
-        "eyebrow": "Legacy Giving",
-        "title": "Plan a Legacy Gift",
-        "body": "Including UVU in your will or trust supports students for generations. Our team can help you plan a gift that fits your goals.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Learn About Legacy Giving", "short": "uvu.edu/give" }
+        "photo": "assets/img/feat-library.jpg",
+        "alt": "The Fulton Library at UVU",
+        "title": "Fulton Library",
+        "body": "Support the library every UVU student and alum can use.",
+        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form?svcid=renxt&formId=1a853c90-cadd-4c17-9eb1-2c1a3530d3e0&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desid=257&desname=Library", "label": "Give to the Fulton Library", "short": "Opens the UVU giving form" }
       }
     ]
   }

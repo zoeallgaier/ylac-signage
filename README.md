@@ -7,7 +7,7 @@ The four touch screens beside the event space in UVU's Young Living Alumni Cente
 | 1 · Alumni | `https://zoeallgaier.github.io/ylac-signage/alumni/` | `content/alumni.json` |
 | 2 · Student Impact | `https://zoeallgaier.github.io/ylac-signage/impact/` | `content/impact.json` |
 | 3 · Give | `https://zoeallgaier.github.io/ylac-signage/give/` | `content/give.json` |
-| 4 · Gratitude | `https://zoeallgaier.github.io/ylac-signage/gratitude/` | `content/gratitude.json` |
+| 4 · Thank You | `https://zoeallgaier.github.io/ylac-signage/gratitude/` | `content/gratitude.json` |
 
 Preview all four side by side at `/wall.html`.
 
@@ -29,23 +29,25 @@ If a comma or quote goes missing, the **Check Content** step on GitHub turns red
 
 ### Scene Types (the `demo` list)
 
+Keep each loop to 4 or 5 scenes. Every scene is a headline plus at most one short line. There are no eyebrow labels: if the headline needs a label, rewrite the headline.
+
 | `type` | Use it for | Fields |
 |---|---|---|
-| `title` | A big welcome or headline | `eyebrow`, `headline`, `lead` |
-| `stat` | One big number that counts up | `eyebrow`, `value`, `unit`, `label`, `note` |
-| `photo` | Full-screen photo with a green fade | `photo`, `alt`, `eyebrow`, `headline`, `lead` |
-| `framed` | Photo in the uvu.edu image style with APFY shapes | `photo`, `alt`, `portrait` (true/false), `eyebrow`, `headline`, `lead` |
-| `timeline` | Years that light up one by one | `eyebrow`, `headline`, `items` (`year`, `name`) |
-| `list` | Up to four funds or options | `eyebrow`, `headline`, `items` (`icon`, `amount`, `title`, `text`) |
-| `quote` | A student or donor in their own words | `quote`, `name`, `detail`, `photo` |
-| `names` | A slowly scrolling donor or board list | `eyebrow`, `headline`, `lead`, `names` |
-| `cta` | One big QR code | `eyebrow`, `headline`, `lead`, `qr` |
+| `title` | A big welcome or headline | `headline`, `lead` |
+| `stat` | One big number that counts up | `value`, `unit`, `prefix`, `label`, `lead` |
+| `photo` | Full-screen photo with the UVU Green fade | `photo`, `alt`, `headline`, `lead` |
+| `framed` | Photo in the uvu.edu image style (rounded corners and APFY shapes) | `photo`, `alt`, `headline`, `lead` |
+| `timeline` | Years that light up one by one | `headline`, `items` (`year`, `name`) |
+| `list` | Up to four funds or options as icon rows | `headline`, `items` (`icon`, `title`, `text`) |
+| `quote` | A pull quote with a headshot | `quote`, `name`, `detail`, `photo` |
+| `names` | A slowly scrolling donor or board list | `headline`, `lead`, `names` |
+| `cta` | One big QR code | `headline`, `lead`, `qr` |
 
 Any scene can take `"seconds": 10` to stay up longer (the default is 7).
 
 ### Topics (the `explore` list)
 
-Each topic needs `label` (card title), `teaser` (one short line), and `icon`. Its detail page can use `photo`, `eyebrow`, `title`, `body`, `stats`, and `qr`. Topics without their own `qr` use the screen's main QR code.
+Keep it to 4 topics. Each needs `label` and `icon`. Its page shows `title`, `body` (one or two short paragraphs), and its own `qr`, plus either a `photo` or a `people` list (`name`, `role`, `photo`) for award recipients or board members. `button` is the label on the screen's Explore button. Make it name the place ("Choose a Fund"), not "Touch Here."
 
 ### Photos
 
@@ -86,7 +88,14 @@ For each screen:
 
 ## Brand
 
-Built on the UVU Alumni Web System v1.2: one UVU Green (#185C33), Rajdhani for display, Lato for reading, Title Case, UVU Icon Library only, photos with rounded corners and APFY shapes, accents under 20%, and one primary action per view. Type sizes are the system's roles scaled for a portrait screen read from 3–10 feet.
+Follows the UVU Brand Guidelines (2025) and the Alumni Web System v1.2 (shared with Giving v1.6). See [AUDIT.md](AUDIT.md) for the full check.
+- **Colors.** Each screen is UVU Green or White, both primary colors. There are no Warm or dark-green fields, and accents stay under 20%.
+- **Logo.** The UVU monogram sits in a UVU Green tab anchored to the top edge, with nothing beside it.
+- **Type.** Rajdhani (the Stratum web fallback) and Lato, Title Case, seven sizes.
+- **Photos and shapes.** APFY shapes appear only around framed photos.
+- **Icons.** UVU Icon Library only.
+- **Actions.** One primary action per view.
+- **Copy and links.** Synced from the Alumni and Giving page mockups.
 
 ## Touch Notes
 
@@ -108,4 +117,4 @@ Each content file starts with a `_verify` note listing what still needs confirmi
 - the `uvu.edu` links (most point to /alumni or /give until fund-specific links are confirmed),
 - the history dates on the Alumni screen,
 - the Food Pantry numbers (2024),
-- the donor and Foundation Board names (currently placeholders).
+- a donor recognition list for a `names` scene, once IA approves one.

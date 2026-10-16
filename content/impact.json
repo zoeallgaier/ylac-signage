@@ -1,34 +1,30 @@
 {
-  "_verify": "Food Pantry numbers are from the 2024 CARE Hub screen; refresh for 2025. Jacob Egan quote is from the 2024 EverGREEN screen; confirm permission is current. CARE Hub and scholarships URLs need confirming.",
+  "_verify": "Food Pantry numbers are from the 2024 CARE Hub screen; refresh them for 2025. Confirm the Jacob Egan quote can still be used. 87% is from the Give home mockup.",
   "screen": "Student Impact",
-  "theme": "warm",
-  "place": "Student Impact",
+  "theme": "white",
   "qr": {
     "url": "https://www.uvu.edu/give/",
-    "label": "See Where Gifts Go",
+    "label": "Give to UVU",
     "short": "uvu.edu/give"
   },
   "demo": [
     {
       "type": "title",
-      "eyebrow": "Student Impact",
       "headline": "Meeting Needs, Changing Lives",
-      "lead": "Gifts from alumni and friends reach UVU students every single day."
+      "lead": "Gifts from alumni and friends reach UVU students every day."
     },
     {
       "type": "stat",
-      "eyebrow": "UVU Food Pantry",
       "value": "250",
-      "label": "People Served Every Week",
-      "note": "On average, at the UVU CARE Hub."
+      "label": "People Served Each Week at the UVU Food Pantry",
+      "lead": "On average, at the UVU CARE Hub."
     },
     {
       "type": "photo",
-      "photo": "assets/img/scholarships-header-mobile.jpg",
-      "alt": "A UVU scholarship recipient",
-      "eyebrow": "Scholarships",
-      "headline": "A Scholarship Keeps Students Going",
-      "lead": "For many Wolverines, a scholarship is the difference between finishing and stopping out."
+      "photo": "assets/img/care-hub-mobile.jpg",
+      "alt": "A student choosing food at the UVU Food Pantry",
+      "headline": "Fresh Food for Every Student",
+      "lead": "Fresh Food Fridays shared almost 10,000 lbs of produce in 2024."
     },
     {
       "type": "quote",
@@ -38,74 +34,42 @@
     },
     {
       "type": "stat",
-      "eyebrow": "Fresh Food Fridays",
-      "value": "10,000",
-      "unit": "lbs",
-      "label": "Of Fresh Produce for Students in 2024",
-      "note": "Plus 52,000 lbs of food distributed through the pantry."
-    },
-    {
-      "type": "framed",
-      "photo": "assets/img/grads-celebrate.jpg",
-      "alt": "UVU graduates celebrating",
-      "eyebrow": "Graduation",
-      "headline": "Every Gift Ends Here",
-      "lead": "Your support helps students cross the stage."
+      "value": "87",
+      "unit": "%",
+      "label": "of UVU Graduates Stay in Utah",
+      "lead": "An investment in UVU is an investment in Utah's future."
     }
   ],
   "explore": {
-    "button": "Touch to See Student Stories",
-    "eyebrow": "Student Impact",
-    "title": "See What Gifts Make Possible",
-    "lead": "Tap a topic. Scan any code to take it with you.",
+    "button": "See Where Gifts Go",
+    "title": "Where Gifts Go",
     "items": [
       {
-        "label": "Food",
-        "teaser": "The UVU Food Pantry.",
+        "label": "UVU Food Pantry",
         "icon": "student-life",
-        "photo": "assets/img/home-stayconnected.jpg",
-        "alt": "Students at the UVU Food Pantry",
-        "eyebrow": "Basic Needs",
-        "title": "The UVU Food Pantry",
-        "body": "No student should have to choose between groceries and class. The pantry and Fresh Food Fridays keep shelves stocked, and cooking classes build skill and confidence in healthy eating.",
-        "stats": [
-          { "value": "250", "label": "people served every week" },
-          { "value": "52,000 lbs", "label": "of food distributed in 2024" }
-        ],
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to the Food Pantry", "short": "uvu.edu/give" }
+        "photo": "assets/img/care-hub-mobile.jpg",
+        "alt": "A student choosing food at the UVU Food Pantry",
+        "title": "UVU Food Pantry",
+        "body": "The pantry at the CARE Hub serves an average of 250 people every week. In 2024, it shared 52,000 lbs of food with students.",
+        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to UVU", "short": "uvu.edu/give" }
       },
       {
         "label": "Scholarships",
-        "teaser": "Keeping students enrolled.",
         "icon": "diploma-3",
-        "photo": "assets/img/scholarships-intro.jpg",
-        "alt": "A UVU scholarship student",
-        "eyebrow": "Scholarships",
-        "title": "Scholarships Change Plans",
-        "body": "Scholarships funded by alumni and friends help students stay in school, work fewer hours, and graduate sooner.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Give to Scholarships", "short": "uvu.edu/give" }
+        "photo": "assets/img/feat-scholarships.jpg",
+        "alt": "UVU graduates at commencement",
+        "title": "General Scholarships",
+        "body": "Scholarships help students across every college stay in school and finish their degrees.",
+        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa", "label": "Give to General Scholarships", "short": "Opens the UVU giving form" }
       },
       {
-        "label": "Student Voices",
-        "teaser": "In their own words.",
-        "icon": "communicate",
-        "photo": "assets/img/saa-qualify.jpg",
-        "alt": "A UVU student",
-        "eyebrow": "Student Voices",
-        "title": "“I'm Very Grateful”",
-        "body": "“I'm very grateful for a UVU scholarship that provides the financial support needed for me to continue my education.” Jacob Egan ’24, Marketing, Men's Cross Country.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Read More Student Stories", "short": "uvu.edu/give" }
-      },
-      {
-        "label": "Graduation",
-        "teaser": "Where every gift leads.",
+        "label": "First-Generation Students",
         "icon": "graduation",
-        "photo": "assets/img/grads-celebrate.jpg",
-        "alt": "UVU graduates celebrating",
-        "eyebrow": "The Finish Line",
-        "title": "Every Gift Ends Here",
-        "body": "Food, scholarships, and support for student parents all point to the same moment: a Wolverine crossing the stage.",
-        "qr": { "url": "https://www.uvu.edu/give/", "label": "Help a Student Graduate", "short": "uvu.edu/give" }
+        "photo": "assets/img/feat-first-gen.jpg",
+        "alt": "First-generation students at UVU",
+        "title": "Be Part of That Village",
+        "body": "“As a first-generation student, I endured many financial challenges, but I got the support from UVU to get through college. I am grateful that I am able to donate to do the same for our students now.” Kyrsi Zamora",
+        "qr": { "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799", "label": "Give to the First Generation Center", "short": "Opens the UVU giving form" }
       }
     ]
   }
