@@ -130,15 +130,15 @@ button:focus { outline: none; }
 .scene--photo .copy { position: relative; z-index: 1; padding: 0 var(--gutter) 660px; --head: var(--al-white); --fg: var(--al-white); }
 
 /* Framed photo: uvu.edu image style (rounded corners + APFY shapes around the photo) */
-.frame { position: relative; isolation: isolate; width: 920px; margin: 0 0 var(--s3) -44px; padding: 44px; }
-.frame > img:not([class]) { position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); animation: photo-in 1.2s var(--ease-reveal) both; }
+/* Full content width: the photo spans gutter to gutter, so it's centered on the screen and lines up with the text */
+.frame { position: relative; isolation: isolate; width: calc(100% + 88px); margin: 0 -44px var(--s2); padding: 44px; }
+.frame > img:not([class]) { position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); animation: photo-in 1.2s var(--ease-reveal) both; }
 .frame .shape-a, .frame .shape-b { position: absolute; animation: shape-in 1.4s var(--ease-reveal) .3s both; }
 .frame .shape-a { z-index: 0; }
 .frame .shape-b { z-index: 2; }
 @keyframes photo-in { from { opacity: 0; transform: translateY(40px) scale(.97); } to { opacity: 1; transform: none; } }
 @keyframes shape-in { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
-.scene--framed { padding-top: 200px; }
-.scene--framed .frame { width: 840px; }
+.scene--framed { padding-top: 196px; }
 
 /* Pull quote: the web's al-pullquote (accent rule + Rajdhani) with a square headshot */
 .pull { margin: 0 0 var(--s4); padding: 0 0 0 var(--s3); border-left: 8px solid var(--accent); }
@@ -246,7 +246,7 @@ button:focus { outline: none; }
 .view .row { animation: rise .6s var(--ease-soft) both; animation-delay: var(--d, 0s); }
 
 /* Topic detail */
-.detail .frame { margin-top: -100px; margin-bottom: var(--s2); }
+.detail .frame { margin-top: -100px; margin-bottom: var(--s1); }
 .detail .frame > img:not([class]) { aspect-ratio: 16 / 10; }
 .detail .h2 { margin-bottom: var(--s1); }
 .detail p { margin: 0 0 var(--s2); max-width: 28em; }

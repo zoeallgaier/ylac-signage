@@ -45,6 +45,8 @@ Keep each loop to 4 or 5 scenes. Every scene is a headline plus at most one shor
 
 Any scene can take `"seconds": 10` to stay up longer (the default is 7).
 
+**Numbers:** only use stats from the UVU Annual Report or the EverGREEN Campaign Report, and add a `_source` line naming the report and page. See AUDIT.md for the current list.
+
 ### Topics (the `explore` list)
 
 Keep it to 4 topics. Each needs `label` and `icon`. Its page shows `title`, `body` (one or two short paragraphs), and its own `qr`, plus either a `photo` or a `people` list (`name`, `role`, `photo`) for award recipients or board members. `button` is the label on the screen's Explore button. Make it name the place ("Choose a Fund"), not "Touch Here."

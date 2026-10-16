@@ -1,5 +1,5 @@
 {
-  "_verify": "Confirm Kyrsi Zamora's title. Copy and links are from the Ways to Give, Give home, and License Plate mockups. Add a 'names' scene once IA approves a donor recognition list (see README).",
+  "_verify": "Every number on this screen comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report; each scene names its source in _source. Add new numbers only from those reports. Confirm Kyrsi Zamora’s title.",
   "screen": "Thank You",
   "theme": "white",
   "qr": {
@@ -23,16 +23,24 @@
     },
     {
       "type": "stat",
-      "value": "115",
-      "label": "Students Earn Merit Scholarships Each Year",
-      "lead": "Thanks to sponsors of the President's Scholarship Ball."
+      "value": "14,166",
+      "label": "Donors Gave 33,538 Gifts",
+      "lead": "Between 2018 and 2025, including 10,491 first-time donors.",
+      "_source": "EverGREEN Campaign Report (v8), p. 13"
+    },
+    {
+      "type": "stat",
+      "value": "359",
+      "label": "Students Received Full-Tuition Presidential Scholarships",
+      "lead": "In fall 2024, thanks to President’s Scholarship Ball donors.",
+      "_source": "UVU 2024–2025 Annual Report, p. 69"
     },
     {
       "type": "framed",
       "photo": "assets/img/frame-plate.jpg",
       "alt": "A UVU license plate on a white car",
       "headline": "Your Plate Funds Scholarships",
-      "lead": "A UVU license plate is $35 a year, and all proceeds go to scholarships."
+      "lead": "Every UVU license plate includes an annual scholarship donation."
     }
   ],
   "explore": {
@@ -84,7 +92,7 @@
         "photo": "assets/img/frame-plate.jpg",
         "alt": "A UVU license plate on a white car",
         "title": "UVU License Plate",
-        "body": "A $35 scholarship donation each year, with your registration. Available for any vehicle registered in Utah.",
+        "body": "Every UVU plate includes an annual scholarship donation with your registration. Available for any vehicle registered in Utah.",
         "qr": {
           "url": "https://www.uvu.edu/alumni/make-an-impact/uvu-license-plate.html",
           "label": "Get a UVU Plate",

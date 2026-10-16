@@ -67,10 +67,29 @@ Text over photos was measured against the actual photo pixels under the text blo
 | C3 | **Dock over a photo on a White screen.** The QR label, URL, and button kept White-screen colors (dark green) on the green fade, and the button vanished. | about 1.2:1 | **8.0:1.** The dock switches to white text and a white button whenever a photo is behind it, and button arrows now follow the text color. |
 | C4 | Other text pairs. | | All pass: White on UVU Green 8.0:1, UVU Green on White 8.0:1, body Dark Green on White 13.8:1, muted text 6.4:1 (green) and 7.1:1 (white), button borders 4.9:1, stat rules 4.5:1 and 5.3:1. |
 
+## Stats (Oct. 16)
+
+Rule: every number on the screens comes from the **UVU 2024–2025 Annual Report** or the **EverGREEN Campaign Report**. Each scene and topic that uses a number names its page in a `_source` field.
+
+| Was | Problem | Now | Source |
+|---|---|---|---|
+| 120,000+ alumni | From the web page, rounded | 124,818 alumni since 1941; 74% live in Utah 10 years later | EverGREEN p. 47; Annual Report p. 24 |
+| Diploma-name years (1945, 1967, 1987, 1993) | Not in either report | Timeline: 1941 opens, 2008 university, 2018 largest in Utah, 2025 record 12,940 graduates | EverGREEN pp. 11, 57; Annual Report p. 3 |
+| 250 people a week; 10,000 lbs of produce | From the 2024 signage | 35,300 meals; 53,000+ lbs of food for 9,000+ people; 13% higher retention | Annual Report p. 19; EverGREEN p. 23 |
+| 87% of graduates stay in Utah | From the Give web page | 6,053 students supported by donor-funded scholarships ($22,550,126) | EverGREEN pp. 13, 29 |
+| 439 funds | From Find a Fund | 344 endowed funds, 254 of them scholarships | EverGREEN p. 45 |
+| 115 merit scholarships a year | From Ways to Give | 359 full-tuition presidential scholarships (fall 2024) | Annual Report p. 69 |
+| (new) | | 14,166 donors, 33,538 gifts, 10,491 first-time donors | EverGREEN p. 13 |
+| (new) | | 41% first-generation | Annual Report p. 7 |
+| (new) | | 326 student-athletes, 94% graduation rate, 3.52 GPA | EverGREEN p. 39 |
+| Jazz $17 and Mammoth $59; $35 plate fee | Prices not in the reports | Removed; the QR codes link to the current offers | |
+| Jacob Egan quote | Permission unclear, not in the reports | Henry Wolthuis ’25, from the EverGREEN report | EverGREEN p. 55 |
+
+The EverGREEN report is the campaign's final record, so its totals are used as UVU facts (donors, scholarships, endowed funds) without naming the campaign on screen.
+
 ## Open Items
 
 - Confirm the history dates on the Alumni screen with UVU Archives.
-- Confirm that Jacob Egan's quote can still be used, and refresh the 2024 Food Pantry numbers.
 - Add a donor recognition list (the `names` scene type is ready) once IA approves names and anonymity rules.
 - Ask whether a Stratum web font kit is available (B9).
 - The 2026 Alumni Awards photos exist only as web crops (1200 × 900). Ask UVU Photo for the originals.

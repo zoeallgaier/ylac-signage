@@ -1,5 +1,5 @@
 {
-  "_verify": "Diploma-name years (UVU Archives). Copy and links are from the Alumni Home, Benefits, Awards, Podcast, and Career mockups (Oct. 2026).",
+  "_verify": "Every number on this screen comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report; each scene names its source in _source. Add new numbers only from those reports.",
   "screen": "Alumni",
   "theme": "green",
   "qr": {
@@ -22,41 +22,34 @@
     },
     {
       "type": "stat",
-      "value": "120,000",
-      "unit": "+",
-      "label": "Alumni and Counting",
-      "lead": "Every graduate of UVU, in all of its iterations."
+      "value": "124,818",
+      "label": "UVU Alumni Since 1941",
+      "lead": "74% still live in Utah 10 years after graduation.",
+      "_source": "EverGREEN Campaign Report (v8), p. 47 (alumni total); UVU 2024–2025 Annual Report, p. 24 (74%)"
     },
     {
       "type": "timeline",
       "seconds": 10,
-      "headline": "Which Name Is on Your Diploma?",
+      "headline": "From Trade School to Utah’s Largest University",
       "items": [
         {
           "year": "1941",
-          "name": "Central Utah Vocational School"
-        },
-        {
-          "year": "1945",
-          "name": "Utah Trade Technical Institute"
-        },
-        {
-          "year": "1967",
-          "name": "Utah Technical College at Provo"
-        },
-        {
-          "year": "1987",
-          "name": "Utah Valley Community College"
-        },
-        {
-          "year": "1993",
-          "name": "Utah Valley State College"
+          "name": "Central Utah Vocational School opens"
         },
         {
           "year": "2008",
-          "name": "Utah Valley University"
+          "name": "Becomes Utah Valley University"
+        },
+        {
+          "year": "2018",
+          "name": "Largest university in Utah"
+        },
+        {
+          "year": "2025",
+          "name": "Record 12,940 graduates"
         }
-      ]
+      ],
+      "_source": "EverGREEN Campaign Report (v8), pp. 11 and 57; UVU 2024–2025 Annual Report, p. 3"
     },
     {
       "type": "framed",
@@ -76,10 +69,7 @@
         "photo": "assets/img/detail-benefits.jpg",
         "alt": "UVU alumni gathered around an SUV in the canyon",
         "title": "Your Degree Opens Doors",
-        "body": [
-          "Membership is free for all graduated alumni. Log in to your alumni profile to see discounts on Lagoon, sporting events, Quick Quack, and more.",
-          "This season, Utah Jazz tickets start at $17 and Utah Mammoth tickets at $59."
-        ],
+        "body": "Membership is free for all graduated alumni. Log in to your alumni profile to see discounts on Lagoon, sporting events, Quick Quack, and more.",
         "qr": {
           "url": "https://alumni.uvu.edu/page/alumni-benefits",
           "label": "See Your Alumni Benefits",
