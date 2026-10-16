@@ -74,7 +74,7 @@ Rule: every number on the screens comes from the **UVU 2024–2025 Annual Report
 | Was | Problem | Now | Source |
 |---|---|---|---|
 | 120,000+ alumni | From the web page, rounded | 124,818 alumni since 1941; 74% live in Utah 10 years later | EverGREEN p. 47; Annual Report p. 24 |
-| Diploma-name years (1945, 1967, 1987, 1993) | Not in either report | Timeline: 1941 opens, 2008 university, 2018 largest in Utah, 2025 record 12,940 graduates | EverGREEN pp. 11, 57; Annual Report p. 3 |
+| Diploma-name years (1945, 1967, 1987, 1993) | Not in either report | Timeline: 1941 opens, 2008 university, 2018 largest in Utah, 2025 record 12,940 graduates | EverGREEN pp. 11, 57; Annual Report p. 4 |
 | 250 people a week; 10,000 lbs of produce | From the 2024 signage | 35,300 meals; 53,000+ lbs of food for 9,000+ people; 13% higher retention | Annual Report p. 19; EverGREEN p. 23 |
 | 87% of graduates stay in Utah | From the Give web page | 6,053 students supported by donor-funded scholarships ($22,550,126) | EverGREEN pp. 13, 29 |
 | 439 funds | From Find a Fund | 344 endowed funds, 254 of them scholarships | EverGREEN p. 45 |
