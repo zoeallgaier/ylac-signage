@@ -29,7 +29,13 @@ If a comma or quote goes missing, the **Check Content** step on GitHub turns red
 
 ### Scene Types (the `demo` list)
 
-Keep each loop to 4 or 5 scenes. Every scene is a headline plus at most one short line. There are no eyebrow labels: if the headline needs a label, rewrite the headline.
+Every loop is three scenes, in this order, so all four screens share one rhythm:
+
+1. **A stat** (`stat`): one number from the reports, with its `_source`.
+2. **An image** (`photo` for full screen, or `framed` for the uvu.edu image style).
+3. **A scan** (`cta`): one big QR code. It uses the screen's main QR unless the scene has its own `qr`.
+
+Keep headlines to two lines. There are no eyebrow labels. The other types below still work if a screen ever needs them.
 
 | `type` | Use it for | Fields |
 |---|---|---|

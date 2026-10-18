@@ -9,50 +9,26 @@
   },
   "demo": [
     {
-      "type": "photo",
-      "photo": "assets/img/bleed-campus.jpg",
-      "alt": "UVU's Orem campus below Mount Timpanogos",
-      "headline": "Giving to Utah Valley University",
-      "lead": "Transforming classrooms, communities, and futures."
-    },
-    {
-      "type": "list",
-      "seconds": 9,
-      "headline": "Featured Funds",
-      "items": [
-        {
-          "icon": "diploma-3",
-          "title": "General Scholarships",
-          "text": "University-wide"
-        },
-        {
-          "icon": "graduation",
-          "title": "First Generation Center",
-          "text": "Programs and Centers"
-        },
-        {
-          "icon": "team",
-          "title": "Wolverine Club",
-          "text": "Athletics"
-        },
-        {
-          "icon": "university",
-          "title": "Fulton Library",
-          "text": "Programs and Centers"
-        }
-      ]
-    },
-    {
       "type": "stat",
       "value": "344",
       "label": "Endowed Funds",
       "lead": "254 of them are scholarships that support students every year.",
-      "_source": "EverGREEN Campaign Report (v8), p. 45"
+      "_source": "EverGREEN Campaign Report (v8), p. 45",
+      "seconds": 8
+    },
+    {
+      "type": "photo",
+      "photo": "assets/img/bleed-campus.jpg",
+      "alt": "UVU's Orem campus below Mount Timpanogos",
+      "headline": "Giving to Utah Valley University",
+      "lead": "Transforming classrooms, communities, and futures.",
+      "seconds": 8
     },
     {
       "type": "cta",
       "headline": "Your Gift Opens Doors",
-      "lead": "Choose a fund and give from your phone."
+      "lead": "Choose a fund and give from your phone.",
+      "seconds": 10
     }
   ],
   "explore": {

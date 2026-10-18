@@ -9,54 +9,26 @@
   },
   "demo": [
     {
-      "type": "title",
-      "headline": "Once a Wolverine, Always a Wolverine",
-      "lead": "Welcome to the Young Living Alumni Center."
+      "type": "stat",
+      "value": "124,818",
+      "label": "UVU Alumni Since 1941",
+      "lead": "74% still live in Utah 10 years after graduation.",
+      "_source": "EverGREEN Campaign Report (v8), p. 47 (alumni total); UVU 2024–2025 Annual Report, p. 24 (74%)",
+      "seconds": 8
     },
     {
       "type": "framed",
       "photo": "assets/img/frame-alumni-tailgate.jpg",
       "alt": "UVU alumni tailgating together in the canyon",
       "headline": "Membership Is Free",
-      "lead": "Discounts on Lagoon, sporting events, Quick Quack, and more."
+      "lead": "Discounts on Lagoon, sporting events, Quick Quack, and more.",
+      "seconds": 8
     },
     {
-      "type": "stat",
-      "value": "124,818",
-      "label": "UVU Alumni Since 1941",
-      "lead": "74% still live in Utah 10 years after graduation.",
-      "_source": "EverGREEN Campaign Report (v8), p. 47 (alumni total); UVU 2024–2025 Annual Report, p. 24 (74%)"
-    },
-    {
-      "type": "timeline",
+      "type": "cta",
       "seconds": 10,
-      "headline": "From Trade School to Utah’s Largest University",
-      "items": [
-        {
-          "year": "1941",
-          "name": "Central Utah Vocational School opens"
-        },
-        {
-          "year": "2008",
-          "name": "Becomes Utah Valley University"
-        },
-        {
-          "year": "2018",
-          "name": "Largest university in Utah"
-        },
-        {
-          "year": "2025",
-          "name": "Record 12,940 graduates"
-        }
-      ],
-      "_source": "EverGREEN Campaign Report (v8), pp. 11 and 57; UVU 2024–2025 Annual Report, p. 4"
-    },
-    {
-      "type": "framed",
-      "photo": "assets/img/frame-awards.jpg",
-      "alt": "2026 Alumni Awards recipients at the ceremony",
-      "headline": "Honoring Those Who Move Us Forward",
-      "lead": "Meet the 2026 Alumni Awards recipients."
+      "headline": "Always a Wolverine",
+      "lead": "Claim your free alumni profile."
     }
   ],
   "explore": {

@@ -9,38 +9,26 @@
   },
   "demo": [
     {
-      "type": "title",
-      "headline": "Thank You",
-      "lead": "To every alum, donor, and friend who lifts UVU students."
-    },
-    {
-      "type": "quote",
-      "seconds": 9,
-      "quote": "Remember, it takes a village to help a student graduate. Be part of that village.",
-      "name": "Kyrsi Zamora",
-      "detail": "First-generation graduate and UVU donor",
-      "photo": "assets/img/headshot-kyrsi.jpg"
-    },
-    {
       "type": "stat",
       "value": "14,166",
       "label": "Donors Gave 33,538 Gifts",
       "lead": "Between 2018 and 2025, including 10,491 first-time donors.",
-      "_source": "EverGREEN Campaign Report (v8), p. 13"
-    },
-    {
-      "type": "stat",
-      "value": "359",
-      "label": "Students Received Full-Tuition Presidential Scholarships",
-      "lead": "In fall 2024, thanks to President’s Scholarship Ball donors.",
-      "_source": "UVU 2024–2025 Annual Report, p. 69"
+      "_source": "EverGREEN Campaign Report (v8), p. 13",
+      "seconds": 8
     },
     {
       "type": "framed",
       "photo": "assets/img/frame-plate.jpg",
       "alt": "A UVU license plate on a white car",
       "headline": "Your Plate Funds Scholarships",
-      "lead": "Every UVU license plate includes an annual scholarship donation."
+      "lead": "Every UVU license plate includes an annual scholarship donation.",
+      "seconds": 8
+    },
+    {
+      "type": "cta",
+      "seconds": 10,
+      "headline": "Thank You",
+      "lead": "To every alum, donor, and friend who lifts UVU students."
     }
   ],
   "explore": {

@@ -9,16 +9,12 @@
   },
   "demo": [
     {
-      "type": "title",
-      "headline": "Meeting Needs, Changing Lives",
-      "lead": "Gifts from alumni and friends reach UVU students every day."
-    },
-    {
       "type": "stat",
       "value": "35,300",
       "label": "Meals From the CARE Hub",
       "lead": "More than 53,000 pounds of food for over 9,000 people in 2024–2025.",
-      "_source": "UVU 2024–2025 Annual Report, p. 19"
+      "_source": "UVU 2024–2025 Annual Report, p. 19",
+      "seconds": 8
     },
     {
       "type": "photo",
@@ -26,21 +22,14 @@
       "alt": "A student choosing food at the UVU Food Pantry",
       "headline": "When Basic Needs Are Met, Students Stay",
       "lead": "Students who use the CARE Hub have a 13% higher retention rate.",
-      "_source": "EverGREEN Campaign Report (v8), p. 23"
+      "_source": "EverGREEN Campaign Report (v8), p. 23",
+      "seconds": 8
     },
     {
-      "type": "quote",
-      "quote": "If it wasn’t for donor support, I likely wouldn’t be graduating.",
-      "name": "Henry Wolthuis ’25",
-      "detail": "National Security Studies",
-      "_source": "EverGREEN Campaign Report (v8), p. 55"
-    },
-    {
-      "type": "stat",
-      "value": "6,053",
-      "label": "Students Supported by Donor-Funded Scholarships",
-      "lead": "Between 2018 and 2025.",
-      "_source": "EverGREEN Campaign Report (v8), pp. 13 and 29"
+      "type": "cta",
+      "seconds": 10,
+      "headline": "Meeting Needs, Changing Lives",
+      "lead": "Help a UVU student today."
     }
   ],
   "explore": {
