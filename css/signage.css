@@ -6,7 +6,6 @@
    - Every element is absolutely positioned on a fixed 1080 × 1920 stage,
      so nothing ever reflows. Tapping an option can't move anything.
    - Only opacity and transform animate (handled by the GPU).
-   - No live blur: the background is a pre-blurred 5 KB image.
    - Only long-supported CSS: no inset, aspect-ratio, flex gap,
      clip-path, :has(), or masks.
 
@@ -15,9 +14,9 @@
    ===================================================================== */
 
 /* ---------- Theme ---------- */
-.theme-green { --bg: #185C33; --ink: #FFFFFF; --soft: rgba(255,255,255,.92); --link: #C5D97A; --rule: rgba(196,214,193,.4); --hl: rgba(255,255,255,.1); --accent: #C4D6C1; --wash: .88;
+.theme-green { --bg: #185C33; --ink: #FFFFFF; --soft: rgba(255,255,255,.92); --link: #C5D97A; --rule: rgba(196,214,193,.4); --hl: rgba(255,255,255,.1); --accent: #C4D6C1;
 	--arrow-on-ink: url("../assets/icons/ui-arrow-right-green.svg"); --arrow-back: url("../assets/icons/ui-arrow-left-white.svg"); --chev: url("../assets/icons/ui-arrow-right-white.svg"); }
-.theme-white { --bg: #FFFFFF; --ink: #185C33; --soft: #4B5D50; --link: #185C33; --rule: rgba(26,50,28,.14); --hl: rgba(24,92,51,.07); --accent: #008A40; --wash: .86;
+.theme-white { --bg: #FFFFFF; --ink: #185C33; --soft: #4B5D50; --link: #185C33; --rule: rgba(26,50,28,.14); --hl: rgba(24,92,51,.07); --accent: #008A40;
 	--arrow-on-ink: url("../assets/icons/ui-arrow-right-white.svg"); --arrow-back: url("../assets/icons/ui-arrow-left-green.svg"); --chev: url("../assets/icons/ui-arrow-right-green.svg"); }
 
 /* ---------- Kiosk basics ---------- */
@@ -41,10 +40,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .d { font-family: "stratum-1-web", "Rajdhani", "Arial Narrow", sans-serif; font-weight: 700; }   /* display style */
 .abs { position: absolute; left: 96px; width: 888px; }
 .full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
-
-/* Background: the photo, mirrored and pre-blurred, under a wash of the screen color */
-.backdrop { object-fit: cover; }
-.wash { background: var(--bg); opacity: var(--wash); }
 
 .mono { position: absolute; left: 96px; top: 88px; height: 56px; width: auto; }
 .headline { top: 200px; width: 800px; font-size: 104px; line-height: 1; text-wrap: balance; }   /* 800px also breaks well where balance isn't supported */

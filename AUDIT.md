@@ -2,6 +2,8 @@
 
 ## v3.1 · Oct. 19, 2026 (current)
 
+- **Background blur removed.** Screens are solid UVU Green or White, which is cleaner and costs the player nothing.
+
 - **QR spotlight.** While idle, every 25 seconds the action takes over the middle of the screen for 7 seconds: a 600 px QR code with breathing corners, a scan line, and the action in 72 px type. This is the most motion on the screen, and it only runs when nobody is using it.
 - **No more jumps.** Options moved from an accordion to fixed rows plus a fixed detail panel. Measured: every row, the panel, and Back keep the exact same pixel position through every pick. All 18 options fit their panel without touching their QR code.
 - **Smoother on players.**

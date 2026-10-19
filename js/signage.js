@@ -51,13 +51,10 @@
 
 	function render() {
 		var m = data.menu, n = m.items.length;
-		var backdrop = data.photo.backdrop || data.photo.src.replace('band-', 'backdrop-');
 		document.body.className = 'theme-' + (white() ? 'white' : 'green') + (DEBUG ? ' show-cursor' : '');
 		document.title = data.screen + ' · YLAC Signage';
 
 		stage.innerHTML =
-			'<img class="full backdrop" src="' + src(backdrop) + '" alt="">' +
-			'<div class="full wash"></div>' +
 			'<img class="mono" src="../assets/img/uvu-mono-' + (white() ? 'green' : 'white') + '.svg" alt="Utah Valley University">' +
 			'<h1 class="abs d headline enter">' + esc(data.headline) + '</h1>' +
 
