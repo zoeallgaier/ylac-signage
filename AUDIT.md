@@ -1,4 +1,45 @@
-# YLAC Signage Audit · Oct. 15, 2026 (imagery and contrast added Oct. 16)
+# YLAC Signage Audit
+
+## v3 Redesign · Oct. 19, 2026 (current)
+
+Started over around one rule: **each screen is one topic with one action.**
+
+| Screen | Topic | Action | Stat (source) |
+|---|---|---|---|
+| Alumni | Connecting with alumni | Claim Your Alumni Profile | 124,818 alumni since 1941 (EverGREEN p. 47) |
+| Students | Student impact | Read Student Stories | 35,300 CARE Hub meals (Annual Report p. 19) |
+| Giving | Giving | Give to UVU | 6,053 students supported by scholarships (EverGREEN p. 29) |
+| Donors | Donor recognition | Plan a Legacy Gift | 14,166 donors, 33,538 gifts (EverGREEN p. 13) |
+
+**What changed and why**
+
+- **No rotating scenes.** Each screen is a single fixed layout: headline, photo, stat, action. It reads the same from across the room every time.
+- **Options in place.** The topic and detail pages are gone. Options are one short list, and each opens in place to a sentence and its own QR code. **Back** replaced Close.
+- **Donor recognition is real.** The Donors list names the five largest gifts in the EverGREEN report: Linder, UCCU, Smith, Kahlert, and Baugh.
+- **Two text styles:** Stratum 1 Bold (display) and Lato (body). Stats are a number plus one line, with 112 px of space above.
+- **Stratum 1 via UVU's Adobe Fonts kit** (`jum4oqb`), with Rajdhani as the fallback. The desktop font files are "preview & print" only, so none are committed.
+- **Monogram without the tab:** plain white on green, or UVU Green on White, aligned with the text.
+- **Links are Pale Meadow:** text on green (5.2:1), and a highlight behind UVU Green text on white (5.2:1).
+- **Motion:**
+  - On load and once a minute, headline words rise and the stat counts up; the QR code settles in last.
+  - The photo drifts slowly.
+  - The backdrop is the photo mirrored, blurred, and washed 84–88% with the screen color. It stays still, since animating a blur is expensive on signage players. Mirror and blur are used on the background only.
+  - Taps change things instantly, with no press effects, pulse rings, or slide-ins.
+- **Photos** use the UVU image style: rounded corners and APFY shapes, with a different composition per screen (hatch, stairs, dot, half) so neighbors never match.
+- **Photos:** new 1776 × 1040 crops with subjects centered. The Donors aerial stops above the baseball field, so its Wolverine logo (Athletics-only) is out of frame.
+- **Tap check:** synthetic taps at each row's center hit the right option. One option is open at a time, a second tap closes it, Back returns home, and the idle timer returns home.
+
+**Open items**
+
+- Confirm the named donors are comfortable appearing on public signage.
+- Confirm Kyrsi Zamora's quote and title.
+- The 365 Stories link is the current advancement URL; confirm it stays live.
+
+---
+
+## Earlier Versions (History)
+
+### v2 · Oct. 15–16, 2026
 
 Checked against the **UVU Brand Guidelines (2025)**, the **Alumni Web System v1.2** (shared with Giving v1.6), and **Apple HIG** basics. Each finding is marked **Fixed** or **Open** (needs someone outside this repo).
 

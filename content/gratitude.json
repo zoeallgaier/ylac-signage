@@ -1,91 +1,54 @@
 {
-  "_verify": "Every number on this screen comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report; each scene names its source in _source. Add new numbers only from those reports. Confirm Kyrsi Zamora’s title.",
-  "screen": "Thank You",
+  "_verify": "One topic per screen. Every number comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report (see _source). Add new numbers only from those reports. Donor gifts are from the EverGREEN report; confirm donors are comfortable being named on public signage.",
+  "screen": "Donors",
   "theme": "white",
-  "qr": {
-    "url": "https://www.uvu.edu/give/ways-to-give/",
-    "label": "See Ways to Give",
-    "short": "uvu.edu/give"
+  "headline": "Thank You to Our Donors",
+  "photo": {
+    "src": "assets/img/band-thanks.jpg",
+    "alt": "UVU’s Orem campus below Mount Timpanogos"
   },
-  "demo": [
-    {
-      "type": "stat",
-      "value": "14,166",
-      "label": "Donors Gave 33,538 Gifts",
-      "lead": "Between 2018 and 2025, including 10,491 first-time donors.",
-      "_source": "EverGREEN Campaign Report (v8), p. 13",
-      "seconds": 8
-    },
-    {
-      "type": "framed",
-      "photo": "assets/img/frame-plate.jpg",
-      "alt": "A UVU license plate on a white car",
-      "headline": "Your Plate Funds Scholarships",
-      "lead": "Every UVU license plate includes an annual scholarship donation.",
-      "seconds": 8
-    },
-    {
-      "type": "cta",
-      "seconds": 10,
-      "headline": "Thank You",
-      "lead": "To every alum, donor, and friend who lifts UVU students."
-    }
-  ],
-  "explore": {
-    "button": "Explore Giving Options",
-    "title": "Ways to Give",
+  "stat": {
+    "value": "14,166",
+    "label": "donors gave 33,538 gifts from 2018 to 2025",
+    "_source": "EverGREEN Campaign Report (v8), p. 13"
+  },
+  "cta": {
+    "label": "Plan a Legacy Gift",
+    "url": "https://uvgift.org/",
+    "short": "uvgift.org"
+  },
+  "menu": {
+    "button": "Meet Our Donors",
     "items": [
       {
-        "label": "Gift Planning",
-        "icon": "relationship",
-        "photo": "assets/img/detail-gift-planning.jpg",
-        "alt": "A father and his young daughter at a laptop",
-        "title": "Gift Planning",
-        "body": "Many people choose a long-term approach to giving using a bequest, will, annuity, or trust.",
-        "qr": {
-          "url": "https://uvgift.org/",
-          "label": "Explore Gift Planning",
-          "short": "uvgift.org"
-        }
+        "label": "Rich and Marla Linder",
+        "icon": "nursing",
+        "text": "A $35 million gift, the largest in UVU history, for a health and wellness building on the Vineyard Campus and the Orrin G. Hatch Center for National Security Studies.",
+        "_source": "EverGREEN Campaign Report (v8), p. 53"
       },
       {
-        "label": "Memorial and Tribute Gifts",
-        "icon": "donation",
-        "photo": "assets/img/memorial-gifts.jpg",
-        "alt": "Flowers on a table",
-        "title": "Memorial and Tribute Gifts",
-        "body": "In lieu of flowers, many people choose to donate in their loved one's name.",
-        "qr": {
-          "url": "https://www.uvu.edu/give/ways-to-give/memorial-gifts.html",
-          "label": "Give a Memorial Gift",
-          "short": "uvu.edu/give"
-        }
+        "label": "Utah Community Credit Union",
+        "icon": "athletics",
+        "text": "A $28.5 million pledge that helped build UCCU Stadium, home of UVU soccer.",
+        "_source": "EverGREEN Campaign Report (v8), p. 39"
       },
       {
-        "label": "Matching Gifts",
-        "icon": "financial-growth",
-        "photo": "assets/img/detail-matching.jpg",
-        "alt": "Two colleagues working at a laptop",
-        "title": "Matching Gifts",
-        "body": "Many employers will match a charitable contribution or volunteer hours.",
-        "qr": {
-          "url": "https://www.uvu.edu/give/ways-to-give/matching-gifts.html",
-          "label": "See If Your Employer Matches",
-          "short": "uvu.edu/give"
-        }
+        "label": "Scott and Karen Smith",
+        "icon": "engineering",
+        "text": "A $25 million gift that built the Scott M. Smith Engineering Building for more than 6,500 students.",
+        "_source": "EverGREEN Campaign Report (v8), p. 33"
       },
       {
-        "label": "UVU License Plate",
-        "icon": "cash-1",
-        "photo": "assets/img/frame-plate.jpg",
-        "alt": "A UVU license plate on a white car",
-        "title": "UVU License Plate",
-        "body": "Every UVU plate includes an annual scholarship donation with your registration. Available for any vehicle registered in Utah.",
-        "qr": {
-          "url": "https://www.uvu.edu/alumni/make-an-impact/uvu-license-plate.html",
-          "label": "Get a UVU Plate",
-          "short": "uvu.edu/alumni"
-        }
+        "label": "The Kahlert Foundation",
+        "icon": "computers",
+        "text": "A $5.2 million gift to establish the Kahlert Applied Artificial Intelligence Institute.",
+        "_source": "EverGREEN Campaign Report (v8), p. 51"
+      },
+      {
+        "label": "Chelsea and Casey Baugh",
+        "icon": "business",
+        "text": "A $5 million gift to the Chelsea and Casey Baugh Entrepreneurship Institute, which serves more than 4,500 students.",
+        "_source": "UVU 2024–2025 Annual Report, p. 37; EverGREEN Campaign Report (v8), p. 19"
       }
     ]
   }

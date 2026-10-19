@@ -1,88 +1,64 @@
 {
-  "_verify": "Every number on this screen comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report; each scene names its source in _source. Add new numbers only from those reports.",
-  "screen": "Student Impact",
+  "_verify": "One topic per screen. Every number comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report (see _source). Add new numbers only from those reports.",
+  "screen": "Students",
   "theme": "white",
-  "qr": {
-    "url": "https://www.uvu.edu/give/",
-    "label": "Give to UVU",
-    "short": "uvu.edu/give"
+  "headline": "Meeting Needs, Changing Lives",
+  "photo": {
+    "src": "assets/img/band-impact.jpg",
+    "alt": "A student choosing food at the UVU CARE Hub pantry"
   },
-  "demo": [
-    {
-      "type": "stat",
-      "value": "35,300",
-      "label": "Meals From the CARE Hub",
-      "lead": "More than 53,000 pounds of food for over 9,000 people in 2024–2025.",
-      "_source": "UVU 2024–2025 Annual Report, p. 19",
-      "seconds": 8
-    },
-    {
-      "type": "photo",
-      "photo": "assets/img/bleed-care-hub.jpg",
-      "alt": "A student choosing food at the UVU Food Pantry",
-      "headline": "When Basic Needs Are Met, Students Stay",
-      "lead": "Students who use the CARE Hub have a 13% higher retention rate.",
-      "_source": "EverGREEN Campaign Report (v8), p. 23",
-      "seconds": 8
-    },
-    {
-      "type": "cta",
-      "seconds": 10,
-      "headline": "Meeting Needs, Changing Lives",
-      "lead": "Help a UVU student today."
-    }
-  ],
-  "explore": {
-    "button": "See Where Gifts Go",
-    "title": "Where Gifts Go",
+  "stat": {
+    "value": "35,300",
+    "label": "meals from the CARE Hub in 2024–2025",
+    "_source": "UVU 2024–2025 Annual Report, p. 19"
+  },
+  "cta": {
+    "label": "Read Student Stories",
+    "url": "https://www.uvu.edu/advancement/make-an-impact/365-stories.html",
+    "short": "uvu.edu/advancement"
+  },
+  "menu": {
+    "button": "See Student Impact",
     "items": [
       {
-        "label": "CARE Hub",
+        "label": "Food and Basic Needs",
         "icon": "student-life",
-        "photo": "assets/img/detail-pantry.jpg",
-        "alt": "Two students choosing food at the UVU Food Pantry",
-        "title": "The CARE Hub",
-        "body": [
-          "In 2024–2025, the CARE Hub provided over 53,000 pounds of food, about 35,300 meals, to more than 9,000 people.",
-          "Students who use its resources have a 13% higher retention rate than the university average."
-        ],
-        "qr": {
-          "url": "https://www.uvu.edu/give/",
-          "label": "Give to UVU",
-          "short": "uvu.edu/give"
+        "stat": {
+          "value": "13%",
+          "label": "higher retention for students who use the CARE Hub"
         },
-        "_source": "UVU 2024–2025 Annual Report, p. 19; EverGREEN Campaign Report (v8), p. 23"
+        "text": "The CARE Hub shared more than 53,000 pounds of food with over 9,000 people in 2024–2025.",
+        "_source": "EverGREEN Campaign Report (v8), p. 23; UVU 2024–2025 Annual Report, p. 19"
+      },
+      {
+        "label": "Student Parents",
+        "icon": "family-studies",
+        "stat": {
+          "value": "93%",
+          "label": "of student-parents said Wee Care was essential to finishing their degree"
+        },
+        "text": "The Wee Care Center gave 199 student-parents more than 72,000 hours of affordable childcare.",
+        "_source": "UVU 2024–2025 Annual Report, p. 18"
       },
       {
         "label": "Scholarships",
         "icon": "diploma-3",
-        "photo": "assets/img/detail-scholarships.jpg",
-        "alt": "Graduates holding their diplomas at convocation",
-        "title": "General Scholarships",
-        "body": "Between 2018 and 2025, donors distributed $22,550,126 in scholarships to 6,053 students and created 190 new scholarships.",
-        "qr": {
-          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa",
-          "label": "Give to General Scholarships",
-          "short": "Opens the UVU giving form"
+        "stat": {
+          "value": "$22.5M",
+          "label": "in donor-funded scholarships, 2018–2025"
         },
-        "_source": "EverGREEN Campaign Report (v8), pp. 13 and 29"
+        "text": "“If it wasn’t for donor support, I likely wouldn’t be graduating.” Henry Wolthuis ’25",
+        "_source": "EverGREEN Campaign Report (v8), pp. 29 and 55"
       },
       {
         "label": "First-Generation Students",
         "icon": "graduation",
-        "photo": "assets/img/feat-first-gen.jpg",
-        "alt": "First-generation students at UVU",
-        "title": "Be Part of That Village",
-        "body": [
-          "41% of UVU students are the first in their family to go to college.",
-          "“As a first-generation student, I endured many financial challenges, but I got the support from UVU to get through college.” Kyrsi Zamora"
-        ],
-        "qr": {
-          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799",
-          "label": "Give to the First Generation Center",
-          "short": "Opens the UVU giving form"
+        "stat": {
+          "value": "41%",
+          "label": "of UVU students are first-generation"
         },
-        "_source": "UVU 2024–2025 Annual Report, p. 7 (41%)"
+        "text": "“Remember, it takes a village to help a student graduate. Be part of that village.” Kyrsi Zamora",
+        "_source": "UVU 2024–2025 Annual Report, p. 7"
       }
     ]
   }

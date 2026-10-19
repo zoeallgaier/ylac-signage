@@ -1,114 +1,62 @@
 {
-  "_verify": "Every number on this screen comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report; each scene names its source in _source. Add new numbers only from those reports.",
+  "_verify": "One topic per screen. Every number comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report (see _source). Add new numbers only from those reports.",
   "screen": "Alumni",
   "theme": "green",
-  "qr": {
-    "url": "https://alumni.uvu.edu/profile/me",
+  "headline": "Welcome Home, Wolverines",
+  "photo": {
+    "src": "assets/img/band-alumni.jpg",
+    "alt": "UVU alumni tailgating together in the canyon"
+  },
+  "stat": {
+    "value": "124,818",
+    "label": "UVU alumni since 1941",
+    "_source": "EverGREEN Campaign Report (v8), p. 47"
+  },
+  "cta": {
     "label": "Claim Your Alumni Profile",
+    "url": "https://alumni.uvu.edu/profile/me",
     "short": "alumni.uvu.edu"
   },
-  "demo": [
-    {
-      "type": "stat",
-      "value": "124,818",
-      "label": "UVU Alumni Since 1941",
-      "lead": "74% still live in Utah 10 years after graduation.",
-      "_source": "EverGREEN Campaign Report (v8), p. 47 (alumni total); UVU 2024–2025 Annual Report, p. 24 (74%)",
-      "seconds": 8
-    },
-    {
-      "type": "framed",
-      "photo": "assets/img/frame-alumni-tailgate.jpg",
-      "alt": "UVU alumni tailgating together in the canyon",
-      "headline": "Membership Is Free",
-      "lead": "Discounts on Lagoon, sporting events, Quick Quack, and more.",
-      "seconds": 8
-    },
-    {
-      "type": "cta",
-      "seconds": 10,
-      "headline": "Always a Wolverine",
-      "lead": "Claim your free alumni profile."
-    }
-  ],
-  "explore": {
-    "button": "Explore UVU Alumni",
-    "title": "UVU Alumni",
+  "menu": {
+    "button": "More Ways to Connect",
     "items": [
       {
         "label": "Alumni Benefits",
         "icon": "award",
-        "photo": "assets/img/detail-benefits.jpg",
-        "alt": "UVU alumni gathered around an SUV in the canyon",
-        "title": "Your Degree Opens Doors",
-        "body": "Membership is free for all graduated alumni. Log in to your alumni profile to see discounts on Lagoon, sporting events, Quick Quack, and more.",
+        "text": "Membership is free for every graduate. Log in to see discounts on Lagoon, sporting events, Quick Quack, and more.",
         "qr": {
-          "url": "https://alumni.uvu.edu/page/alumni-benefits",
           "label": "See Your Alumni Benefits",
+          "url": "https://alumni.uvu.edu/page/alumni-benefits",
           "short": "alumni.uvu.edu"
         }
       },
       {
-        "label": "2026 Alumni Awards",
+        "label": "Alumni Awards",
         "icon": "graduation",
-        "title": "2026 Alumni Awards",
-        "body": "Each year at Homecoming, we honor those who've made a difference at UVU and in our community.",
-        "people": [
-          {
-            "name": "Jane F. Rhodes ’15",
-            "role": "Alumni Impact Award",
-            "photo": "assets/img/awards-jane-rhodes.jpg"
-          },
-          {
-            "name": "Richard J. and Marla A. Linder",
-            "role": "Honorary Alumni Award",
-            "photo": "assets/img/awards-linder.jpg"
-          },
-          {
-            "name": "Heather Kahlert ’04",
-            "role": "University Partner Award",
-            "photo": "assets/img/awards-heather-kahlert.jpg"
-          },
-          {
-            "name": "Robert A. Bastian ’12",
-            "role": "Distinguished Alumni Award",
-            "photo": "assets/img/awards-robert-bastian.jpg"
-          },
-          {
-            "name": "Sheldon R. Smith",
-            "role": "Wilson W. Sorensen Lifetime Achievement Award",
-            "photo": "assets/img/awards-sheldon-smith.jpg"
-          }
-        ],
+        "text": "Each year at Homecoming, we honor alumni and friends who have made a difference at UVU and in our community.",
         "qr": {
-          "url": "https://www.uvu.edu/alumni/",
           "label": "See the Alumni Awards",
+          "url": "https://www.uvu.edu/alumni/",
           "short": "uvu.edu/alumni"
         }
       },
       {
         "label": "Forever Wolverines Podcast",
         "icon": "communicate",
-        "photo": "assets/img/detail-podcast.jpg",
-        "alt": "Two people recording a podcast in a studio",
-        "title": "Forever Wolverines Podcast",
-        "body": "UVU Student Alumni Ambassadors sit down with alumni to talk about careers, their time at school, and advice. New episodes drop every other week.",
+        "text": "Student Alumni Ambassadors talk with alumni about careers, campus memories, and advice. New episodes every other week.",
         "qr": {
-          "url": "https://open.spotify.com/show/0jjnDHtCAWyyTIzDSZYxHp",
           "label": "Listen on Spotify",
+          "url": "https://open.spotify.com/show/0jjnDHtCAWyyTIzDSZYxHp",
           "short": "Forever Wolverines on Spotify"
         }
       },
       {
         "label": "Career and Networking",
         "icon": "team",
-        "photo": "assets/img/detail-career.jpg",
-        "alt": "Two colleagues talking at a conference table",
-        "title": "Hire a Wolverine. Help a Wolverine.",
-        "body": "Alumni can still use the Career and Internship Center, the Writing Center, and the Small Business Development Center. Connect with fellow alumni in the UVU Alumni LinkedIn group.",
+        "text": "Hire a Wolverine. Help a Wolverine. Connect with fellow alumni in the UVU Alumni LinkedIn group.",
         "qr": {
+          "label": "Join the Alumni LinkedIn Group",
           "url": "https://www.linkedin.com/groups/61904",
-          "label": "Join the UVU Alumni LinkedIn Group",
           "short": "linkedin.com"
         }
       }

@@ -1,96 +1,75 @@
 {
-  "_verify": "Every number on this screen comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report; each scene names its source in _source. Add new numbers only from those reports.",
-  "screen": "Give",
+  "_verify": "One topic per screen. Every number comes from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report (see _source). Add new numbers only from those reports.",
+  "screen": "Giving",
   "theme": "green",
-  "qr": {
-    "url": "https://www.uvu.edu/give/",
+  "headline": "Your Gift Opens Doors",
+  "photo": {
+    "src": "assets/img/band-give.jpg",
+    "alt": "UVU graduates holding their diplomas at convocation"
+  },
+  "stat": {
+    "value": "6,053",
+    "label": "students supported by donor-funded scholarships since 2018",
+    "_source": "EverGREEN Campaign Report (v8), p. 29"
+  },
+  "cta": {
     "label": "Give to UVU",
+    "url": "https://www.uvu.edu/give/",
     "short": "uvu.edu/give"
   },
-  "demo": [
-    {
-      "type": "stat",
-      "value": "344",
-      "label": "Endowed Funds",
-      "lead": "254 of them are scholarships that support students every year.",
-      "_source": "EverGREEN Campaign Report (v8), p. 45",
-      "seconds": 8
-    },
-    {
-      "type": "photo",
-      "photo": "assets/img/bleed-campus.jpg",
-      "alt": "UVU's Orem campus below Mount Timpanogos",
-      "headline": "Giving to Utah Valley University",
-      "lead": "Transforming classrooms, communities, and futures.",
-      "seconds": 8
-    },
-    {
-      "type": "cta",
-      "headline": "Your Gift Opens Doors",
-      "lead": "Choose a fund and give from your phone.",
-      "seconds": 10
-    }
-  ],
-  "explore": {
+  "menu": {
     "button": "Choose a Fund",
-    "title": "Featured Funds",
     "items": [
       {
         "label": "General Scholarships",
         "icon": "diploma-3",
-        "photo": "assets/img/detail-scholarships.jpg",
-        "alt": "Graduates holding their diplomas at convocation",
-        "title": "General Scholarships",
-        "body": "Donor-funded scholarships supported 6,053 students between 2018 and 2025.",
+        "text": "Help students in every college stay in school and graduate.",
         "qr": {
-          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa",
           "label": "Give to General Scholarships",
+          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=3ebce5df-6a4a-4f44-89b7-ef3d89fcad79&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa",
           "short": "Opens the UVU giving form"
-        },
-        "_source": "EverGREEN Campaign Report (v8), p. 29"
+        }
       },
       {
         "label": "First Generation Center",
         "icon": "graduation",
-        "photo": "assets/img/feat-first-gen.jpg",
-        "alt": "First-generation students at UVU",
-        "title": "First Generation Center",
-        "body": [
-          "41% of UVU students are first-generation.",
-          "“Remember, it takes a village to help a student graduate. Be part of that village.” Kyrsi Zamora"
-        ],
+        "text": "41% of UVU students are the first in their family to go to college.",
+        "_source": "UVU 2024–2025 Annual Report, p. 7",
         "qr": {
-          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799",
           "label": "Give to the First Generation Center",
+          "url": "https://host.nxt.blackbaud.com/donor-form/?svcid=renxt&formId=a682c8b3-82cb-447c-b901-f043a44f02f1&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=First%20Generation%20Center&desid=1799",
           "short": "Opens the UVU giving form"
-        },
-        "_source": "UVU 2024–2025 Annual Report, p. 7"
+        }
       },
       {
         "label": "Wolverine Club",
-        "icon": "team",
-        "photo": "assets/img/detail-wolverine-club.jpg",
-        "alt": "UVU fans cheering in the stands",
-        "title": "Wolverine Club",
-        "body": "UVU’s 326 student-athletes posted a 94% graduation rate and a 3.52 average GPA in 2025.",
+        "icon": "athletics",
+        "text": "Support 326 student-athletes with a 94% graduation rate.",
+        "_source": "EverGREEN Campaign Report (v8), p. 39",
         "qr": {
-          "url": "https://host.nxt.blackbaud.com/donor-form?svcid=tcs&formId=1f03fb1a-3bd4-4a08-870d-71ef2c2d9450&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=UVU%20Wolverine%20Club&desid=144",
           "label": "Give to the Wolverine Club",
+          "url": "https://host.nxt.blackbaud.com/donor-form?svcid=tcs&formId=1f03fb1a-3bd4-4a08-870d-71ef2c2d9450&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desname=UVU%20Wolverine%20Club&desid=144",
           "short": "Opens the UVU giving form"
-        },
-        "_source": "EverGREEN Campaign Report (v8), p. 39; UVU 2024–2025 Annual Report, p. 55"
+        }
       },
       {
         "label": "Fulton Library",
-        "icon": "university",
-        "photo": "assets/img/detail-library.jpg",
-        "alt": "A student reading in the Fulton Library",
-        "title": "Fulton Library",
-        "body": "Support the library every UVU student and alum can use.",
+        "icon": "book",
+        "text": "Support the library every UVU student and alum can use.",
         "qr": {
-          "url": "https://host.nxt.blackbaud.com/donor-form?svcid=renxt&formId=1a853c90-cadd-4c17-9eb1-2c1a3530d3e0&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desid=257&desname=Library",
           "label": "Give to the Fulton Library",
+          "url": "https://host.nxt.blackbaud.com/donor-form?svcid=renxt&formId=1a853c90-cadd-4c17-9eb1-2c1a3530d3e0&envid=p-15SOd3UsHUO8MRNYFSnBvg&zone=usa&desid=257&desname=Library",
           "short": "Opens the UVU giving form"
+        }
+      },
+      {
+        "label": "More Ways to Give",
+        "icon": "donation",
+        "text": "Give monthly, give in someone’s memory, double your gift with an employer match, or get a UVU license plate.",
+        "qr": {
+          "label": "See Ways to Give",
+          "url": "https://www.uvu.edu/give/ways-to-give/",
+          "short": "uvu.edu/give"
         }
       }
     ]

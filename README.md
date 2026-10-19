@@ -1,128 +1,87 @@
 # YLAC Signage
 
-The four touch screens beside the event space in UVU's Young Living Alumni Center. Each screen is a web page that PlaySignage shows full screen.
+The four touch screens beside the event space in UVU's Young Living Alumni Center. Each screen is one topic with one action, shown full screen in PlaySignage.
 
-| Screen | Link (paste into PlaySignage) | Edit this file |
-|---|---|---|
-| 1 · Alumni | `https://zoeallgaier.github.io/ylac-signage/alumni/` | `content/alumni.json` |
-| 2 · Student Impact | `https://zoeallgaier.github.io/ylac-signage/impact/` | `content/impact.json` |
-| 3 · Give | `https://zoeallgaier.github.io/ylac-signage/give/` | `content/give.json` |
-| 4 · Thank You | `https://zoeallgaier.github.io/ylac-signage/gratitude/` | `content/gratitude.json` |
+| Screen | Topic | The action (QR code) | Link for PlaySignage | Edit |
+|---|---|---|---|---|
+| 1 | Alumni | Claim Your Alumni Profile | `https://zoeallgaier.github.io/ylac-signage/alumni/` | `content/alumni.json` |
+| 2 | Students | Read Student Stories | `https://zoeallgaier.github.io/ylac-signage/impact/` | `content/impact.json` |
+| 3 | Giving | Give to UVU | `https://zoeallgaier.github.io/ylac-signage/give/` | `content/give.json` |
+| 4 | Donors | Plan a Legacy Gift | `https://zoeallgaier.github.io/ylac-signage/gratitude/` | `content/gratitude.json` |
 
 Preview all four side by side at `/wall.html`.
 
-## How Each Screen Works
+## How a Screen Works
 
-- **Demo loop.** Branded motion scenes play on repeat, like a store demo. A QR code and a "Touch to Explore" button stay on screen the whole time, so the screen works even when nobody touches it.
-- **Explore.** A tap anywhere opens topic cards. Each topic has its own QR code. After 45 seconds with no touch, the screen slides back to the demo.
-- **Edits show up on their own.** At the end of every loop the screen checks for new content. Nobody needs to restart the player.
+**Home** is one composition, read top to bottom from across the room:
 
-## Editing Content
+1. the UVU monogram,
+2. a headline,
+3. a photo in the UVU image style (rounded corners and APFY shapes, a different composition on each screen); the background is that photo mirrored, blurred, and washed with the screen color,
+4. one stat,
+5. one QR code (the screen's action),
+6. one button that opens the screen's options.
 
-All words, photos, and links live in the `content/` folder. You never need to touch the HTML, CSS, or JS.
+**Options**: tap anywhere on home and the lower half becomes a short list. Tapping an option opens it in place to show a sentence and its own QR code. Only one is open at a time, and tapping it again closes it. **Back** returns home. After 45 seconds with no touch, the screen goes home on its own.
 
-1. On GitHub, open the screen's file in `content/` and click the pencil icon.
-2. Change the text between the quotes. Keep the quotes, colons, and commas.
-3. Click **Commit changes**. The screen updates within a few minutes.
+**Motion**: home plays a quiet entrance on load and again once a minute. The headline rises, the number counts up, and the QR code settles in last. The photo drifts slowly. Taps change things instantly, with no tap animations.
 
-If a comma or quote goes missing, the **Check Content** step on GitHub turns red and tells you the line. The screens keep showing the last good version until it's fixed.
+## Editing a Screen
 
-### Scene Types (the `demo` list)
-
-Every loop is three scenes, in this order, so all four screens share one rhythm:
-
-1. **A stat** (`stat`): one number from the reports, with its `_source`.
-2. **An image** (`photo` for full screen, or `framed` for the uvu.edu image style).
-3. **A scan** (`cta`): one big QR code. It uses the screen's main QR unless the scene has its own `qr`.
-
-Keep headlines to two lines. There are no eyebrow labels. The other types below still work if a screen ever needs them.
-
-| `type` | Use it for | Fields |
-|---|---|---|
-| `title` | A big welcome or headline | `headline`, `lead` |
-| `stat` | One big number that counts up | `value`, `unit`, `prefix`, `label`, `lead` |
-| `photo` | Full-screen photo with the UVU Green fade | `photo`, `alt`, `headline`, `lead` |
-| `framed` | Photo in the uvu.edu image style (rounded corners and APFY shapes) | `photo`, `alt`, `headline`, `lead` |
-| `timeline` | Years that light up one by one | `headline`, `items` (`year`, `name`) |
-| `list` | Up to four funds or options as icon rows | `headline`, `items` (`icon`, `title`, `text`) |
-| `quote` | A pull quote with a headshot | `quote`, `name`, `detail`, `photo` |
-| `names` | A slowly scrolling donor or board list | `headline`, `lead`, `names` |
-| `cta` | One big QR code | `headline`, `lead`, `qr` |
-
-Any scene can take `"seconds": 10` to stay up longer (the default is 7).
-
-**Numbers:** only use stats from the UVU Annual Report or the EverGREEN Campaign Report, and add a `_source` line naming the report and page. See AUDIT.md for the current list.
-
-### Topics (the `explore` list)
-
-Keep it to 4 topics. Each needs `label` and `icon`. Its page shows `title`, `body` (one or two short paragraphs), and its own `qr`, plus either a `photo` or a `people` list (`name`, `role`, `photo`) for award recipients or board members. `button` is the label on the screen's Explore button. Make it name the place ("Choose a Fund"), not "Touch Here."
-
-### Photos
-
-Put photos in `assets/img/` and refer to them as `assets/img/name.jpg`.
-- **Full-screen `photo` scenes:** vertical, at least 1080 × 1920 (2160 × 3840 for 4K screens), subject in the upper half.
-- **`framed` scenes and topic photos:** 4:3, about 1600 × 1200.
-
-### Icons
-
-Use names from the UVU Icon Library that are already in `assets/icons/`: award, calendar, cash-1, communicate, diploma-3, donation, financial-growth, graduation, history, info-1, person, relationship, student-life, team, university. To add one, copy its `-green.svg` and `-white.svg` files from the Alumni Web System kit.
-
-### QR Codes
-
-Every `qr` has three parts:
+Everything lives in that screen's file in `content/`. On GitHub, open the file, click the pencil, change the text between the quotes, and commit. The screen picks up the change within 10 minutes while it's on its home view. If a comma or quote goes missing, the **Check Content** step on GitHub turns red, and the screen keeps showing the last good version.
 
 ```json
-"qr": { "url": "https://www.uvu.edu/give/", "label": "Give to UVU", "short": "uvu.edu/give" }
+{
+  "screen": "Giving",                       // shown in the browser tab only
+  "theme": "green",                         // "green" or "white"
+  "headline": "Your Gift Opens Doors",      // two lines at most
+  "photo": { "src": "assets/img/band-give.jpg", "alt": "Describe the photo" },
+  "stat": { "value": "6,053", "label": "students supported by donor-funded scholarships since 2018", "_source": "Report, page" },
+  "cta":  { "label": "Give to UVU", "url": "https://www.uvu.edu/give/", "short": "uvu.edu/give" },
+  "menu": {
+    "button": "Choose a Fund",              // names where the button goes
+    "items": [
+      { "label": "Wolverine Club", "icon": "athletics",
+        "text": "One or two sentences.",
+        "stat": { "value": "94%", "label": "graduation rate" },          // optional
+        "qr":   { "label": "Give to the Wolverine Club", "url": "…", "short": "Opens the UVU giving form" } // optional: uses the screen's cta if left out
+      }
+    ]
+  }
+}
 ```
+(JSON can't hold comments; they're here only to explain.)
 
-The code is generated from `url`, so changing the link changes the code. Labels say where the code goes ("Give to Scholarships," never "Scan Here").
+**Rules that keep it clear**
+- **One topic per screen**, and no two screens share the same action.
+- **Numbers** come only from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report. Add a `_source` naming the report and page.
+- **Labels** say where they go: "Give to the Wolverine Club," never "Learn More."
+- **Options:** 4 or 5 per screen.
+- **Photos** are 1776 × 1040, with the subject centered. Crop them with `tools/crop.py` (Pillow), and don't use photos showing the Athletics-only Wolverine mark.
+- **Icons** come from the UVU Icon Library and live in `assets/icons/` as `name-green.svg` and `name-white.svg`.
 
-## Making a New Version
-
-To run a different version for an event, a season, or a campaign push:
-
-1. Copy a content file, for example `content/give.json` → `content/give-gala.json`.
-2. Edit the copy.
-3. In PlaySignage, schedule a slide with `…/give/?content=give-gala`.
+**Making a new version** (an event, a campaign push): copy a content file, for example `give.json` to `give-gala.json`, edit the copy, and schedule `…/give/?content=give-gala` in PlaySignage.
 
 ## PlaySignage Setup
 
 For each screen:
 
-1. Make a playlist with **one** Website slide. The page runs its own loop, so a second slide would interrupt someone mid-tap.
-2. Paste the screen's link and set the slide duration very long (for example 24 hours).
+1. Make a playlist with **one** Website slide and a long duration.
+2. Paste the screen's link.
 3. Turn on **Enable scrolling** so touches reach the page.
-4. Leave **Screenshot Mode** off. It shows a still image that can't be touched.
+4. Leave **Screenshot Mode** off.
 
-## Brand
+## Type, Color, and Accessibility
 
-Follows the UVU Brand Guidelines (2025) and the Alumni Web System v1.2 (shared with Giving v1.6). See [AUDIT.md](AUDIT.md) for the full check.
-- **Colors.** Each screen is UVU Green or White, both primary colors. There are no Warm or dark-green fields, and accents stay under 20%.
-- **Logo.** The UVU monogram sits in a UVU Green tab anchored to the top edge, with nothing beside it.
-- **Type.** Rajdhani (the Stratum web fallback) and Lato, Title Case, seven sizes.
-- **Photos and shapes.** APFY shapes appear only around framed photos.
-- **Icons.** UVU Icon Library only.
-- **Actions.** One primary action per view.
-- **Copy and links.** Synced from the Alumni and Giving page mockups.
-
-## Touch Notes
-
-Tapping failed in the old Adobe XD version because of hover states. This version:
-- has no hover styles at all (press feedback only),
-- counts the first tap, with no double-tap or 300 ms delay,
-- ignores long-press menus, drags, pinch zoom, and accidental double taps,
-- keeps every interactive element in the lower half of the screen, where people can reach it.
+- **Stratum 1** comes from UVU's Adobe Fonts web project, kit `jum4oqb`, linked in each screen's `<head>`. If the kit can't load, Rajdhani (the approved web fallback) takes over. Never commit Stratum font files: the desktop license doesn't allow web serving.
+- **Lato** is used for body text.
+- **Two text styles:** display (Stratum Bold) and body (Lato).
+- **Color:** UVU Green or White screens. Links are Pale Meadow: as the text color on green (5.2:1), and as a highlight behind UVU Green text on white (5.2:1), since Pale Meadow text on white is only 1.6:1.
+- **Contrast:** white on UVU Green and UVU Green on White are 8.0:1. The blurred backdrop sits under an 86–88% wash of the screen color, so text stays above 4.5:1 even over the brightest part of the blur.
+- **Touch targets** are 112–128 px on the stage, about 3 inches on a 55" screen, and sit in the lower half of the screen. There are no hover or press effects; hover broke tapping in the old XD version.
+- Motion respects reduced-motion settings. Options use real buttons with `aria-expanded`.
 
 ## Reviewing on a Laptop
 
-- <kbd>→</kbd> / <kbd>←</kbd> step through scenes, <kbd>E</kbd> opens Explore, <kbd>Esc</kbd> closes it.
-- `?debug` shows the cursor and marks each tap.
-- `?scene=3` starts on the fourth scene. `?explore` opens Explore right away. `?idle=10` shortens the idle timeout.
-
-## Before Launch
-
-Each content file starts with a `_verify` note listing what still needs confirming:
-- the `uvu.edu` links (most point to /alumni or /give until fund-specific links are confirmed),
-- the history dates on the Alumni screen,
-- the Food Pantry numbers (2024),
-- a donor recognition list for a `names` scene, once IA approves one.
+- **O** opens the options, **1–9** opens an option, **Esc** goes home.
+- `?debug` shows the cursor and marks each tap. `?menu` opens the options, `?open=2` opens the third option, and `?idle=5` shortens the idle timeout.

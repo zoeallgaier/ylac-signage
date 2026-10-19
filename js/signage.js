@@ -1,19 +1,17 @@
 /* =====================================================================
-   YLAC SIGNAGE ENGINE
+   YLAC SIGNAGE ENGINE · v3
    ---------------------------------------------------------------------
-   One engine for all four screens. Each screen's page sets
-   <body data-screen="give"> and the engine loads content/give.json.
-   ?content=give-gala loads content/give-gala.json instead, which is how
-   you make a new version without touching the original.
+   <body data-screen="give"> loads content/give.json.
+   ?content=give-gala loads content/give-gala.json instead (new versions).
 
-   Two modes:
-   1. DEMO: a store-demo loop of branded motion scenes, with one QR code
-      and one "Explore" button always on screen.
-   2. EXPLORE: any tap opens a short topic list → a topic page with its
-      own QR code. After IDLE_MS with no touch it slides back to the demo.
+   Two states, nothing else:
+   HOME     One topic, one action: headline, photo, stat, QR, options button.
+   OPTIONS  The bottom half becomes a short list. Tapping an option opens it
+            in place (sentence + its own QR); one open at a time. Back, or
+            45 seconds with no touch, returns home.
 
-   Touch: one tap handler on Pointer Events. No hover, no click/dblclick,
-   no mouse-only events, so the first tap always counts (the XD problem).
+   Touch: Pointer Events, first tap always counts, no hover, no press
+   effects, no double-tap zoom, no long-press menus.
    ===================================================================== */
 (function () {
 	'use strict';
@@ -23,349 +21,217 @@
 	const CONTENT = params.get('content') || SCREEN;
 	const DEBUG = params.has('debug');
 	const IDLE_MS = (+params.get('idle') || 45) * 1000;
+	const REPLAY_MS = 60000;      // home entrance replays every minute
+	const REFRESH_MS = 600000;    // check for content edits every 10 minutes
 	const BASE = '../';
-	const SCENE_MS = 7000;
-	const TAP_SLOP = 30;   // px a finger can drift and still count as a tap
-	const TAP_LOCK = 350;  // ms between taps (no ghost double-taps)
+	const TAP_SLOP = 30, TAP_LOCK = 300;
 
 	const stage = document.querySelector('.stage');
-	const scenesEl = stage.querySelector('.scenes');
-	const dockEl = stage.querySelector('.dock');
-	const exploreEl = stage.querySelector('.explore');
 	if (DEBUG) document.body.classList.add('show-cursor');
 
-	let data = null, dataText = '';
-	let sceneIdx = -1, sceneTimer = null, idleTimer = null, mode = 'demo', lastTap = 0;
+	let data = null, dataText = '', state = 'home', idleTimer = null, replayTimer = null, lastTap = 0;
 
-	/* ---------- Stage scaling ---------- */
-	function fit() { document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1080, innerHeight / 1920)); }
+	/* ---------- Scale the 1080 × 1920 stage to any display ---------- */
+	const fit = () => document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1080, innerHeight / 1920));
 	addEventListener('resize', fit);
 	fit();
 
 	/* ---------- Helpers ---------- */
 	const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-	const src = p => p ? (/^(https?:)?\/\//.test(p) ? p : BASE + p) : '';
-	const onWhite = () => data.theme === 'white';
-	const icon = (name, color) => `${BASE}assets/icons/${name}-${color || (onWhite() ? 'green' : 'white')}.svg`;
-	const shortUrl = u => u.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+	const src = p => /^(https?:)?\/\//.test(p) ? p : BASE + p;
+	// UVU image style: a different APFY shape composition per screen, so neighbors never match
+	const SHAPES = { alumni: 'hatch', impact: 'stairs', give: 'dot', gratitude: 'half' };
+	const white = () => data.theme === 'white';
+	const icon = name => `${BASE}assets/icons/${name}-${white() ? 'green' : 'white'}.svg`;
 
-	// Letter-by-letter blur-in, same as zoeallgaier.com's reveal.js
-	function chars(text, base = 0.25, gap = 0.032) {
-		let i = 0;
-		return String(text).split(' ').map(w =>
-			`<span class="word">${[...w].map(ch => `<span class="char-mask"><span class="char" style="--d:${(base + i++ * gap).toFixed(3)}s">${esc(ch)}</span></span>`).join('')}</span>`
-		).join(' ');
-	}
-
-	// Long links (Blackbaud forms) use low error correction so the squares stay big enough to scan
+	// Long links (giving forms) use low error correction so each square stays big enough to scan
 	function qrSvg(url) {
 		const q = qrcode(0, url.length > 80 ? 'L' : 'M');
 		q.addData(url);
 		q.make();
-		const n = q.getModuleCount(), m = 1;
+		const n = q.getModuleCount();
 		let d = '';
-		for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += `M${c + m} ${r + m}h1v1h-1z`;
-		return `<svg viewBox="0 0 ${n + m * 2} ${n + m * 2}" shape-rendering="crispEdges" role="img" aria-label="QR code"><path fill="#1A321C" d="${d}"/></svg>`;
+		for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) if (q.isDark(r, c)) d += `M${c + 1} ${r + 1}h1v1h-1z`;
+		return `<svg viewBox="0 0 ${n + 2} ${n + 2}" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1A321C" d="${d}"/></svg>`;
 	}
 
-	function qrBlock(qr) {
-		if (!qr || !qr.url) return '';
-		return `<div class="qr">
-			<div class="qr-card">${qrSvg(qr.url)}</div>
-			<div class="qr-text"><b>${esc(qr.label)}</b><span class="short">${esc(qr.short || shortUrl(qr.url))}</span><span>Scan with your phone camera.</span></div>
-		</div>`;
+	const cta = c => `<div class="cta" role="group" aria-label="${esc(c.label)}: scan with your phone camera">
+		<div class="qr-card">${qrSvg(c.url)}</div>
+		<div><div class="cta-label">${esc(c.label)}</div><div class="cta-where"><b>${esc(c.short)}</b><br>Scan with your phone camera.</div></div>
+	</div>`;
+
+	const stat = (s, cls = '') => `<div class="stat ${cls}"><div class="stat-num" data-value="${esc(s.value)}">${esc(s.value)}</div><p class="stat-label">${esc(s.label)}</p></div>`;
+
+	const words = text => String(text).split(' ').map((w, i) => `<span class="word"><span style="--d:${(.08 * i).toFixed(2)}s">${esc(w)}</span></span>`).join(' ');
+
+	/* ---------- Render ---------- */
+	function render() {
+		document.body.className = `theme-${white() ? 'white' : 'green'}${DEBUG ? ' show-cursor' : ''}`;
+		document.title = `${data.screen} · YLAC Signage`;
+		const m = data.menu;
+		stage.innerHTML = `
+			<div class="backdrop" aria-hidden="true"><img src="${src(data.photo.src)}" alt=""></div>
+			<img class="mono" src="${BASE}assets/img/uvu-mono-${white() ? 'green' : 'white'}.svg" alt="Utah Valley University">
+			<h1 class="headline">${words(data.headline)}</h1>
+
+			<section class="home" aria-label="${esc(data.screen)}">
+				<figure class="photo" data-shape="${esc(data.photo.shape || SHAPES[SCREEN] || 'hatch')}">
+					<div class="photo-frame"><img src="${src(data.photo.src)}" alt="${esc(data.photo.alt)}"></div>
+				</figure>
+				${stat(data.stat)}
+				${cta(data.cta)}
+				<button type="button" class="btn btn--solid" data-act="open">${esc(m.button)}<span class="arrow" aria-hidden="true"></span></button>
+			</section>
+
+			<section class="menu" aria-label="${esc(m.button)}" hidden>
+				<ul class="options">${m.items.map((o, i) => `<li class="opt">
+					<button type="button" class="opt-head" data-act="toggle" aria-expanded="false" aria-controls="opt-${i}" id="opt-h-${i}">
+						<img class="ico" src="${icon(o.icon || 'info-1')}" alt=""><b>${esc(o.label)}</b><span class="chev" aria-hidden="true"></span>
+					</button>
+					<div class="opt-body" id="opt-${i}" role="region" aria-labelledby="opt-h-${i}" hidden>
+						${o.stat ? stat(o.stat, 'opt-stat') : ''}
+						<p class="opt-text">${esc(o.text)}</p>
+						${cta(o.qr || data.cta)}
+					</div>
+				</li>`).join('')}</ul>
+				<button type="button" class="btn btn--outline" data-act="back"><span class="arrow" aria-hidden="true"></span>Back</button>
+			</section>`;
+		playHome();
 	}
 
-	/* APFY shapes: only around framed photos (uvu.edu image style), rotated so neighbors never match */
-	const FRAMES = [
-		{ a: ['hatch-circle-rise', 'left:0;top:0;width:30%'], b: ['ring-lake', 'right:8px;bottom:8px;width:10%'] },
-		{ a: ['stairs-green', 'left:0;bottom:0;width:26%'], b: ['square-outline-brick', 'right:6px;top:6px;width:9%'] },
-		{ a: ['circle-rise', 'right:8%;top:0;width:22%'], b: ['x-rise', 'left:6px;bottom:10%;width:7%'] },
-		{ a: ['steps-meadow', 'right:0;bottom:0;width:24%'], b: ['half-wolverine', 'left:0;top:22%;width:6%'] },
-	];
-	let frameTurn = 0;
-	function frame(photo, alt) {
-		const f = FRAMES[frameTurn++ % FRAMES.length];
-		return `<figure class="frame">
-			<img class="shape-a" src="${BASE}assets/shapes/${f.a[0]}.svg" alt="" style="${f.a[1]}">
-			<img src="${src(photo)}" alt="${esc(alt)}">
-			<img class="shape-b" src="${BASE}assets/shapes/${f.b[0]}.svg" alt="" style="${f.b[1]}">
-		</figure>`;
+	// Entrance: words rise, photo unveils, number counts up, action settles last
+	function playHome(first = true) {
+		const home = stage.querySelector('.home');
+		stage.classList.remove('play');
+		void stage.offsetWidth;                 // restart the CSS animations
+		stage.classList.add('play');
+		if (!first) home.querySelector('.photo-frame').style.animation = 'none';  // replays keep the photo still
+		countUp(home.querySelector('.stat-num'), 600);
+		clearTimeout(replayTimer);
+		replayTimer = setTimeout(() => { if (state === 'home') playHome(false); }, REPLAY_MS);
 	}
 
-	const lead = (s, d) => s.lead ? `<p class="lead rise" style="--d:${d}s">${esc(s.lead)}</p>` : '';
+	function countUp(el, delay) {
+		const raw = el.dataset.value, m = raw.match(/^(\D*)([\d,]+(?:\.\d+)?)(.*)$/);
+		if (!m || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+		const [, pre, num, post] = m, target = +num.replace(/,/g, ''), dec = (num.split('.')[1] || '').length, comma = num.includes(',');
+		const fmt = v => pre + (comma ? v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) : v.toFixed(dec)) + post;
+		el.textContent = fmt(0);
+		setTimeout(() => {
+			const t0 = performance.now();
+			const step = now => {
+				const p = Math.min(1, (now - t0) / 1600);
+				el.textContent = p < 1 ? fmt(target * (1 - Math.pow(2, -10 * p))) : raw;
+				if (p < 1 && el.isConnected) requestAnimationFrame(step);
+			};
+			requestAnimationFrame(step);
+		}, delay);
+	}
 
-	/* ---------- Scenes ---------- */
-	const SCENES = {
-		title: s => `<h1 class="display">${chars(s.headline)}</h1>${lead(s, 1.1)}`,
+	/* ---------- States ---------- */
+	function show(next) {
+		state = next;
+		const home = stage.querySelector('.home'), menu = stage.querySelector('.menu');
+		home.hidden = next !== 'home';
+		menu.hidden = next !== 'menu';
+		(next === 'home' ? home : menu).classList.remove('swap');
+		void stage.offsetWidth;
+		(next === 'home' ? home : menu).classList.add('swap');
+		if (next === 'home') { collapseAll(); playHome(false); clearTimeout(idleTimer); }
+		else bumpIdle();
+	}
 
-		stat: s => `<div class="stat-value">${esc(s.prefix || '')}<span class="num">${esc(s.value)}</span>${s.unit ? `<span class="unit">${esc(s.unit)}</span>` : ''}</div>
-			<div class="stat-rule"></div>
-			<h2 class="h2 rise" style="--d:.5s">${esc(s.label)}</h2>${lead(s, .9)}`,
-
-		photo: s => `<div class="bleed"><img src="${src(s.photo)}" alt="${esc(s.alt)}"></div>
-			<div class="copy"><h1 class="display">${chars(s.headline, .6)}</h1>${lead(s, 1.4)}</div>`,
-
-		framed: s => `${frame(s.photo, s.alt)}<h2 class="h2">${chars(s.headline, .7, .026)}</h2>${lead(s, 1.4)}`,
-
-		quote: s => `<blockquote class="pull rise" style="--d:.2s"><p>“${esc(s.quote)}”</p></blockquote>
-			<div class="cite rise" style="--d:.9s">${s.photo ? `<img src="${src(s.photo)}" alt="">` : ''}<div><b>${esc(s.name)}</b><span>${esc(s.detail)}</span></div></div>`,
-
-		timeline: s => `<h2 class="h2">${chars(s.headline, .25, .026)}</h2>
-			<ol class="eras">${s.items.map((e, i) => `<li class="era rise" style="--d:${(.9 + i * .1).toFixed(2)}s"><b>${esc(e.year)}</b><span>${esc(e.name)}</span></li>`).join('')}</ol>`,
-
-		list: s => `<h2 class="h2">${chars(s.headline, .25, .026)}</h2>
-			<ul class="rows">${s.items.map((r, i) => `<li class="row rise" style="--d:${(.9 + i * .3).toFixed(2)}s">
-				<img class="ico" src="${icon(r.icon || 'donation')}" alt=""><div><b>${esc(r.title)}</b>${r.text ? `<small>${esc(r.text)}</small>` : ''}</div>
-			</li>`).join('')}</ul>`,
-
-		names: s => `<h2 class="h2">${chars(s.headline, .25, .026)}</h2>${lead(s, .9)}
-			<div class="names-window rise" style="--d:1s"><ul class="names">${(s.names || []).map(n => `<li>${esc(n)}</li>`).join('')}</ul></div>`,
-
-		cta: s => {
-			const qr = s.qr || data.qr;
-			return `<h1 class="display">${chars(s.headline)}</h1>${lead(s, 1)}
-				<div class="qr-big">${qrSvg(qr.url)}</div>
-				<div class="qr-short rise" style="--d:1.2s">${esc(qr.short || shortUrl(qr.url))}</div>`;
-		},
-	};
-
-	// After a scene mounts: count-ups, timeline sweep, name scroll
-	function afterRender(el, s, ms) {
-		const num = el.querySelector('.num');
-		if (num) {
-			const raw = String(s.value).replace(/,/g, '');
-			if (/^\d+(\.\d+)?$/.test(raw)) {
-				const target = +raw, dec = (raw.split('.')[1] || '').length, t0 = performance.now();
-				const step = now => {
-					const p = Math.min(1, (now - t0) / 1800), e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
-					num.textContent = (target * e).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
-					if (p < 1 && el.isConnected) requestAnimationFrame(step);
-				};
-				num.textContent = '0';
-				requestAnimationFrame(step);
-			}
-		}
-		const eras = [...el.querySelectorAll('.era')];
-		if (eras.length) {
-			const per = (ms - 2600) / eras.length;
-			eras.forEach((e, i) => setTimeout(() => eras.forEach((x, j) => {
-				x.classList.toggle('is-on', j === i);
-				x.classList.toggle('is-past', j < i);
-			}), 1800 + i * per));
-		}
-		const names = el.querySelector('.names');
-		if (names) requestAnimationFrame(() => {
-			names.style.setProperty('--travel', Math.min(0, names.parentElement.clientHeight - names.scrollHeight) + 'px');
-			names.style.setProperty('--dur', (ms - 1800) / 1000 + 's');
+	function collapseAll(except) {
+		stage.querySelectorAll('.opt-head').forEach(h => {
+			if (h === except) return;
+			h.setAttribute('aria-expanded', 'false');
+			document.getElementById(h.getAttribute('aria-controls')).hidden = true;
 		});
 	}
 
-	/* ---------- Demo loop ---------- */
-	function showScene(i) {
-		const list = data.demo;
-		sceneIdx = (i + list.length) % list.length;
-		const s = list[sceneIdx];
-		const ms = s.seconds ? s.seconds * 1000 : SCENE_MS;
-
-		const old = scenesEl.querySelector('.scene:not(.is-leaving)');
-		if (old) { old.classList.add('is-leaving'); setTimeout(() => old.remove(), 800); }
-
-		const el = document.createElement('section');
-		el.className = `scene scene--${s.type}`;
-		el.innerHTML = (SCENES[s.type] || SCENES.title)(s);
-		setTimeout(() => {
-			scenesEl.appendChild(el);
-			// Dock colors change with the scene behind it, not before (no flash of dark text on green)
-			stage.classList.toggle('is-cta', s.type === 'cta');
-			stage.classList.toggle('is-photo', s.type === 'photo');
-			afterRender(el, s, ms);
-		}, old ? 350 : 0);
-
-		const next = list[(sceneIdx + 1) % list.length];
-		if (next.photo) new Image().src = src(next.photo);
-
-		clearTimeout(sceneTimer);
-		sceneTimer = setTimeout(() => {
-			if (sceneIdx === list.length - 1) refresh().then(() => showScene(0));
-			else showScene(sceneIdx + 1);
-		}, ms);
-	}
-
-	function renderDock() {
-		dockEl.innerHTML = `${qrBlock(data.qr)}
-			<button class="btn ${onWhite() ? 'btn--primary' : 'btn--light'} explore-btn" type="button" data-act="open">${esc(data.explore.button)}<span class="arrow" aria-hidden="true"></span></button>`;
-	}
-
-	/* ---------- Explore ---------- */
-	function openExplore() {
-		if (mode === 'explore') return;
-		mode = 'explore';
-		clearTimeout(sceneTimer);
-		renderTopics(false);
-		exploreEl.classList.add('is-open');
-		bumpIdle();
-	}
-
-	function closeExplore() {
-		if (mode !== 'explore') return;
-		mode = 'demo';
-		clearTimeout(idleTimer);
-		exploreEl.classList.remove('is-open');
-		setTimeout(() => showScene(sceneIdx + 1), 400);
+	function toggle(head) {
+		const open = head.getAttribute('aria-expanded') === 'true';
+		collapseAll(head);
+		head.setAttribute('aria-expanded', String(!open));
+		document.getElementById(head.getAttribute('aria-controls')).hidden = open;
 	}
 
 	function bumpIdle() {
 		clearTimeout(idleTimer);
-		if (mode === 'explore') idleTimer = setTimeout(closeExplore, IDLE_MS);
-	}
-
-	function view(html, back) {
-		exploreEl.querySelector('.view')?.remove();
-		const v = document.createElement('div');
-		v.className = 'view ' + (back ? 'is-entering-back' : 'is-entering');
-		v.innerHTML = html;
-		exploreEl.appendChild(v);
-	}
-
-	function renderTopics(back) {
-		const x = data.explore;
-		view(`<h2 class="h2">${esc(x.title)}</h2>${x.lead ? `<p class="lead">${esc(x.lead)}</p>` : ''}
-			<ul class="rows">${x.items.map((t, i) => `<li><button type="button" class="row" data-act="topic" data-i="${i}" style="--d:${(.1 + i * .06).toFixed(2)}s">
-				<img class="ico" src="${icon(t.icon || 'info-1')}" alt=""><span><b>${esc(t.label)}</b></span><img class="go" src="${icon('ui-arrow-right')}" alt="">
-			</button></li>`).join('')}</ul>
-			<button type="button" class="btn btn--secondary" data-act="close">Close</button>`, back);
-	}
-
-	function renderTopic(i) {
-		const t = data.explore.items[i];
-		const body = [].concat(t.body || []).map(p => `<p>${esc(p)}</p>`).join('');
-		const people = t.people ? `<ul class="people">${t.people.map((p, j) => `<li style="--d:${(.1 + j * .06).toFixed(2)}s"><img src="${src(p.photo)}" alt=""><b>${esc(p.name)}</b><span>${esc(p.role)}</span></li>`).join('')}</ul>` : '';
-		view(`<div class="detail view">
-				${t.photo && !t.people ? frame(t.photo, t.alt) : ''}
-				<h2 class="h2">${esc(t.title || t.label)}</h2>
-				${body}${people}
-				${qrBlock(t.qr || data.qr)}
-				<div class="foot">
-					<button type="button" class="btn btn--secondary back" data-act="back"><span class="arrow" aria-hidden="true"></span>Back</button>
-					<button type="button" class="btn btn--secondary" data-act="close">Close</button>
-				</div>
-			</div>`);
+		if (state === 'menu') idleTimer = setTimeout(() => show('home'), IDLE_MS);
 	}
 
 	/* ---------- Touch ---------- */
-	const ACTIONS = {
-		open: openExplore,
-		close: closeExplore,
-		back: () => renderTopics(true),
-		topic: el => renderTopic(+el.dataset.i),
-	};
-
+	const ACTIONS = { open: () => show('menu'), back: () => show('home'), toggle };
 	let down = null;
-	function onDown(e) {
+	stage.addEventListener('pointerdown', e => {
 		if (e.isPrimary === false) return;
-		const target = e.target.closest('[data-act]');
-		down = { x: e.clientX, y: e.clientY, target };
-		if (target) target.classList.add('is-pressed');
+		down = { x: e.clientX, y: e.clientY, target: e.target.closest('[data-act]') };
 		bumpIdle();
-	}
-	function onUp(e) {
+	});
+	addEventListener('pointerup', e => {
 		if (!down) return;
 		const d = down; down = null;
-		if (d.target) d.target.classList.remove('is-pressed');
 		if (Math.hypot(e.clientX - d.x, e.clientY - d.y) > TAP_SLOP) return;
 		const now = Date.now();
 		if (now - lastTap < TAP_LOCK) return;
 		lastTap = now;
 		if (DEBUG) {
-			const r = stage.getBoundingClientRect(), s = r.width / 1080, dot = document.createElement('i');
-			dot.className = 'tap-dot';
-			dot.style.left = (e.clientX - r.left) / s + 'px';
-			dot.style.top = (e.clientY - r.top) / s + 'px';
-			stage.appendChild(dot);
-			setTimeout(() => dot.remove(), 800);
+			const r = stage.getBoundingClientRect(), k = r.width / 1080, dot = document.createElement('i');
+			dot.className = 'tap-dot'; dot.style.left = (e.clientX - r.left) / k + 'px'; dot.style.top = (e.clientY - r.top) / k + 'px';
+			stage.appendChild(dot); setTimeout(() => dot.remove(), 500);
 		}
-		if (mode === 'demo') return openExplore(); // a tap anywhere on the demo opens Explore
+		if (state === 'home') return show('menu');            // anywhere on home opens the options
 		if (d.target && ACTIONS[d.target.dataset.act]) ACTIONS[d.target.dataset.act](d.target);
-	}
-	function onCancel() { if (down && down.target) down.target.classList.remove('is-pressed'); down = null; }
-
-	if (window.PointerEvent) {
-		stage.addEventListener('pointerdown', onDown);
-		addEventListener('pointerup', onUp);
-		addEventListener('pointercancel', onCancel);
-	} else { // very old webviews
-		const pt = (e, f) => { const t = e.changedTouches ? e.changedTouches[0] : e; f({ clientX: t.clientX, clientY: t.clientY, target: e.target }); };
-		stage.addEventListener('touchstart', e => pt(e, onDown), { passive: true });
-		addEventListener('touchend', e => { pt(e, onUp); e.preventDefault(); }, { passive: false });
-	}
-	// Nothing may scroll the stage sideways (focus, scrollIntoView)
-	[stage, exploreEl, scenesEl].forEach(el => el.addEventListener('scroll', () => { el.scrollTop = 0; el.scrollLeft = 0; }));
+	});
+	addEventListener('pointercancel', () => { down = null; });
+	stage.addEventListener('scroll', () => { stage.scrollTop = 0; stage.scrollLeft = 0; });
 	stage.addEventListener('mousedown', e => e.preventDefault());
-	// No long-press menus, drags, pinch zoom, double-tap zoom, or link clicks
 	['contextmenu', 'dragstart', 'gesturestart', 'selectstart', 'dblclick'].forEach(t => addEventListener(t, e => e.preventDefault(), { passive: false }));
 	addEventListener('click', e => e.preventDefault(), true);
 
-	// Laptop review: → / ← scenes, E explore, Esc close
+	// Laptop review: O opens options, Esc goes home, 1–9 opens that option
 	addEventListener('keydown', e => {
-		if (e.key === 'ArrowRight' && mode === 'demo') showScene(sceneIdx + 1);
-		if (e.key === 'ArrowLeft' && mode === 'demo') showScene(sceneIdx - 1);
-		if (e.key === 'e') openExplore();
-		if (e.key === 'Escape') closeExplore();
+		if (e.key === 'o') show('menu');
+		if (e.key === 'Escape') show('home');
+		const n = +e.key;
+		if (n >= 1 && n <= 9) { if (state !== 'menu') show('menu'); const h = stage.querySelectorAll('.opt-head')[n - 1]; if (h) toggle(h); }
 	});
 
 	/* ---------- Content ---------- */
-	const cacheKey = 'ylac:' + CONTENT;
+	const cacheKey = 'ylac3:' + CONTENT;
 	async function load() {
 		const res = await fetch(`${BASE}content/${CONTENT}.json`, { cache: 'no-store' });
 		if (!res.ok) throw new Error(`content/${CONTENT}.json → ${res.status}`);
 		const text = await res.text();
 		let json;
-		try { json = JSON.parse(text); }
-		catch (err) { throw new Error(`content/${CONTENT}.json has a typo:\n${err.message}`); }
+		try { json = JSON.parse(text); } catch (err) { throw new Error(`content/${CONTENT}.json has a typo:\n${err.message}`); }
 		try { localStorage.setItem(cacheKey, text); } catch (e) {}
 		return { json, text };
 	}
 
-	// End of every loop: pick up edits without anyone touching the player
-	async function refresh() {
-		try {
-			const { json, text } = await load();
-			if (text !== dataText) { data = json; dataText = text; apply(); }
-		} catch (e) { /* keep showing the last good version */ }
-	}
-
-	function apply() {
-		document.body.classList.toggle('theme-white', onWhite());
-		document.body.classList.toggle('theme-green', !onWhite());
-		document.title = `${data.screen || SCREEN} · YLAC Signage`;
-		renderDock();
-	}
+	// Pick up edits without anyone touching the player (only while home, so nobody is mid-tap)
+	setInterval(async () => {
+		if (state !== 'home') return;
+		try { const r = await load(); if (r.text !== dataText) { data = r.json; dataText = r.text; render(); } } catch (e) {}
+	}, REFRESH_MS);
 
 	function fail(err) {
-		const n = document.createElement('div');
-		n.className = 'notice';
-		n.innerHTML = `<div><b>This Screen Needs a Content Fix</b><p>The last change to its content file couldn't be read.</p><code>${esc(err.message)}</code></div>`;
-		stage.appendChild(n);
+		stage.innerHTML = `<div class="notice"><div><b>This Screen Needs a Content Fix</b>The last change to its content file couldn't be read.<br><code>${esc(err.message)}</code></div></div>`;
 		setTimeout(() => location.reload(), 60000);
 	}
 
-	async function start() {
-		try {
-			const r = await load();
-			data = r.json; dataText = r.text;
-		} catch (err) {
+	(async function start() {
+		try { const r = await load(); data = r.json; dataText = r.text; }
+		catch (err) {
 			let cached = null;
 			try { cached = localStorage.getItem(cacheKey); } catch (e) {}
 			if (!cached) return fail(err);
 			data = JSON.parse(cached); dataText = cached;
 		}
-		apply();
 		await document.fonts.ready;
-		showScene(+params.get('scene') || 0);
-		if (params.has('explore')) openExplore();
-		if (params.has('topic')) renderTopic(+params.get('topic'));
-	}
-
-	start();
+		render();
+		if (params.has('menu')) show('menu');
+		if (params.has('open')) { show('menu'); toggle(stage.querySelectorAll('.opt-head')[+params.get('open') || 0]); }
+	}());
 }());

@@ -1,0 +1,2 @@
+# Never commit font files for licensed faces. Stratum 1 is served by UVU's Adobe Fonts kit.
+assets/fonts/stratum*

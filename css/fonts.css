@@ -1,3 +1,5 @@
+/* Stratum 1 comes from UVU's Adobe Fonts web project (kit jum4oqb, linked in each screen's <head>).
+   Lato and Rajdhani (the Stratum fallback) are self-hosted below. */
 @font-face{font-family:'Lato';font-weight:400;font-style:normal;font-display:block;src:url('../assets/fonts/lato-400.woff2') format('woff2');}
 @font-face{font-family:'Lato';font-weight:700;font-style:normal;font-display:block;src:url('../assets/fonts/lato-700.woff2') format('woff2');}
 @font-face{font-family:'Rajdhani';font-weight:600;font-style:normal;font-display:block;src:url('../assets/fonts/rajdhani-600.woff2') format('woff2');}
