@@ -1,182 +1,156 @@
 /* =====================================================================
-   YLAC SIGNAGE · v3
-   ---------------------------------------------------------------------
-   One screen = one topic = one action. A single composition, read top
-   to bottom from across the room:
+   YLAC SIGNAGE · v3.1
+   One topic, one action per screen. Built on the UVU Alumni Web System.
 
-     monogram → headline → photo → stat → QR (the action) → options button
+   Built to be smooth on signage players:
+   - Every element is absolutely positioned on a fixed 1080 × 1920 stage,
+     so nothing ever reflows. Tapping an option can't move anything.
+   - Only opacity and transform animate (handled by the GPU).
+   - No live blur: the background is a pre-blurred 5 KB image.
+   - Only long-supported CSS: no inset, aspect-ratio, flex gap,
+     clip-path, :has(), or masks.
 
-   Tapping swaps the bottom of the screen for a short list of options.
-   Each option opens in place to show a sentence and its own QR code.
-   Back returns home. After 45 seconds with no touch, it goes home alone.
-
-   Built on the UVU Alumni Web System: UVU Green or White screens, Rajdhani
-   (Stratum's web fallback) for display, Lato for reading, Title Case,
-   UVU Icon Library, 16px (8px web) photo corners.
-
-   Two text styles only:
-     Display: Stratum 1 Bold via Adobe Fonts (headline, numbers, labels, buttons); Rajdhani fallback
-     Body:    Lato (everything you read)
-
-   Accessibility: White on UVU Green and UVU Green on White are both 8.0:1.
-   Text over the blurred backdrop is measured in AUDIT.md. Tap targets are
-   112–128px on the stage (about 3 in.). No hover or press effects (hover
-   broke tapping in the old XD version). Respects reduced motion.
+   Type: two styles. Display (.d) = Stratum 1 Bold from the Adobe Fonts
+   kit, with Rajdhani as fallback. Body = Lato.
    ===================================================================== */
 
-:root {
-	--green: #185C33;
-	--green-dark: #1A321C;
-	--wolverine: #008A40;
-	--haze: #C4D6C1;
-	--white: #FFFFFF;
-	--muted-on-white: #4B5D50;
-	--meadow: #C5D97A;
+/* ---------- Theme ---------- */
+.theme-green { --bg: #185C33; --ink: #FFFFFF; --soft: rgba(255,255,255,.92); --link: #C5D97A; --rule: rgba(196,214,193,.4); --hl: rgba(255,255,255,.1); --accent: #C4D6C1; --wash: .88;
+	--arrow-on-ink: url("../assets/icons/ui-arrow-right-green.svg"); --arrow-back: url("../assets/icons/ui-arrow-left-white.svg"); --chev: url("../assets/icons/ui-arrow-right-white.svg"); }
+.theme-white { --bg: #FFFFFF; --ink: #185C33; --soft: #4B5D50; --link: #185C33; --rule: rgba(26,50,28,.14); --hl: rgba(24,92,51,.07); --accent: #008A40; --wash: .86;
+	--arrow-on-ink: url("../assets/icons/ui-arrow-right-white.svg"); --arrow-back: url("../assets/icons/ui-arrow-left-green.svg"); --chev: url("../assets/icons/ui-arrow-right-green.svg"); }
 
-	--display: "stratum-1-web", "Rajdhani", "Arial Narrow", sans-serif;   /* Stratum 1 via UVU's Adobe Fonts kit; Rajdhani if it can't load */
-	--body: "Lato", Arial, sans-serif;
-
-	--gutter: 96px;
-	--radius: 16px;
-	--ease: cubic-bezier(.16, 1, .3, 1);      /* long, soft settle */
-	--ease-io: cubic-bezier(.65, 0, .35, 1);
-
-	--scale: 1;
-}
-
-.theme-green { --bg: var(--green); --ink: var(--white); --soft: rgba(255, 255, 255, .92); --rule: rgba(196, 214, 193, .4); --accent: var(--haze); --wash: .88; }
-.theme-white { --bg: var(--white); --ink: var(--green); --soft: var(--muted-on-white); --rule: rgba(26, 50, 28, .14); --accent: var(--wolverine); --wash: .86; }
-
-/* ---------- Kiosk hardening ---------- */
-*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { margin: 0; height: 100%; overflow: hidden; background: #000; touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; overscroll-behavior: none; cursor: none; }
-body.show-cursor, body.show-cursor * { cursor: default; }
-img { -webkit-user-drag: none; pointer-events: none; display: block; }
-button { font: inherit; color: inherit; background: none; border: 0; margin: 0; padding: 0; text-align: inherit; }
+/* ---------- Kiosk basics ---------- */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #000; cursor: none;
+	touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.show-cursor, .show-cursor * { cursor: default; }
+img { display: block; pointer-events: none; -webkit-user-drag: none; }
+button { font: inherit; color: inherit; background: none; border: 0; margin: 0; padding: 0; text-align: left; }
 button:focus { outline: none; }
-ul { list-style: none; margin: 0; padding: 0; }
-h1, h2, p, figure { margin: 0; }
+h1, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
 
-/* ---------- Stage: fixed 1080 × 1920, scaled to fit ---------- */
+/* ---------- Stage: everything below is positioned in stage pixels ---------- */
 .stage {
-	position: fixed; left: 50%; top: 50%;
-	width: 1080px; height: 1920px;
-	transform: translate(-50%, -50%) scale(var(--scale));
-	overflow: hidden; overflow: clip;
+	position: fixed; left: 50%; top: 50%; width: 1080px; height: 1920px; overflow: hidden;
+	-webkit-transform: translate(-50%, -50%) scale(var(--scale, 1)); transform: translate(-50%, -50%) scale(var(--scale, 1));
 	background: var(--bg); color: var(--ink);
-	font-family: var(--body); -webkit-font-smoothing: antialiased;
-	padding: 88px var(--gutter) 56px;
-	display: flex; flex-direction: column;
+	font-family: "Lato", Arial, sans-serif; -webkit-font-smoothing: antialiased;
 }
+.d { font-family: "stratum-1-web", "Rajdhani", "Arial Narrow", sans-serif; font-weight: 700; }   /* display style */
+.abs { position: absolute; left: 96px; width: 888px; }
+.full { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
 
-/* Backdrop: the photo, mirrored and blurred, under a wash of the screen color.
-   Static on purpose (a moving blur is expensive on signage players). */
-.backdrop { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-.backdrop img { position: absolute; left: -15%; top: 8%; width: 130%; height: 70%; object-fit: cover; transform: scaleY(-1); filter: blur(90px) saturate(1.35); }
-.backdrop::after { content: ""; position: absolute; inset: 0; background: var(--bg); opacity: var(--wash); }
-.stage > :not(.backdrop) { position: relative; z-index: 1; }
+/* Background: the photo, mirrored and pre-blurred, under a wash of the screen color */
+.backdrop { object-fit: cover; }
+.wash { background: var(--bg); opacity: var(--wash); }
 
-/* ---------- Brand + headline (always on screen) ---------- */
-.mono { height: 56px; width: auto; flex: none; align-self: flex-start; }
-.headline {
-	margin-top: 72px; flex: none;
-	font-family: var(--display); font-weight: 700; font-size: 104px; line-height: 1; letter-spacing: -.005em;
-	color: var(--ink); text-wrap: balance;
-}
-.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
-.word > span { display: inline-block; }
+.mono { position: absolute; left: 96px; top: 88px; height: 56px; width: auto; }
+.headline { top: 200px; width: 800px; font-size: 104px; line-height: 1; text-wrap: balance; }   /* 800px also breaks well where balance isn't supported */
+
+/* ---------- Layers cross-fade; nothing reflows ---------- */
+.home, .menu { transition: opacity .35s ease, visibility .35s; }
+.menu, .is-menu .home { opacity: 0; visibility: hidden; }
+.is-menu .menu { opacity: 1; visibility: visible; }
 
 /* ---------- Home ---------- */
-.home, .menu { display: flex; flex-direction: column; flex: 1; min-height: 0; margin-top: 64px; }
-.menu[hidden], .home[hidden] { display: none; }
-
-.photo { position: relative; flex: none; height: 520px; isolation: isolate; }
-.photo-frame { position: relative; z-index: 1; height: 100%; border-radius: var(--radius); overflow: hidden; }
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; animation: drift 24s ease-in-out infinite alternate; }
-
-/* UVU image style (Alumni Web System, al-media): a plain photo with rounded corners and APFY
-   shapes layered around it: one set behind a corner, one small mark in front. Each screen gets
-   a different composition so neighbors on the wall never match. The mirror-and-blur treatment is
-   only for the background (.backdrop), never the photo itself. */
-.photo::before, .photo::after { content: ""; position: absolute; inset: -44px; pointer-events: none; background-repeat: no-repeat; }
-.photo::before { z-index: 0; }
-.photo::after { z-index: 2; }
-/* hatch: hatched circle behind the top-left, lake ring on the lower-right */
-.photo[data-shape="hatch"]::before { background-image: url("../assets/shapes/hatch-circle-rise.svg"); background-position: left top; background-size: 300px auto; }
-.photo[data-shape="hatch"]::after { background-image: url("../assets/shapes/ring-lake.svg"); background-position: right 12px bottom 12px; background-size: 96px auto; }
-/* stairs: green stairs behind the lower-left, brick square outline on the top-right */
-.photo[data-shape="stairs"]::before { background-image: url("../assets/shapes/stairs-green.svg"); background-position: left bottom; background-size: 248px auto; }
-.photo[data-shape="stairs"]::after { background-image: url("../assets/shapes/square-outline-brick.svg"); background-position: right 8px top 8px; background-size: 88px auto; }
-/* dot: Valley Rise circle behind the top-right, meadow half-hatch behind the lower-left, rise x in front */
-.photo[data-shape="dot"]::before { background-image: url("../assets/shapes/circle-rise.svg"), url("../assets/shapes/hatch-half-meadow.svg"); background-position: right 10% top, left 12% bottom; background-size: 212px auto, 264px auto; }
-.photo[data-shape="dot"]::after { background-image: url("../assets/shapes/x-rise.svg"); background-position: left 8px bottom 14%; background-size: 72px auto; }
-/* half: meadow steps behind the lower-right, wolverine half-disc tab on the left edge */
-.photo[data-shape="half"]::before { background-image: url("../assets/shapes/steps-meadow.svg"); background-position: right bottom; background-size: 232px auto; }
-.photo[data-shape="half"]::after { background-image: url("../assets/shapes/half-wolverine.svg"); background-position: left 0 top 22%; background-size: 64px auto; }
+.photo { top: 488px; height: 520px; }
+.frame { position: relative; z-index: 1; width: 888px; height: 520px; border-radius: 16px; overflow: hidden; -webkit-transform: translateZ(0); transform: translateZ(0); }
+.frame img { width: 888px; height: 520px; object-fit: cover; will-change: transform; -webkit-animation: drift 30s ease-in-out infinite alternate; animation: drift 30s ease-in-out infinite alternate; }
+@-webkit-keyframes drift { from { -webkit-transform: scale(1); } to { -webkit-transform: scale(1.06); } }
 @keyframes drift { from { transform: scale(1); } to { transform: scale(1.06); } }
 
-/* Stat: two styles only, number + one line, lots of air */
-.stat { margin-top: 112px; flex: none; }
-.stat-num { font-family: var(--display); font-weight: 700; font-size: 184px; line-height: .86; letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
-.stat-label { margin-top: 20px; font-size: 38px; line-height: 1.3; color: var(--ink); max-width: 20em; }
+/* UVU image style: APFY shapes around the photo, a different composition per screen */
+.photo:before, .photo:after { content: ""; position: absolute; left: -44px; top: -44px; right: -44px; bottom: -44px; background-repeat: no-repeat; pointer-events: none; }
+.photo:after { z-index: 2; }
+.shape-hatch:before  { background-image: url("../assets/shapes/hatch-circle-rise.svg"); background-position: left top; background-size: 300px auto; }
+.shape-hatch:after   { background-image: url("../assets/shapes/ring-lake.svg"); background-position: right 12px bottom 12px; background-size: 96px auto; }
+.shape-stairs:before { background-image: url("../assets/shapes/stairs-green.svg"); background-position: left bottom; background-size: 248px auto; }
+.shape-stairs:after  { background-image: url("../assets/shapes/square-outline-brick.svg"); background-position: right 8px top 8px; background-size: 88px auto; }
+.shape-dot:before    { background-image: url("../assets/shapes/circle-rise.svg"), url("../assets/shapes/hatch-half-meadow.svg"); background-position: right 10% top, left 12% bottom; background-size: 212px auto, 264px auto; }
+.shape-dot:after     { background-image: url("../assets/shapes/x-rise.svg"); background-position: left 8px bottom 14%; background-size: 72px auto; }
+.shape-half:before   { background-image: url("../assets/shapes/steps-meadow.svg"); background-position: right bottom; background-size: 232px auto; }
+.shape-half:after    { background-image: url("../assets/shapes/half-wolverine.svg"); background-position: left 0 top 22%; background-size: 64px auto; }
 
-/* The action: QR + what it does + where it goes */
-.cta { margin-top: auto; display: grid; grid-template-columns: auto 1fr; gap: 44px; align-items: center; flex: none; }
-.qr-card { background: var(--white); border-radius: var(--radius); padding: 18px; box-shadow: 0 0 0 2px var(--rule); }
-.qr-card svg { display: block; width: 220px; height: 220px; }
-.cta-label { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1.04; color: var(--ink); text-wrap: balance; }
+.stat { top: 1120px; }
+.num { font-size: 184px; line-height: .86; letter-spacing: -.02em; }
+.label { margin-top: 20px; font-size: 38px; line-height: 1.3; }
+
+.cta { top: 1452px; height: 256px; }
+.qr { position: absolute; left: 0; top: 0; width: 256px; height: 256px; padding: 18px; border-radius: 16px; background: #FFFFFF; box-shadow: 0 0 0 2px var(--rule); }
+.qr svg, .spot-qr svg { display: block; width: 100%; height: 100%; }
+.cta-text { position: absolute; left: 300px; right: 0; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+.cta-label { font-size: 56px; line-height: 1.04; }
 .cta-where { margin-top: 14px; font-size: 32px; line-height: 1.35; color: var(--soft); }
-/* Links: Pale Meadow on green screens (5.2:1), UVU Green on white screens (8.0:1) */
-.cta-where b { font-weight: 700; }
-.theme-green .cta-where b { color: var(--meadow); }
-.theme-white .cta-where b { color: var(--green); }
+.cta-where b, .spot-where b { color: var(--link); }
 
-/* Buttons (same three looks as the web system) */
-.btn { display: flex; align-items: center; justify-content: center; gap: 18px; width: 100%; min-height: 112px; margin-top: 40px; border-radius: var(--radius); font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; flex: none; }
-.btn--solid { background: var(--ink); color: var(--bg); }        /* white on green screens, green on white screens */
-.btn--outline { box-shadow: inset 0 0 0 3px var(--ink); color: var(--ink); }
-.btn .arrow { width: 34px; height: 34px; flex: none; background: currentColor; -webkit-mask: url("../assets/icons/ui-arrow-right-white.svg") center / contain no-repeat; mask: url("../assets/icons/ui-arrow-right-white.svg") center / contain no-repeat; }
-.btn--outline .arrow { transform: rotate(180deg); }
+.btn { position: absolute; left: 96px; top: 1752px; width: 888px; height: 112px; border-radius: 16px; font-size: 44px; line-height: 112px; text-align: center; }
+.btn-solid { background: var(--ink); color: var(--bg); }
+.btn-outline { box-shadow: inset 0 0 0 3px var(--ink); }
+.arrow { display: inline-block; width: 34px; height: 34px; vertical-align: -4px; margin-left: 16px; background: no-repeat center; background-size: contain; background-image: var(--arrow-on-ink); }
+.btn-outline .arrow { margin: 0 16px 0 0; background-image: var(--arrow-back); }
 
-/* ---------- Menu: one list, options open in place ---------- */
-.options { margin-top: auto; border-top: 2px solid var(--rule); }
-.opt { border-bottom: 2px solid var(--rule); }
-.opt-head { display: grid; grid-template-columns: 64px 1fr 40px; gap: 32px; align-items: center; width: 100%; min-height: 124px; padding: 16px 0; }
-.opt-head .ico { width: 64px; height: 64px; }
-.opt-head b { font-family: var(--display); font-weight: 700; font-size: 48px; line-height: 1.05; color: var(--ink); }
-.opt-head .chev { width: 40px; height: 40px; background: var(--ink); -webkit-mask: url("../assets/icons/ui-chevron-down-white.svg") center / contain no-repeat; mask: url("../assets/icons/ui-chevron-down-white.svg") center / contain no-repeat; }
-.opt-head[aria-expanded="true"] .chev { transform: rotate(180deg); }
-.opt-body { padding: 0 0 44px 96px; }
-.opt-body[hidden] { display: none; }
-.opt-stat { margin: 0 0 24px; }
-.opt-stat .stat-num { font-size: 112px; }
-.opt-stat .stat-label { margin-top: 12px; font-size: 32px; }
-.opt-text { font-size: 34px; line-height: 1.45; color: var(--ink); max-width: 25em; }
-.opt-body .cta { margin-top: 32px; gap: 36px; }
-.opt-body .qr-card svg { width: 184px; height: 184px; }
-.opt-body .cta-label { font-size: 44px; }
-.opt-body .cta-where { font-size: 28px; margin-top: 10px; }
+/* Entrance on load: opacity + transform only */
+.enter { opacity: 0; -webkit-transform: translateY(32px); transform: translateY(32px); }
+.ready .enter { opacity: 1; -webkit-transform: none; transform: none;
+	transition: opacity .9s ease, -webkit-transform 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+.ready .e2 { transition-delay: .15s; } .ready .e3 { transition-delay: .5s; } .ready .e4 { transition-delay: .9s; }
 
-/* ---------- Motion (purposeful, quiet) ----------
-   Home plays an entrance on load and again every minute: headline words rise,
-   the number counts up, the action settles in last. Taps change state
-   instantly; only the home ⇄ options swap crossfades. */
-.play .word > span { animation: rise 1s var(--ease) both; animation-delay: var(--d); }
-.play .photo-frame { animation: unveil 1.2s var(--ease) both .15s; }
-.play .home > .stat { animation: fade-up .9s var(--ease) both .6s; }
-.play .home > .cta { animation: fade-up .9s var(--ease) both 1.1s; }
-@keyframes rise { from { transform: translateY(105%); } }
-@keyframes unveil { from { clip-path: inset(100% 0 0 0 round var(--radius)); } to { clip-path: inset(0 0 0 0 round var(--radius)); } }
-@keyframes fade-up { from { opacity: 0; transform: translateY(28px); } }
-.swap { animation: swap .28s var(--ease-io) both; }
-@keyframes swap { from { opacity: 0; } }
+/* ---------- QR spotlight (idle loop): the action takes over the middle of the screen ---------- */
+.photo, .stat, .cta { transition: opacity .6s ease, -webkit-transform .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+.is-spot .home .photo, .is-spot .home .stat, .is-spot .home .cta { opacity: 0; -webkit-transform: scale(.96); transform: scale(.96); }
+
+.spot { position: absolute; left: 0; top: 470px; width: 1080px; height: 1240px; text-align: center; visibility: hidden;
+	opacity: 0; -webkit-transform: scale(.9); transform: scale(.9);
+	transition: opacity .6s ease, visibility .6s, -webkit-transform .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+.is-spot .spot { visibility: visible; opacity: 1; -webkit-transform: none; transform: none; transition-delay: .25s; }
+.spot-qr { position: relative; width: 600px; height: 600px; margin: 156px auto 0; padding: 36px; border-radius: 28px; background: #FFFFFF; }
+.spot-scan { position: absolute; left: 36px; right: 36px; top: 36px; height: 6px; border-radius: 3px; background: #008A40; opacity: 0; }
+.is-spot .spot-scan { -webkit-animation: scan 2.4s ease-in-out .9s 2; animation: scan 2.4s ease-in-out .9s 2; }
+@-webkit-keyframes scan { 0% { opacity: 0; -webkit-transform: translateY(0); } 15%, 85% { opacity: .75; } 100% { opacity: 0; -webkit-transform: translateY(522px); } }
+@keyframes scan { 0% { opacity: 0; transform: translateY(0); } 15%, 85% { opacity: .75; } 100% { opacity: 0; transform: translateY(522px); } }
+/* corner brackets that breathe around the code */
+.corner { position: absolute; width: 96px; height: 96px; border: 0 solid var(--ink); }
+.c1 { left: -40px; top: -40px; border-width: 8px 0 0 8px; border-top-left-radius: 28px; -webkit-transform-origin: 100% 100%; transform-origin: 100% 100%; }
+.c2 { right: -40px; top: -40px; border-width: 8px 8px 0 0; border-top-right-radius: 28px; -webkit-transform-origin: 0 100%; transform-origin: 0 100%; }
+.c3 { left: -40px; bottom: -40px; border-width: 0 0 8px 8px; border-bottom-left-radius: 28px; -webkit-transform-origin: 100% 0; transform-origin: 100% 0; }
+.c4 { right: -40px; bottom: -40px; border-width: 0 8px 8px 0; border-bottom-right-radius: 28px; -webkit-transform-origin: 0 0; transform-origin: 0 0; }
+.is-spot .corner { -webkit-animation: breathe 1.4s ease-in-out .9s infinite alternate; animation: breathe 1.4s ease-in-out .9s infinite alternate; }
+@-webkit-keyframes breathe { to { -webkit-transform: scale(1.14); } }
+@keyframes breathe { to { transform: scale(1.14); } }
+.spot-label { margin-top: 96px; font-size: 72px; line-height: 1.05; }
+.spot-where { margin-top: 18px; font-size: 40px; color: var(--soft); }
+
+/* ---------- Options: rows fixed at the bottom, details in a fixed panel above ---------- */
+.detail { top: 488px; bottom: 712px; }                      /* bottom set inline from the row count */
+.pane { position: absolute; left: 0; top: 0; right: 0; bottom: 0; visibility: hidden; }
+.pane.on { visibility: visible; }
+.pane .num { font-size: 120px; }
+.pane .label { margin-top: 12px; font-size: 32px; }
+.pane-text { font-size: 36px; line-height: 1.45; }
+.pane .label + .pane-text { margin-top: 32px; }
+.pane .cta { top: auto; bottom: 0; left: 0; height: 224px; }
+.pane .qr { width: 224px; height: 224px; padding: 16px; }
+.pane .cta-text { left: 264px; }
+.pane .cta-label { font-size: 46px; }
+.pane .cta-where { font-size: 28px; margin-top: 10px; }
+
+.rows { bottom: 208px; border-top: 2px solid var(--rule); }
+.row { position: relative; display: block; width: 888px; height: 116px; border-bottom: 2px solid var(--rule); }
+.row .ico { position: absolute; left: 24px; top: 25px; width: 64px; height: 64px; }
+.row .name { position: absolute; left: 120px; right: 80px; top: 0; font-size: 46px; line-height: 114px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .chev { position: absolute; right: 24px; top: 39px; width: 36px; height: 36px; background: no-repeat center; background-size: contain; background-image: var(--chev); }
+.row.on { background: var(--hl); }
+.row.on:before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: var(--accent); }
+.row.on .chev { visibility: hidden; }
 
 /* ---------- Editor notice + debug ---------- */
-.notice { position: absolute; inset: 0; z-index: 10; display: grid; place-content: center; padding: var(--gutter); text-align: center; background: var(--green); color: var(--white); font-size: 32px; }
-.notice b { font-family: var(--display); font-size: 72px; display: block; margin-bottom: 24px; }
-.notice code { display: inline-block; margin-top: 24px; font-size: 26px; background: rgba(255,255,255,.12); padding: 16px 24px; border-radius: 12px; white-space: pre-wrap; text-align: left; }
-.tap-dot { position: absolute; z-index: 20; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; border: 4px solid #B45336; pointer-events: none; }
+.notice { padding: 600px 96px 0; text-align: center; background: #185C33; color: #FFF; font-size: 32px; }
+.notice b { display: block; margin-bottom: 24px; font-size: 72px; }
+.notice code { display: block; margin-top: 24px; font-size: 26px; white-space: pre-wrap; }
+.tap-dot { position: absolute; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; border: 4px solid #B45336; pointer-events: none; }
 
 @media (prefers-reduced-motion: reduce) {
-	*, *::before, *::after { animation: none !important; transition: none !important; }
+	*, *:before, *:after { -webkit-animation: none !important; animation: none !important; transition: none !important; }
 }

@@ -5,7 +5,7 @@
 #   place = where it should land in the band, zoom = 1 for the largest crop, smaller to zoom in
 #   box   = an exact crop (x, y, width, height as fractions) when you need to keep something out of frame
 import os
-from PIL import Image, ImageOps
+from PIL import Image, ImageOps, ImageFilter, ImageEnhance
 
 OUT = os.path.join(os.path.dirname(__file__), '..', 'assets', 'img') + '/'
 AI = '/Users/ty/Documents/UVU-Alumni Redesign/_images/'
@@ -34,4 +34,7 @@ for name, path, focal, place, zoom in BANDS:
 		cw, ch = min(cw * zoom, sw), min(ch * zoom, sh)
 		x = min(max(fx * sw - tx * cw, 0), sw - cw); y = min(max(fy * sh - ty * ch, 0), sh - ch)
 	im.crop((round(x), round(y), round(x + cw), round(y + ch))).resize((W, H), Image.LANCZOS).save(OUT + name + '.jpg', quality=82, optimize=True, progressive=True)
-	print('saved', name)
+	# the background: the same photo mirrored and pre-blurred, tiny (no live CSS blur on the players)
+	bd = ImageOps.fit(ImageOps.flip(Image.open(OUT + name + '.jpg')), (270, 480), Image.LANCZOS).filter(ImageFilter.GaussianBlur(22))
+	ImageEnhance.Color(bd).enhance(1.3).save(OUT + name.replace('band-', 'backdrop-') + '.jpg', quality=72, optimize=True, progressive=True)
+	print('saved', name, 'and its backdrop')

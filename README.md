@@ -17,14 +17,22 @@ Preview all four side by side at `/wall.html`.
 
 1. the UVU monogram,
 2. a headline,
-3. a photo in the UVU image style (rounded corners and APFY shapes, a different composition on each screen); the background is that photo mirrored, blurred, and washed with the screen color,
+3. a photo in the UVU image style (rounded corners and APFY shapes, a different composition per screen),
 4. one stat,
 5. one QR code (the screen's action),
-6. one button that opens the screen's options.
+6. one button that opens the options.
 
-**Options**: tap anywhere on home and the lower half becomes a short list. Tapping an option opens it in place to show a sentence and its own QR code. Only one is open at a time, and tapping it again closes it. **Back** returns home. After 45 seconds with no touch, the screen goes home on its own.
+The background is that photo, mirrored and pre-blurred, under a wash of the screen color.
 
-**Motion**: home plays a quiet entrance on load and again once a minute. The headline rises, the number counts up, and the QR code settles in last. The photo drifts slowly. Taps change things instantly, with no tap animations.
+**QR spotlight (idle loop).** While nobody is touching the screen:
+
+1. Every 25 seconds, the photo, stat, and small QR fade out.
+2. The action takes the middle of the screen: a 600 px QR code with breathing corner brackets, a scan line, and the action in large type.
+3. After 7 seconds it eases back, and the stat counts up again.
+
+**Options.** Tap anywhere on home. The options sit in fixed rows at the bottom, within reach, and the first one is selected. Tapping a row shows its sentence, stat, and QR code in a fixed panel above, so nothing on screen moves. **Back** returns home. After 45 seconds with no touch, the screen goes home on its own.
+
+**Smoothness on PlaySignage.** Every element is absolutely positioned on a fixed 1080 × 1920 stage, so nothing reflows. Only opacity and transform animate, which the GPU handles. The background blur is a 5 KB baked image, not a live filter. The CSS and JS avoid newer features that older Android or Chrome players don't support.
 
 ## Editing a Screen
 
@@ -57,7 +65,8 @@ Everything lives in that screen's file in `content/`. On GitHub, open the file, 
 - **Numbers** come only from the UVU 2024–2025 Annual Report or the EverGREEN Campaign Report. Add a `_source` naming the report and page.
 - **Labels** say where they go: "Give to the Wolverine Club," never "Learn More."
 - **Options:** 4 or 5 per screen.
-- **Photos** are 1776 × 1040, with the subject centered. Crop them with `tools/crop.py` (Pillow), and don't use photos showing the Athletics-only Wolverine mark.
+- **Photos** are 1776 × 1040, with the subject centered. Each also needs a `backdrop-*.jpg`: the same photo mirrored and blurred at 270 × 480. `tools/crop.py` (Pillow) makes both. Don't use photos showing the Athletics-only Wolverine mark.
+- **Option text:** about three lines, so it clears its QR code. Check with `?open=N`.
 - **Icons** come from the UVU Icon Library and live in `assets/icons/` as `name-green.svg` and `name-white.svg`.
 
 **Making a new version** (an event, a campaign push): copy a content file, for example `give.json` to `give-gala.json`, edit the copy, and schedule `…/give/?content=give-gala` in PlaySignage.
@@ -83,5 +92,5 @@ For each screen:
 
 ## Reviewing on a Laptop
 
-- **O** opens the options, **1–9** opens an option, **Esc** goes home.
-- `?debug` shows the cursor and marks each tap. `?menu` opens the options, `?open=2` opens the third option, and `?idle=5` shortens the idle timeout.
+- **O** opens the options, **1–9** picks one, **Esc** goes home, **S** plays the QR spotlight now.
+- `?debug` shows the cursor and marks each tap. `?menu` opens the options, `?open=2` picks the third option, `?spot` plays the spotlight right away, and `?idle=5` shortens the idle timeout.

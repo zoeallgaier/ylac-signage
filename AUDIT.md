@@ -1,6 +1,17 @@
 # YLAC Signage Audit
 
-## v3 Redesign · Oct. 19, 2026 (current)
+## v3.1 · Oct. 19, 2026 (current)
+
+- **QR spotlight.** While idle, every 25 seconds the action takes over the middle of the screen for 7 seconds: a 600 px QR code with breathing corners, a scan line, and the action in 72 px type. This is the most motion on the screen, and it only runs when nobody is using it.
+- **No more jumps.** Options moved from an accordion to fixed rows plus a fixed detail panel. Measured: every row, the panel, and Back keep the exact same pixel position through every pick. All 18 options fit their panel without touching their QR code.
+- **Smoother on players.**
+  - Everything is absolutely positioned, with no flex or grid layout at runtime.
+  - Only opacity and transform animate.
+  - The live 90 px CSS blur is replaced by baked 5 KB backdrops.
+  - Removed clip-path, mask, `inset`, `aspect-ratio`, flex `gap`, `?.`, and `??`.
+- **Simpler code.** The engine is about 200 lines of plain ES2017 with one tap handler and three states (home, spotlight, options).
+
+## v3 Redesign · Oct. 19, 2026
 
 Started over around one rule: **each screen is one topic with one action.**
 
