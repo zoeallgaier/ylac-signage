@@ -126,11 +126,10 @@ h1, h2, p, figure { margin: 0; }
 .qr-card svg { display: block; width: 220px; height: 220px; }
 .cta-label { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1.04; color: var(--ink); text-wrap: balance; }
 .cta-where { margin-top: 14px; font-size: 32px; line-height: 1.35; color: var(--soft); }
-/* Links are Pale Meadow. On green it's the text color (5.2:1); on white, Pale Meadow text
-   would be 1.6:1, so it becomes a highlight behind UVU Green text (5.2:1). */
+/* Links: Pale Meadow on green screens (5.2:1), UVU Green on white screens (8.0:1) */
 .cta-where b { font-weight: 700; }
 .theme-green .cta-where b { color: var(--meadow); }
-.theme-white .cta-where b { color: var(--green); background: var(--meadow); padding: 0 10px; border-radius: 6px; }
+.theme-white .cta-where b { color: var(--green); }
 
 /* Buttons (same three looks as the web system) */
 .btn { display: flex; align-items: center; justify-content: center; gap: 18px; width: 100%; min-height: 112px; margin-top: 40px; border-radius: var(--radius); font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; flex: none; }

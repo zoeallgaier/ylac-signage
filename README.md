@@ -76,7 +76,7 @@ For each screen:
 - **Stratum 1** comes from UVU's Adobe Fonts web project, kit `jum4oqb`, linked in each screen's `<head>`. If the kit can't load, Rajdhani (the approved web fallback) takes over. Never commit Stratum font files: the desktop license doesn't allow web serving.
 - **Lato** is used for body text.
 - **Two text styles:** display (Stratum Bold) and body (Lato).
-- **Color:** UVU Green or White screens. Links are Pale Meadow: as the text color on green (5.2:1), and as a highlight behind UVU Green text on white (5.2:1), since Pale Meadow text on white is only 1.6:1.
+- **Color:** UVU Green or White screens. Links are Pale Meadow on green (5.2:1) and UVU Green on white (8.0:1).
 - **Contrast:** white on UVU Green and UVU Green on White are 8.0:1. The blurred backdrop sits under an 86–88% wash of the screen color, so text stays above 4.5:1 even over the brightest part of the blur.
 - **Touch targets** are 112–128 px on the stage, about 3 inches on a 55" screen, and sit in the lower half of the screen. There are no hover or press effects; hover broke tapping in the old XD version.
 - Motion respects reduced-motion settings. Options use real buttons with `aria-expanded`.

@@ -19,7 +19,7 @@ Started over around one rule: **each screen is one topic with one action.**
 - **Two text styles:** Stratum 1 Bold (display) and Lato (body). Stats are a number plus one line, with 112 px of space above.
 - **Stratum 1 via UVU's Adobe Fonts kit** (`jum4oqb`), with Rajdhani as the fallback. The desktop font files are "preview & print" only, so none are committed.
 - **Monogram without the tab:** plain white on green, or UVU Green on White, aligned with the text.
-- **Links are Pale Meadow:** text on green (5.2:1), and a highlight behind UVU Green text on white (5.2:1).
+- **Links:** Pale Meadow on green (5.2:1), UVU Green on white (8.0:1).
 - **Motion:**
   - On load and once a minute, headline words rise and the stat counts up; the QR code settles in last.
   - The photo drifts slowly.
