@@ -1,6 +1,24 @@
 # YLAC Signage Audit
 
-## v3.1 · Oct. 19, 2026 (current)
+## Alumni 4K · Nov. 16, 2026
+
+UX and visual design pass on the new horizontal screen.
+
+- **No repeats.** Spotlight stories no longer restate the name and class year shown above them, and timeline sentences no longer restate the year shown at 420 px. QR text is the action and the address only; "Scan with your phone camera" is gone from every code.
+- **One era label.** The era name and years sit only on the bracket above the track, not twice.
+- **Fewer pieces.** Dropped the spotlight divider rule and the X shape. One type scale: display 220, title 150, label 84, body 68, small 48.
+- **No dead ends.** Submit Your Photos stays hidden until it has a link.
+- **Smoother.**
+  - The next chapter fades in over the last one, so white-to-green changes never dip through black.
+  - Spotlights and traditions keep one circle and its shapes, and only the photo inside cross-fades.
+  - Text resets only after its slide has faded, so nothing slides backward on the way out.
+  - Photos settle linearly from 106% over the whole slide, with no fast start.
+  - A new era's name fades while its bracket glides.
+  - One ease is used for entrances and one for the timeline glide.
+- **Brand.** The UVU Alumni lockup replaces the monogram, recolored from the white master to UVU Green (#185C33) for white chapters.
+- **Ben Kjar** has a new solo photo and a draft blurb sourced from UVU News, pending approval.
+
+## v3.1 · Oct. 19, 2026
 
 - **Background blur removed.** Screens are solid UVU Green or White, which is cleaner and costs the player nothing.
 

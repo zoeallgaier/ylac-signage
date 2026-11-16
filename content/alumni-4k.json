@@ -1,0 +1,151 @@
+{
+  "_verify": "Carried over from the YLAC Screen After Effects and Illustrator files, trimmed so no line repeats what the screen already shows (name, class year, or the timeline year). Open items: approval of Ben Kjar's draft blurb (see _draft), and the Submit Your Photos link. A link left empty hides its QR code; the Submit Your Photos card stays hidden until its link is in.",
+  "screen": "Alumni 4K",
+
+  "welcome": {
+    "seconds": 12,
+    "headline": "Welcome Home, Wolverines",
+    "stat": { "value": "124,818", "label": "UVU alumni since 1941", "_source": "EverGREEN Campaign Report (v8), p. 47" },
+    "photo": { "src": "assets/img/band-alumni.jpg", "alt": "UVU alumni tailgating together in the canyon" }
+  },
+
+  "spotlights": {
+    "nav": "Alumni Spotlights",
+    "seconds": 16,
+    "items": [
+      {
+        "name": "Ben Kjar",
+        "year": "’11",
+        "major": "Business Management",
+        "honor": "UVU’s First All-American Wrestler",
+        "_draft": "Blurb and link are a DRAFT pending approval. Sources: uvu.edu/news/2025/standout-movie-ben-kjar-uvu-wrestling.html (unseeded at the 2011 NCAA Championships, finished fourth; inspirational speaker; documentary STANDOUT).",
+        "text": "Ben entered the 2011 NCAA Championships unseeded and finished fourth in the nation. Today he’s an inspirational speaker whose story is told in the documentary STANDOUT.",
+        "photo": { "src": "assets/img/wide/spot-ben-kjar.jpg", "alt": "Ben Kjar in a gray suit with a green UVU scarf on the wrestling mat" },
+        "qr": { "label": "Read Ben’s Story", "url": "https://www.uvu.edu/news/2025/standout-movie-ben-kjar-uvu-wrestling.html", "short": "uvu.edu/news" }
+      },
+      {
+        "name": "CJ Harrison",
+        "year": "’15",
+        "major": "Woodbury School of Business",
+        "honor": "",
+        "text": "CJ created a thriving career in financial planning. Now he strives to give students the opportunities he had.",
+        "photo": { "src": "assets/img/wide/spot-cj-harrison.jpg", "alt": "CJ Harrison in a light blue pullover in an office" },
+        "qr": { "label": "Read CJ’s Story", "url": "https://engage.uvu.edu/tv-cjharrison?r=qr", "short": "engage.uvu.edu" }
+      },
+      {
+        "name": "Jensen Reynolds",
+        "year": "’18",
+        "major": "Woodbury School of Business",
+        "honor": "",
+        "text": "Jensen runs a thriving business making gooey gourmet brownies.",
+        "photo": { "src": "assets/img/wide/spot-jensen-reynolds.jpg", "alt": "Jensen Reynolds piping frosting onto a brownie" },
+        "qr": { "label": "Read Jensen’s Story", "url": "https://engage.uvu.edu/tv-jensenreynolds?r=qr", "short": "engage.uvu.edu" }
+      },
+      {
+        "name": "Serena Seawolf",
+        "year": "’18",
+        "major": "College of Science",
+        "honor": "",
+        "text": "Serena is a hydrologist for USGS, where she studies the Great Salt Lake and Bear Lake.",
+        "photo": { "src": "assets/img/wide/spot-serena-seawolf.jpg", "alt": "Serena Seawolf smiling in a field with mountains behind her" },
+        "qr": { "label": "Read Serena’s Story", "url": "https://engage.uvu.edu/tv-serenaseawolf?r=qr", "short": "engage.uvu.edu" }
+      }
+    ]
+  },
+
+  "timeline": {
+    "nav": "Our History",
+    "seconds": 7,
+    "eras": [
+      { "name": "The Beginnings", "years": "1941–46" },
+      { "name": "Evolution of Identity", "years": "1946–76" },
+      { "name": "A Change in Location", "years": "1977–82" },
+      { "name": "Transition to a Community College", "years": "1982–88" },
+      { "name": "Becoming a State College", "years": "1988–2003" },
+      { "name": "Achieving University Status", "years": "2003–08" },
+      { "name": "Expanding Buildings and Offerings", "years": "2009–18" },
+      { "name": "Creating Opportunity and Innovation", "years": "2018–25" }
+    ],
+    "items": [
+      { "era": 0, "year": "1941", "text": "Amid World War II, Central Utah Vocational School (CUVS) was established to provide essential war production training.", "photo": "assets/img/timeline/1941-cuvs.jpg" },
+      { "era": 1, "year": "1946", "text": "The institution expanded its commitment to career-focused and technical education.", "photo": "assets/img/timeline/1946-career.jpg" },
+      { "era": 1, "year": "1967", "text": "Willy the Wolverine, named after President Sorensen, became the school’s mascot in the 1967–68 school year.", "photo": "assets/img/timeline/1967-willy.jpg" },
+      { "era": 1, "year": "1968", "text": "The UVU Rodeo team started, paving the way for future programs.", "photo": "assets/img/timeline/1968-rodeo.jpg" },
+      { "era": 2, "year": "1977", "text": "Utah Technical College at Provo moved to primarily offer classes at the university’s current Orem Campus location.", "photo": "assets/img/timeline/1977-orem.jpg" },
+      { "era": 3, "year": "1987", "text": "Utah Technical College became Utah Valley Community College (UVCC).", "photo": "assets/img/timeline/1987-uvcc.jpg" },
+      { "era": 4, "year": "1993", "text": "The institution became Utah Valley State College (UVSC), now offering four-year degrees.", "photo": "assets/img/timeline/1993-uvsc.jpg" },
+      { "era": 4, "year": "1995", "text": "The first classes took place in the current Wasatch Campus.", "photo": "assets/img/timeline/1995-wasatch.jpg" },
+      { "era": 5, "year": "2008", "text": "On July 1, Utah Valley University (UVU) was officially born.", "photo": "assets/img/timeline/2008-uvu.jpg" },
+      { "era": 5, "year": "2008", "text": "The Ira A. and Mary Lou Fulton Library officially opened on July 1.", "photo": "assets/img/timeline/2008-library.jpg" },
+      { "era": 5, "year": "2008", "text": "The Capitol Reef Field Station began operations on Oct. 16.", "photo": "assets/img/timeline/2008-capitol-reef.jpg" },
+      { "era": 6, "year": "2010", "text": "The Green Man group was formed.", "photo": "assets/img/timeline/2010-green-man.jpg" },
+      { "era": 6, "year": "2015", "text": "The Military-Affiliated Student Hub (MASH) began serving military-connected students.", "photo": "assets/img/timeline/2015-mash.jpg" },
+      { "era": 7, "year": "2018", "text": "President Astrid S. Tuminez began her tenure, focusing on innovation, inclusion, and growth.", "photo": "assets/img/timeline/2018-tuminez.jpg" },
+      { "era": 7, "year": "2019", "text": "The state-of-the-art Noorda Center for the Performing Arts opened, quickly becoming a cultural hub in Utah County.", "photo": "assets/img/timeline/2019-noorda.jpg" },
+      { "era": 7, "year": "2021", "text": "The UVU Pedestrian Bridge, the largest such bridge in the state, was unveiled, connecting UVU to the UTA FrontRunner Orem Central Station.", "photo": "assets/img/timeline/2021-bridge.jpg" },
+      { "era": 7, "year": "2024", "text": "UVU expanded its reach by opening a campus in Lehi, an extension of the College of Health and Public Service.", "photo": "assets/img/timeline/2024-lehi.jpg" }
+    ],
+    "end": {
+      "seconds": 12,
+      "headline": "Submit Your Photos From Your Time at UVU!",
+      "text": "",
+      "photo": "assets/img/timeline/photos-submit.jpg",
+      "qr": { "label": "Submit Your Photos", "url": "", "short": "" }
+    }
+  },
+
+  "campuses": {
+    "nav": "Our Campuses",
+    "items": [
+      { "name": "UVU Orem Campus", "video": "assets/video/campus-orem.mp4" },
+      { "name": "UVU Wasatch Campus", "video": "assets/video/campus-wasatch.mp4" },
+      { "name": "UVU Lehi Campus", "video": "assets/video/campus-lehi.mp4" },
+      { "name": "UVU Provo Airport Campus", "video": "assets/video/campus-provo-airport.mp4" },
+      { "name": "UVU Vineyard Soccer Dome", "video": "assets/video/campus-vineyard-dome.mp4" },
+      { "name": "Capitol Reef Field Station", "video": "assets/video/campus-capitol-reef.mp4" }
+    ]
+  },
+
+  "traditions": {
+    "nav": "Traditions",
+    "seconds": 13,
+    "items": [
+      {
+        "headline": "Homecoming",
+        "text": "Homecoming Week brings students, alumni, and the UVU community together to celebrate Wolverine pride.",
+        "photo": { "src": "assets/img/wide/trad-homecoming.jpg", "alt": "A family posing with Wolverine hand signs in front of a lit-up #UVU sign" },
+        "qr": { "label": "See Homecoming Events", "url": "https://engage.uvu.edu/tv-homecoming?r=qr", "short": "engage.uvu.edu" }
+      },
+      {
+        "headline": "Alumni Awards",
+        "text": "Every year as part of the Homecoming celebration, we honor those who have made a difference at Utah Valley University and in our community.",
+        "photo": { "src": "assets/img/wide/trad-alumni-awards.jpg", "alt": "An award recipient smiling at a podium" },
+        "qr": { "label": "See the Alumni Awards", "url": "https://engage.uvu.edu/tv-alumniawards?r=qr", "short": "engage.uvu.edu" }
+      },
+      {
+        "headline": "Wolverine Sign",
+        "text": "Whether you’re celebrating a win or posing for a photo opp, it’s the perfect way to show your Wolverine pride.",
+        "photo": { "src": "assets/img/wide/trad-wolverine-sign.jpg", "alt": "Crossed hands making the Wolverine sign" },
+        "qr": null
+      },
+      {
+        "headline": "Follow Us on Instagram",
+        "text": "Follow for updates, events, and ways to stay involved with UVU.",
+        "photo": { "src": "assets/img/wide/trad-instagram.jpg", "alt": "New graduates in green caps and gowns taking a selfie" },
+        "qr": { "label": "Follow UVU Alumni", "url": "https://engage.uvu.edu/tv-uvualumni-ig?r=qr", "short": "Instagram" }
+      }
+    ]
+  },
+
+  "connect": {
+    "nav": "Stay Connected",
+    "seconds": 20,
+    "headline": "More Ways to Connect",
+    "items": [
+      { "label": "Claim Your Alumni Profile", "icon": "person", "text": "Membership is free for every graduate.", "url": "https://alumni.uvu.edu/profile/me", "short": "alumni.uvu.edu" },
+      { "label": "Alumni Benefits", "icon": "award", "text": "Log in to see discounts on Lagoon, sporting events, Quick Quack, and more.", "url": "https://alumni.uvu.edu/page/alumni-benefits", "short": "alumni.uvu.edu" },
+      { "label": "Forever Wolverines Podcast", "icon": "communicate", "text": "Student Alumni Ambassadors talk with alumni about careers, campus memories, and advice.", "url": "https://www.uvu.edu/alumni/connect/forever-wolverines-podcast.html", "short": "uvu.edu/alumni" },
+      { "label": "Career and Networking", "icon": "team", "text": "Hire a Wolverine. Help a Wolverine. Join the UVU Alumni LinkedIn group.", "url": "https://www.linkedin.com/groups/61904", "short": "linkedin.com" }
+    ]
+  }
+}

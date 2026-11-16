@@ -11,6 +11,8 @@ The four touch screens beside the event space in UVU's Young Living Alumni Cente
 
 Preview all four side by side at `/wall.html`.
 
+**Alumni 4K** is a separate, horizontal screen (3840 × 2160) that plays itself. Link for PlaySignage: `https://zoeallgaier.github.io/ylac-signage/alumni-4k/`. Edit `content/alumni-4k.json`. See [The 4K Alumni Screen](#the-4k-alumni-screen).
+
 ## How a Screen Works
 
 **Home** is one composition, read top to bottom from across the room:
@@ -94,3 +96,23 @@ For each screen:
 
 - **O** opens the options, **1–9** picks one, **Esc** goes home, **S** plays the QR spotlight now.
 - `?debug` shows the cursor and marks each tap. `?menu` opens the options, `?open=2` picks the third option, `?spot` plays the spotlight right away, and `?idle=5` shortens the idle timeout.
+
+## The 4K Alumni Screen
+
+A horizontal 3840 × 2160 screen that plays on its own, chapter by chapter, then starts over:
+
+1. **Welcome:** the headline, the alumni count, and a photo.
+2. **Alumni Spotlights:** one alum at a time, with a circle photo, class year, major, story, and a QR code to their story.
+3. **Our History:** a single timeline track along the bottom. The line fills and the marker glides to each moment, while the year, the sentence, and the photo change above it. The current era is bracketed above the line. It ends on Submit Your Photos.
+4. **Our Campuses:** drone footage of each campus.
+5. **Traditions:** Homecoming, Alumni Awards, the Wolverine Sign, and Instagram.
+6. **Stay Connected:** four actions side by side, each with its own QR code.
+
+The UVU Alumni lockup sits top left (white on green chapters, UVU Green on white ones), and the chapter names at the top right show where the loop is; the current one's underline fills as it plays. Type is the same as the touch screens: Stratum 1 from the Adobe Fonts kit, with Rajdhani as the fallback.
+
+**Editing.** Everything is in `content/alumni-4k.json`. Each chapter has a `seconds` per slide. A QR link left empty (`"url": ""`) hides that QR code, and empty text hides its line. To add a spotlight, copy one entry in `spotlights.items`, and save its photo as a square in `assets/img/wide/`. Edits are picked up within 10 minutes, at the start of the next loop.
+
+**Photos.** Timeline photos are 1788 × 1120, cropped from the originals with `tools/crop_wide.py`. Spotlight and tradition photos are squares shown in a circle. Campus clips in `assets/video/` are 2560 × 1132 H.264, cut from the drone renders without their old title bars.
+
+**Reviewing on a laptop.** → or a click goes to the next slide, ← goes back, Space pauses, and 1–6 jump to a chapter. Click a chapter name or a year on the timeline to jump to it. `?scene=timeline:8` opens on a slide, and `?hold` starts paused.
+
