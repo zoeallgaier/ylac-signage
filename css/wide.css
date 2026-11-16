@@ -1,0 +1,200 @@
+/* =====================================================================
+   YLAC SIGNAGE · ALUMNI 4K (horizontal, 3840 × 2160)
+   Same design language as the touch screens: solid UVU Green or White,
+   Stratum 1 Bold for display, Lato for body, rounded photos with APFY
+   shapes, white QR tiles.
+
+   Same player rules: a fixed stage, everything absolutely positioned,
+   only opacity and transform animate, no clip-path, mask, inset,
+   aspect-ratio, or flex gap.
+   ===================================================================== */
+
+/* ---------- Kiosk basics ---------- */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #000; cursor: none; -webkit-user-select: none; user-select: none; }
+.show-cursor, .show-cursor * { cursor: default; }
+img, video { display: block; pointer-events: none; -webkit-user-drag: none; }
+h1, h2, p { margin: 0; font-weight: inherit; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+.stage {
+	position: fixed; left: 50%; top: 50%; width: 3840px; height: 2160px; overflow: hidden;
+	-webkit-transform: translate(-50%, -50%) scale(var(--scale, 1)); transform: translate(-50%, -50%) scale(var(--scale, 1));
+	background: #185C33; color: #FFFFFF;
+	font-family: "Lato", Arial, sans-serif; -webkit-font-smoothing: antialiased;
+}
+.d { font-family: "stratum-1-web", "Rajdhani", "Arial Narrow", sans-serif; font-weight: 700; }   /* display style */
+.abs { position: absolute; }
+.full { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; }
+
+/* ---------- Themes (per chapter) ---------- */
+.green { --bg: #185C33; --ink: #FFFFFF; --soft: rgba(255,255,255,.88); --dim: rgba(255,255,255,.5); --faint: rgba(255,255,255,.2); --accent: #C5D97A; --rule: rgba(196,214,193,.4); }
+.white { --bg: #FFFFFF; --ink: #185C33; --soft: #4B5D50; --dim: rgba(24,92,51,.45); --faint: rgba(24,92,51,.14); --accent: #008A40; --rule: rgba(26,50,28,.14); }
+
+/* ---------- Chapters and slides cross-fade; nothing reflows ---------- */
+.chapter { background: var(--bg); color: var(--ink); opacity: 0; visibility: hidden; transition: opacity 1s ease, visibility 1s; }
+.chapter.on { opacity: 1; visibility: visible; }
+.slide { opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility .7s; }
+.slide.on { opacity: 1; visibility: visible; transition-delay: .35s; }
+
+/* Entrance: each .rise eases up after its slide turns on (opacity + transform only) */
+.rise { opacity: 0; -webkit-transform: translateY(48px); transform: translateY(48px);
+	transition: opacity .5s ease, -webkit-transform .5s ease, transform .5s ease; }
+.on > .rise, .on .rise { opacity: 1; -webkit-transform: none; transform: none;
+	transition: opacity 1s ease, -webkit-transform 1.2s cubic-bezier(.16,1,.3,1), transform 1.2s cubic-bezier(.16,1,.3,1); }
+.on .r1 { transition-delay: .45s; } .on .r2 { transition-delay: .6s; } .on .r3 { transition-delay: .75s; }
+.on .r4 { transition-delay: .9s; }  .on .r5 { transition-delay: 1.05s; } .on .r6 { transition-delay: 1.3s; }
+
+/* ---------- Chrome: monogram + chapter nav ---------- */
+.chrome { position: absolute; left: 0; top: 0; width: 3840px; height: 300px; z-index: 5; color: #FFFFFF; transition: color 1s ease; }
+.t-white .chrome { color: #185C33; }
+.mono { position: absolute; left: 192px; top: 150px; height: 104px; width: auto; transition: opacity 1s ease; }
+.mono-green, .t-white .mono-white { opacity: 0; }
+.t-white .mono-green { opacity: 1; }
+.nav { position: absolute; right: 192px; top: 160px; white-space: nowrap; font-size: 0; }
+.nav li { display: inline-block; position: relative; margin-left: 88px; padding-bottom: 26px; font-size: 48px; line-height: 1; opacity: .5; transition: opacity .6s ease; }
+.nav li.on { opacity: 1; }
+.nav .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; border-radius: 3px; background: currentColor; opacity: 0; transition: opacity .6s ease; }
+.nav li.on .bar { opacity: .22; }
+.nav .fill { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; border-radius: 3px; background: currentColor; opacity: 0;
+	-webkit-transform-origin: 0 50%; transform-origin: 0 50%; -webkit-transform: scaleX(0); transform: scaleX(0); }
+.nav li.on .fill { opacity: 1; }
+
+/* ---------- Shared pieces ---------- */
+.frame { position: absolute; overflow: hidden; border-radius: 32px; background: var(--faint); -webkit-transform: translateZ(0); transform: translateZ(0); }
+.frame img, .frame video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.drift { -webkit-transform: scale(1.0); transform: scale(1.0); }
+.on .drift { -webkit-animation: drift 18s ease-out both; animation: drift 18s ease-out both; }
+@-webkit-keyframes drift { from { -webkit-transform: scale(1.1); } to { -webkit-transform: scale(1.0); } }
+@keyframes drift { from { transform: scale(1.1); } to { transform: scale(1.0); } }
+
+.cta { position: relative; height: 360px; }
+.qr { position: absolute; left: 0; top: 0; width: 360px; height: 360px; padding: 26px; border-radius: 28px; background: #FFFFFF; box-shadow: 0 0 0 3px var(--rule); }
+.qr svg { display: block; width: 100%; height: 100%; }
+.cta-text { position: absolute; left: 424px; top: 50%; width: 1200px; -webkit-transform: translateY(-50%); transform: translateY(-50%); }
+.cta-label { font-size: 84px; line-height: 1; }
+.cta-where { margin-top: 20px; font-size: 48px; line-height: 1.35; color: var(--soft); }
+.cta-where b { color: var(--accent); font-weight: 700; }
+
+/* A circle photo with APFY shapes, after the old spotlight and traditions frames */
+.circle { position: absolute; width: 1360px; height: 1360px; }
+.circle .frame { left: 0; top: 0; width: 1360px; height: 1360px; border-radius: 50%; z-index: 2; }
+.circle .sh { position: absolute; background: no-repeat center; background-size: contain; opacity: 0;
+	transition: opacity .6s ease, -webkit-transform .6s ease, transform .6s ease; }
+.on .circle .sh { opacity: 1; -webkit-transform: none; transform: none;
+	transition: opacity 1s ease .8s, -webkit-transform 1.4s cubic-bezier(.16,1,.3,1) .8s, transform 1.4s cubic-bezier(.16,1,.3,1) .8s; }
+.circle .sh-hatch { left: -96px; top: 96px; width: 1360px; height: 1360px; z-index: 1; background-image: url("../assets/shapes/hatch-circle-rise.svg");
+	-webkit-transform: translate(60px, -60px); transform: translate(60px, -60px); }
+.circle .sh-sq1 { left: 1010px; top: 1190px; width: 190px; height: 190px; z-index: 3; background-image: url("../assets/shapes/square-meadow.svg"); -webkit-transform: translate(-40px, -40px); transform: translate(-40px, -40px); }
+.circle .sh-sq2 { left: 900px; top: 1380px; width: 100px; height: 100px; z-index: 3; background-image: url("../assets/shapes/square-meadow.svg"); -webkit-transform: translate(-60px, -60px); transform: translate(-60px, -60px); }
+.circle .sh-x { left: -40px; top: 120px; width: 120px; height: 120px; z-index: 3; background-image: url("../assets/shapes/x-rise.svg"); -webkit-transform: scale(.4); transform: scale(.4); }
+.on .circle .sh-sq2 { transition-delay: .95s; } .on .circle .sh-x { transition-delay: 1.1s; }
+.circle .frame { opacity: 0; -webkit-transform: scale(.94); transform: scale(.94); transition: opacity .6s ease, -webkit-transform .6s ease, transform .6s ease; }
+.on .circle .frame { opacity: 1; -webkit-transform: none; transform: none;
+	transition: opacity 1.2s ease .3s, -webkit-transform 1.6s cubic-bezier(.16,1,.3,1) .3s, transform 1.6s cubic-bezier(.16,1,.3,1) .3s; }
+
+/* Text column that centers itself vertically */
+.col { position: absolute; top: 300px; height: 1700px; display: -webkit-box; display: -webkit-flex; display: flex;
+	-webkit-box-orient: vertical; -webkit-flex-direction: column; flex-direction: column; -webkit-box-pack: center; -webkit-justify-content: center; justify-content: center; }
+
+/* ---------- Welcome ---------- */
+.w-text { left: 192px; width: 1700px; }
+.w-head { font-size: 240px; line-height: .92; }
+.w-num { margin-top: 140px; font-size: 300px; line-height: .86; letter-spacing: -.02em; }
+.w-rule { width: 160px; height: 12px; margin-top: 56px; border-radius: 6px; background: var(--accent); }
+.w-label { margin-top: 40px; font-size: 72px; line-height: 1.25; color: var(--soft); }
+.w-photo { left: 2016px; top: 560px; width: 1632px; height: 1040px; }
+.w-photo .frame { left: 0; top: 0; width: 1632px; height: 1040px; z-index: 2; }
+.w-photo .sh { position: absolute; background: no-repeat center; background-size: contain; }
+.w-photo .sh-a { left: -150px; top: -150px; width: 560px; height: 560px; z-index: 1; background-image: url("../assets/shapes/hatch-circle-rise.svg"); }
+.w-photo .sh-b { right: -60px; bottom: -60px; width: 180px; height: 180px; z-index: 3; background-image: url("../assets/shapes/ring-lake.svg"); }
+
+/* ---------- Alumni spotlights ---------- */
+.sp-photo { left: 300px; top: 420px; }
+.sp-text { left: 2000px; width: 1648px; }
+.sp-name { font-size: 220px; line-height: .92; }
+.sp-year { white-space: nowrap; }
+.sp-major { margin-top: 44px; font-size: 68px; line-height: 1.25; color: var(--soft); }
+.sp-honor { margin-top: 20px; font-size: 84px; line-height: 1.05; color: var(--accent); }
+.sp-rule { width: 160px; height: 12px; margin-top: 64px; border-radius: 6px; background: var(--accent);
+	-webkit-transform-origin: 0 50%; transform-origin: 0 50%; }
+.sp-body { margin-top: 64px; font-size: 64px; line-height: 1.42; color: var(--soft); }
+.sp-text .cta { margin-top: 96px; }
+
+/* ---------- Timeline ---------- */
+.tl-item { }
+.tl-era { left: 192px; top: 420px; width: 1560px; font-size: 56px; line-height: 1.2; color: var(--accent); }
+.tl-year { left: 180px; top: 520px; font-size: 420px; line-height: 1; letter-spacing: -.02em; }
+.tl-text { left: 192px; top: 1000px; width: 1500px; font-size: 68px; line-height: 1.42; color: var(--soft); }
+.tl-photo { left: 1860px; top: 380px; width: 1788px; height: 1120px; }
+.tl-photo img { opacity: 0; transition: opacity 1.1s ease; }
+.tl-photo img.on { opacity: 1; }
+.tl-photo img.on.drift { -webkit-animation: drift 9s ease-out both; animation: drift 9s ease-out both; }
+
+/* The track: a line that fills as history moves forward, one node per moment */
+.track { left: 192px; top: 1700px; width: 3456px; height: 240px; transition: opacity .8s ease; }
+.is-end .track { opacity: 0; }
+.track .line, .track .fill { position: absolute; left: 0; top: 0; width: 3456px; height: 8px; margin-top: -4px; border-radius: 4px; }
+.track .line { background: var(--faint); }
+.track .fill { background: #78BE3F; -webkit-transform-origin: 0 50%; transform-origin: 0 50%;
+	transition: -webkit-transform 1.4s cubic-bezier(.65,0,.35,1); transition: transform 1.4s cubic-bezier(.65,0,.35,1); }
+.node { position: absolute; top: 0; width: 0; height: 0; }
+.node i { position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%; background: #185C33; box-shadow: inset 0 0 0 5px var(--dim);
+	transition: background .6s ease, box-shadow .6s ease; }
+.node.past i { background: #78BE3F; box-shadow: none; }
+.node span { position: absolute; left: -150px; top: 56px; width: 300px; text-align: center; font-size: 44px; line-height: 1; color: var(--dim); transition: color .6s ease; }
+.node.past span { color: var(--soft); }
+.node.now span { color: var(--ink); }
+/* The playhead glides to the current node */
+.head { position: absolute; left: 0; top: 0; width: 0; height: 0;
+	transition: -webkit-transform 1.4s cubic-bezier(.65,0,.35,1); transition: transform 1.4s cubic-bezier(.65,0,.35,1); }
+.head b { position: absolute; left: -36px; top: -36px; width: 72px; height: 72px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 0 0 10px rgba(120,190,63,.55); }
+.head em { position: absolute; left: -36px; top: -36px; width: 72px; height: 72px; border-radius: 50%; border: 4px solid #C5D97A; opacity: 0;
+	-webkit-animation: ping 2.4s ease-out 1.4s infinite; animation: ping 2.4s ease-out 1.4s infinite; }
+@-webkit-keyframes ping { 0% { opacity: .9; -webkit-transform: scale(1); } 100% { opacity: 0; -webkit-transform: scale(2.6); } }
+@keyframes ping { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+/* The current era is bracketed above the line */
+.era { position: absolute; left: 0; top: -150px; width: 0; height: 0;
+	transition: -webkit-transform 1.4s cubic-bezier(.65,0,.35,1); transition: transform 1.4s cubic-bezier(.65,0,.35,1); }
+.era-name { position: absolute; left: -16px; top: 0; white-space: nowrap; font-size: 44px; line-height: 1; color: var(--accent); }
+.era-span { position: absolute; left: -16px; top: 76px; width: 1px; height: 6px; border-radius: 3px; background: var(--accent); opacity: .7;
+	-webkit-transform-origin: 0 50%; transform-origin: 0 50%;
+	transition: -webkit-transform 1.4s cubic-bezier(.65,0,.35,1); transition: transform 1.4s cubic-bezier(.65,0,.35,1); }
+
+/* Last card: submit your photos */
+.tl-end-text { left: 192px; width: 1500px; }
+.tl-end-head { font-size: 200px; line-height: .95; }
+.tl-end-body { margin-top: 56px; font-size: 68px; line-height: 1.42; color: var(--soft); }
+.tl-end-text .cta { margin-top: 112px; }
+
+/* ---------- Campuses ---------- */
+.cp-name { left: 192px; top: 330px; font-size: 150px; line-height: 1; }
+.cp-video { left: 192px; top: 520px; width: 3456px; height: 1528px; }
+.cp-video video { opacity: 0; transition: opacity 1s ease; }
+.cp-video video.on { opacity: 1; }
+
+/* ---------- Traditions ---------- */
+.tr-text { left: 192px; width: 1760px; }
+.tr-head { font-size: 220px; line-height: .92; }
+.tr-body { margin-top: 64px; font-size: 72px; line-height: 1.4; color: var(--soft); }
+.tr-text .cta { margin-top: 112px; }
+.tr-photo { left: 2240px; top: 460px; }
+
+/* ---------- Stay connected ---------- */
+.cn-head { left: 192px; top: 400px; font-size: 220px; line-height: 1; }
+.cn-col { top: 820px; width: 774px; }
+.cn-ico { width: 128px; height: 128px; }
+.cn-label { margin-top: 40px; height: 168px; font-size: 80px; line-height: 1.02; }
+.cn-text { margin-top: 24px; height: 216px; font-size: 48px; line-height: 1.45; color: var(--soft); }
+.cn-col .qr { position: relative; width: 440px; height: 440px; margin-top: 56px; padding: 30px; }
+.cn-short { margin-top: 32px; font-size: 48px; color: var(--accent); font-weight: 700; }
+
+/* ---------- Editor notice + paused flag ---------- */
+.notice { padding: 760px 400px 0; text-align: center; background: #185C33; color: #FFF; font-size: 64px; }
+.notice b { display: block; margin-bottom: 48px; font-size: 140px; }
+.notice code { display: block; margin-top: 48px; font-size: 48px; white-space: pre-wrap; }
+.paused:after { content: "Paused · press Space"; position: absolute; right: 192px; bottom: 64px; z-index: 9; padding: 16px 32px; border-radius: 12px; background: #B45336; color: #FFF; font: 700 40px "Lato", sans-serif; }
+
+@media (prefers-reduced-motion: reduce) {
+	*, *:before, *:after { -webkit-animation: none !important; animation: none !important; transition: none !important; }
+}
