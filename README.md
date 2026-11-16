@@ -108,7 +108,7 @@ A horizontal 3840 × 2160 screen that plays on its own, chapter by chapter, then
 5. **Traditions:** Homecoming, Alumni Awards, the Wolverine Sign, and Instagram.
 6. **Stay Connected:** four actions side by side, each with its own QR code.
 
-The chapter names at the top show where the loop is; the current one's underline fills as it plays.
+The UVU Alumni lockup sits top left (white on green chapters, UVU Green on white ones), and the chapter names at the top right show where the loop is; the current one's underline fills as it plays. Type is the same as the touch screens: Stratum 1 from the Adobe Fonts kit, with Rajdhani as the fallback.
 
 **Editing.** Everything is in `content/alumni-4k.json`. Each chapter has a `seconds` per slide. A QR link left empty (`"url": ""`) hides that QR code, and empty text hides its line. To add a spotlight, copy one entry in `spotlights.items`, and save its photo as a square in `assets/img/wide/`. Edits are picked up within 10 minutes, at the start of the next loop.
 
