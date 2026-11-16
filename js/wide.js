@@ -1,5 +1,5 @@
 /* YLAC SIGNAGE · ALUMNI 4K ENGINE
-   <body data-content="alumni-4k"> loads content/alumni-4k.json (?content=alumni-4k-homecoming loads a copy).
+   <body data-screen="alumni-4k"> loads content/alumni-4k.json (?content=alumni-4k-homecoming loads a copy).
 
    The screen plays itself, chapter by chapter:
      welcome → alumni spotlights → our history (timeline) → our campuses → traditions → stay connected → again
@@ -12,7 +12,7 @@
 	'use strict';
 
 	var params = new URLSearchParams(location.search);
-	var CONTENT = params.get('content') || document.body.getAttribute('data-content');
+	var CONTENT = params.get('content') || (document.body.getAttribute('data-screen') || document.body.getAttribute('data-content'));
 	var DEBUG = params.has('debug');
 	var W = 3840, H = 2160, TRACK = 3456, FADE = 1100;
 
@@ -75,7 +75,7 @@
 		document.body.className = DEBUG ? 'show-cursor' : '';
 		document.title = data.screen + ' · YLAC Signage';
 
-		function chapter(key, theme, inner) { html += '<section class="full chapter ' + theme + '" data-ch="' + key + '">' + inner + '</section>'; }
+		function chapter(key, theme, inner) { html += '<section class="full chapter theme-' + theme + '" data-ch="' + key + '">' + inner + '</section>'; }
 		function add(key, i, seconds, theme) { scenes.push({ ch: key, i: i, ms: (seconds || 10) * 1000, theme: theme }); }
 
 		// Welcome
@@ -125,7 +125,7 @@
 			var photos = tl.items.map(function (o) { return { src: o.photo, alt: o.year }; });
 			if (end && end.photo) photos.push({ src: end.photo, alt: end.headline });
 			var track = '<div class="abs track" aria-hidden="true"><i class="line"></i><i class="fill"></i>' +
-				'<div class="era"><span class="era-name"></span><i class="era-span"></i></div>' +
+				'<div class="era"><span class="era-name"></span></div>' +
 				tl.items.map(function (o, i) {
 					var same = i > 0 && tl.items[i - 1].year === o.year;   // one label per year
 					return '<div class="node" data-i="' + i + '" style="left:' + nodeX(i, n) + 'px"><i></i><span class="d">' + (same ? '' : esc(o.year)) + '</span></div>';
@@ -134,11 +134,13 @@
 			chapter('timeline', 'green', '<div class="frame tl-photo">' + pics(photos) + '</div>' + items + track);
 		}
 
-		// Our campuses: drone footage
+		// Our campuses: drone footage and photos
 		if (cp && cp.items.length) {
 			nav.push(['campuses', cp.nav]);
 			chapter('campuses', 'green',
 				'<div class="frame cp-video">' + cp.items.map(function (o, i) {
+					// A campus shows its drone clip, or a photo that settles like the others
+					if (!o.video && o.photo) return img(o.photo.src, o.photo.alt, 'class="pic" data-i="' + i + '"');
 					return '<video muted playsinline preload="none" data-i="' + i + '" data-src="' + esc(src(o.video)) + '"></video>';
 				}).join('') + '</div>' +
 				cp.items.map(function (o, i) {
@@ -247,8 +249,8 @@
 		var ch = chapterEl('timeline'), items = data.timeline.items, n = items.length, eras = data.timeline.eras || [];
 		var at = Math.min(i, n - 1);
 		ch.classList.toggle('is-end', i >= n);
-		var head = $('.head', ch), fill = $('.track .fill', ch), eraEl = $('.era', ch), name = $('.era-name', ch), span = $('.era-span', ch);
-		var glide = [head, fill, eraEl, name, span];
+		var head = $('.head', ch), fill = $('.track .fill', ch), eraEl = $('.era', ch), name = $('.era-name', ch);
+		var glide = [head, fill, eraEl, name];
 		// Entering the chapter: place everything at once, with no glide from wherever it was last loop
 		if (!within) glide.forEach(function (el) { el.style.transition = 'none'; });
 
@@ -264,12 +266,11 @@
 		while (first > 0 && items[first - 1].era === e) first--;
 		while (last < n - 1 && items[last + 1].era === e) last++;
 		var era = eras[e] || {}, label = (era.name || '') + (era.years ? ' · ' + era.years : '');
-		var x0 = nodeX(first, n), x1 = nodeX(last, n);
+		var x0 = nodeX(first, n);
 		move(eraEl, 'translateX(' + x0 + 'px)');
-		move(span, 'scaleX(' + (x1 - x0 + 32) + ')');
 		function place() { move(name, 'translateX(' + Math.min(0, TRACK - x0 - name.offsetWidth) + 'px)'); }   // keep the name on the stage
 		if (name.textContent !== label && within) {
-			// A new era: the name fades out while the bracket glides, then fades back in
+			// A new era: the name fades out while it glides, then fades back in
 			name.classList.add('swap');
 			setTimeout(function () { name.textContent = label; place(); name.classList.remove('swap'); }, 500);
 		} else { name.textContent = label; place(); }

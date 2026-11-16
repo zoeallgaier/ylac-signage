@@ -98,11 +98,11 @@
     "nav": "Our Campuses",
     "items": [
       { "name": "UVU Orem Campus", "video": "assets/video/campus-orem.mp4" },
-      { "name": "UVU Wasatch Campus", "video": "assets/video/campus-wasatch.mp4" },
+      { "name": "UVU Wasatch Campus", "photo": { "src": "assets/img/campus/wasatch.jpg", "alt": "The Wasatch Campus building behind sagebrush in fall" } },
       { "name": "UVU Lehi Campus", "video": "assets/video/campus-lehi.mp4" },
-      { "name": "UVU Provo Airport Campus", "video": "assets/video/campus-provo-airport.mp4" },
-      { "name": "UVU Vineyard Soccer Dome", "video": "assets/video/campus-vineyard-dome.mp4" },
-      { "name": "Capitol Reef Field Station", "video": "assets/video/campus-capitol-reef.mp4" }
+      { "name": "UVU Provo Airport Campus", "photo": { "src": "assets/img/campus/provo-airport.jpg", "alt": "UVU’s Airport Hangar B at the Provo Airport" } },
+      { "name": "UVU Vineyard Soccer Dome", "photo": { "src": "assets/img/campus/vineyard-dome.jpg", "alt": "A student kicking a ball inside the Vineyard Soccer Dome" } },
+      { "name": "Capitol Reef Field Station", "photo": { "src": "assets/img/campus/capitol-reef.jpg", "alt": "The Capitol Reef Field Station below red rock cliffs" } }
     ]
   },
 

@@ -22,3 +22,5 @@ kbd, code { font: 14px ui-monospace, monospace; background: #fff; padding: 2px 6
 .wall header a { color: var(--meadow); }
 .wall .row { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4vw; padding: 1vw 3vw 3vw; align-items: center; }
 .wall iframe { width: 100%; aspect-ratio: 9 / 16; border: 10px solid #e8e6e1; border-radius: 4px; background: #1A321C; box-shadow: 0 0 60px rgba(255,255,255,.12); }
+.wall .row-wide { padding: 0 3vw 3vw; display: flex; justify-content: center; }
+.wall .row-wide iframe { width: 100%; max-width: 1600px; aspect-ratio: 16 / 9; }
