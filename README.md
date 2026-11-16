@@ -1,6 +1,6 @@
 # YLAC Signage
 
-The four touch screens beside the event space in UVU's Young Living Alumni Center. Each screen is one topic with one action, shown full screen in PlaySignage.
+The screens in UVU's Young Living Alumni Center: four touch screens beside the event space, each one topic with one action, and the horizontal 4K alumni screen. All play full screen in PlaySignage.
 
 | Screen | Topic | The action (QR code) | Link for PlaySignage | Edit |
 |---|---|---|---|---|
@@ -8,10 +8,11 @@ The four touch screens beside the event space in UVU's Young Living Alumni Cente
 | 2 | Students | Read Student Stories | `https://zoeallgaier.github.io/ylac-signage/impact/` | `content/impact.json` |
 | 3 | Giving | Give to UVU | `https://zoeallgaier.github.io/ylac-signage/give/` | `content/give.json` |
 | 4 | Donors | Plan a Legacy Gift | `https://zoeallgaier.github.io/ylac-signage/gratitude/` | `content/gratitude.json` |
+| 5 | Alumni 4K (horizontal) | Spotlights, History, Campuses, Traditions | `https://zoeallgaier.github.io/ylac-signage/alumni-4k/` | `content/alumni-4k.json` |
 
-Preview all four side by side at `/wall.html`.
+Preview all five at `/wall.html`: the touch screens side by side, the 4K screen below.
 
-**Alumni 4K** is a separate, horizontal screen (3840 × 2160) that plays itself. Link for PlaySignage: `https://zoeallgaier.github.io/ylac-signage/alumni-4k/`. Edit `content/alumni-4k.json`. See [The 4K Alumni Screen](#the-4k-alumni-screen).
+**5 · Alumni 4K** is the horizontal screen (3840 × 2160). It plays itself and is built the same way: its own folder, `content/alumni-4k.json`, the same fonts, theme names and `?debug`/`?content=` options. See [The 4K Alumni Screen](#the-4k-alumni-screen).
 
 ## How a Screen Works
 

@@ -1,9 +1,9 @@
 name: Check Content
 on:
   push:
-    paths: ["content/**"]
+    paths: ["content/**", "assets/**"]
   pull_request:
-    paths: ["content/**"]
+    paths: ["content/**", "assets/**"]
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -31,6 +31,15 @@ jobs:
                   i = t.get("icon")
                   if i and not os.path.exists(f"assets/icons/{i}-green.svg"):
                       print(f"::error file={f}::Icon not in assets/icons: {i}"); ok = False
+              def walk(v):
+                  if isinstance(v, dict): [walk(x) for x in v.values()]
+                  elif isinstance(v, list): [walk(x) for x in v]
+                  elif isinstance(v, str) and v.startswith("assets/") and not os.path.exists(v):
+                      yield_missing.append(v)
+              yield_missing = []
+              walk(d)
+              for m in yield_missing:
+                  print(f"::error file={f}::File not found: {m}"); ok = False
               print(f"{'✓' if ok else '✗'} {f}")
           sys.exit(0 if ok else 1)
           PY

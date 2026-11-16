@@ -35,8 +35,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .full { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; }
 
 /* ---------- Themes (per chapter) ---------- */
-.green { --bg: #185C33; --ink: #FFFFFF; --soft: rgba(255,255,255,.88); --dim: rgba(255,255,255,.5); --faint: rgba(255,255,255,.2); --accent: #C5D97A; --rule: rgba(196,214,193,.4); }
-.white { --bg: #FFFFFF; --ink: #185C33; --soft: #4B5D50; --dim: rgba(24,92,51,.45); --faint: rgba(24,92,51,.14); --accent: #008A40; --rule: rgba(26,50,28,.14); }
+.theme-green { --bg: #185C33; --ink: #FFFFFF; --soft: rgba(255,255,255,.88); --dim: rgba(255,255,255,.5); --faint: rgba(255,255,255,.2); --accent: #C5D97A; --rule: rgba(196,214,193,.4); }
+.theme-white { --bg: #FFFFFF; --ink: #185C33; --soft: #4B5D50; --dim: rgba(24,92,51,.45); --faint: rgba(24,92,51,.14); --accent: #008A40; --rule: rgba(26,50,28,.14); }
 
 /* ---------- Chapters: the new one fades in over the old one, so the screen never dips to black ---------- */
 .chapter { z-index: 1; background: var(--bg); color: var(--ink); opacity: 0; visibility: hidden; transition: opacity 1s ease, visibility 0s 1s; }
@@ -155,15 +155,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 	-webkit-animation: ping 2.4s ease-out 1.4s infinite; animation: ping 2.4s ease-out 1.4s infinite; }
 @-webkit-keyframes ping { 0% { opacity: .9; -webkit-transform: scale(1); } 100% { opacity: 0; -webkit-transform: scale(2.6); } }
 @keyframes ping { 0% { opacity: .9; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
-/* The current era is named and bracketed above the line */
+/* The current era is named above the line */
 .era { position: absolute; left: 0; top: -150px; width: 0; height: 0;
 	-webkit-transition: -webkit-transform 1.4s var(--glide); transition: transform 1.4s var(--glide); }
 .era-name { position: absolute; left: -16px; top: 0; white-space: nowrap; font-size: 48px; line-height: 1; color: var(--accent);
 	-webkit-transition: -webkit-transform 1.4s var(--glide), opacity .5s ease; transition: transform 1.4s var(--glide), opacity .5s ease; }
 .era-name.swap { opacity: 0; }
-.era-span { position: absolute; left: -16px; top: 76px; width: 1px; height: 6px; background: var(--accent); opacity: .7;
-	-webkit-transform-origin: 0 50%; transform-origin: 0 50%;
-	-webkit-transition: -webkit-transform 1.4s var(--glide); transition: transform 1.4s var(--glide); }
 
 /* Last card: submit your photos (shows once its link is in) */
 .tl-end-text { left: 192px; width: 1560px; }
